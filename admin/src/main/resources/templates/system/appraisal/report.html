@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:mo="https://gitee.com/aun/Timo"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:replace="/common/template :: header(~{::title},~{::link},~{::style})">
+    <link rel="stylesheet" th:href="@{/lib/zTree_v3/css/zTreeStyle/zTreeStyle.css}" type="text/css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .wrapper{
+            width: 1150px;
+            border: 1px solid #dedede;
+            margin: 20px auto;
+            box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),
+            0 2px 10px 0 rgba(34,36,38,.15);
+        }
+        .wrapper h1{
+            margin: 0;
+            padding: 0;
+            height: 60px;
+            line-height: 60px;
+            color: white;
+            font-size: 28px;
+            font-weight: bolder;
+            text-indent: 2em;
+            background: #2185D0;
+        }
+        .info{
+            width: 60%;
+            margin: 20px auto;
+        }
+        .info h2{
+            margin-bottom: 20px;
+            font-size: 24px;
+            font-weight: bolder;
+        }
+        .tab{
+            width: 100%;
+            font-size: 16px;
+        }
+        .tab tr{
+            height: 60px;
+            border: 1px solid #dedede;
+        }
+        .td-w-1{
+            width: 80px;
+            text-align: right;
+        }
+        .td-w-2{
+            width: 180px;
+            text-indent: 2em;
+        }
+        .photo{
+            width: 120px;
+            height: 150px;
+            margin: 10px auto;
+        }
+        .photo img{
+            width: 120px;
+            height: 150px;
+        }
+        .td-w-3{
+            width: 120px;
+            text-align: center;
+        }
+        .td-cen{
+            text-align: center;
+        }
+        .fol p{
+            font-size: 16px;
+        }
+        .btn-back{
+            width: 90%;
+            margin: 20px auto;
+            border-radius: 5px;
+            font-size: 22px;
+            background: #2185D0;
+            height: 50px;
+            line-height: 50px;
+            color: white;
+            text-align: center;
+            cursor: pointer;
+        }
+        .pingyu{
+            width: 160px;
+            display: inline-block;
+        }
+        .btn-edit{
+            background-color: #337AB7;
+            color: white;
+            border: none;
+            width: 100px;
+            height: 25px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-edit:hover{
+            background-color: #2F5F8D;
+        }
+        .area-edit{
+            width: 100%;
+            height: 100px;
+            border-radius: 5px;
+            margin: 10px auto;
+            font-size: 18px;
+        }
+        .btn-save{
+            background-color: #5CB85C;
+            color: white;
+            border: none;
+            width: 100px;
+            height: 25px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="timo-layout-page">
+<div class="layui-card">
+<!--    <div class="layui-card-header timo-card-header">-->
+<!--        <span><i class="fa fa-bars"></i>测评记录</span>-->
+<!--        <i class="layui-icon layui-icon-refresh refresh-btn"></i>-->
+<!--    </div>-->
+    <div class="layui-card-body">
+        <div class="layui-row timo-card-screen put-row">
+            <div class="pull-right screen-btn-group">
+                <div class="btn-group-left">
+                </div>
+                <div class="btn-group-right">
+                </div>
+            </div>
+        </div>
+        <div class="wrapper">
+            <h1>[[${map.nickname}]]的测评报告</h1>
+            <div class="info">
+                <h2>个人信息</h2>
+                <div style="width: 100%;height: 200px">
+                    <table class="tab" >
+                        <tr>
+                            <td class="td-w-1">姓名</td>
+                            <td class="td-w-2">[[${map.nickname==null?'未填写':map.nickname}]]</td>
+                            <td class="td-w-1">性别</td>
+                            <td class="td-w-2">[[${map.sex==null?'未填写':map.sex}]]</td>
+                            <td rowspan="3">
+                                <div class="photo">
+                                    <img src="/upload/images/logo.jpg">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td-w-1">出生日期</td>
+                            <td class="td-w-2">[[${map.birthDate==null?'未填写':map.birthDate}]]</td>
+                            <td class="td-w-1">年龄</td>
+                            <td class="td-w-2">[[${map.age==null?'未填写':map.age}]]</td>
+                        </tr>
+                        <tr>
+                            <td class="td-w-1">民族</td>
+                            <td class="td-w-2">[[${map.nation==null?'未填写':map.nation}]]</td>
+                            <td class="td-w-1">学历</td>
+                            <td class="td-w-2">[[${map.education==null?'未填写':map.education}]]</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div class="info">
+                <h2>测评信息</h2>
+                <div style="width: 100%">
+                    <table class="tab">
+                        <tr>
+                            <td class="td-w-3">量表名称</td>
+                            <td colspan="3">[[${map.alias}]]</td>
+                        </tr>
+                        <tr>
+                            <td class="td-w-3">量表简介</td>
+                            <td style="padding: 8px" colspan="3">[[${map.info}]]</td>
+                        </tr>
+                        <tr>
+                            <td class="td-w-3">测评时间</td>
+                            <td style="width: 200px">[[${map.submitTime}]]</td>
+                            <td class="td-w-3">测评用时</td>
+                            <td>2分钟</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!--<div class="info">-->
+                <!--<h2>因子得分</h2>-->
+                <!--<div>-->
+                    <!--<table class="tab">-->
+                        <!--<thead>-->
+                        <!--<th class="td-cen">名称</th>-->
+                        <!--<th class="td-cen">编码</th>-->
+                        <!--<th class="td-cen">原始分</th>-->
+                        <!--<th class="td-cen">转换分</th>-->
+                        <!--<th class="td-cen">常模</th>-->
+                        <!--</thead>-->
+                        <!--<tbody>-->
+                        <!--<tr style="text-align: center">-->
+                            <!--<td>外倾-内倾</td>-->
+                            <!--<td>E-I</td>-->
+                            <!--<td>7</td>-->
+                            <!--<td>7</td>-->
+                            <!--<td>-</td>-->
+                        <!--</tr>-->
+                        <!--<tr style="text-align: center">-->
+                            <!--<td>触觉-直觉</td>-->
+                            <!--<td>S-N</td>-->
+                            <!--<td>14</td>-->
+                            <!--<td>14</td>-->
+                            <!--<td>-</td>-->
+                        <!--</tr>-->
+                        <!--<tr style="text-align: center">-->
+                            <!--<td>思维-情感</td>-->
+                            <!--<td>T-F</td>-->
+                            <!--<td>14</td>-->
+                            <!--<td>14</td>-->
+                            <!--<td>-</td>-->
+                        <!--</tr>-->
+                        <!--<tr style="text-align: center">-->
+                            <!--<td>判断-知觉</td>-->
+                            <!--<td>J-P</td>-->
+                            <!--<td>8</td>-->
+                            <!--<td>8</td>-->
+                            <!--<td>-</td>-->
+                        <!--</tr>-->
+                        <!--</tbody>-->
+                    <!--</table>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <div class="info fol">
+                <h2>测评结果</h2>
+                <p>
+                    [[${map.consequence}]]
+                </p>
+                <!--<p>-->
+                    <!--【外倾&#45;&#45;内倾(E-I)】该维度用以表示个体心理能量的获得途径和与外界相互作用的程度,-->
+                    <!--即个体的注意较多的指向于外部的客观环境还是内部的概念建构和思想观念。-->
+                    <!--通过测试得知您在注意力的指向上属中等内倾。-->
+                <!--</p>-->
+                <!--<p>-->
+                    <!--【触觉&#45;&#45;直觉(S-N)】该维度又称之为非理性维度或知觉维度,表示个体在收集信息时注意的指向。-->
+                    <!--即倾向于通过各种感官去注意现实的、直接的、实际的、可观察的事件还是对事件将来的各种可能性-->
+                    <!--和事件背后隐含的意义感兴趣。通过测试得知您轻微偏向以感觉方式提取信息。-->
+                <!--</p>-->
+                <!--<P>-->
+                    <!--【思维&#45;&#45;情感(T-F)】该维度又称之为理性维度或判断维度。该维度用于表示个体在作决定时采用什么系统,-->
+                    <!--即作决定和下结论的方法,是客观的逻辑推理还是主观的情感和价值。通过测试得知您轻微偏向以思维做决策。-->
+                <!--</P>-->
+                <!--<P>-->
+                    <!--【判断&#45;&#45;知觉(J-P)】该维度用以描述个体的生活方式。即倾向于以一种较固定的方式生活（或做决定）-->
+                    <!--还是以一种更自然的方式生活（或收集信息）。通过测试得知您中等偏向以知觉方式适应生活或外部环境。-->
+                <!--</P>-->
+            </div>
+
+            <div class="info fol">
+                <h2>辅导建议</h2>
+                <p>
+                    [[${(map.suggest==null|| map.suggest=='')?'暂无建议':map.suggest}]]
+                </p>
+                <!--<p>-->
+                    <!--【外倾&#45;&#45;内倾(E-I)】内倾型态度表现为主体的注意力和精力指向于内部的精神世界,其心理能量通过内部的思想,-->
+                    <!--情绪等而获得。内倾型个体在内部世界中获得支持并看重发生的事件的概念、意义等,因此他们的许多活动是精神性的,-->
+                    <!--他们倾向于在头脑内安静的思考以加工信息。-->
+                <!--</p>-->
+                <!--<p>-->
+                    <!--【触觉&#45;&#45;直觉(S-N)】感觉型的个体倾向与接受能够衡量或有证据的任何事物,关注真实而有形的事件。-->
+                    <!--感觉型的个体相信感官能告诉他们关于外界的准确信息,也相信自己的经验。-->
+                    <!--感觉型的个体关注现在,关心某一刻发生的事情。-->
+                <!--</p>-->
+                <!--<P>-->
+                    <!--【思维&#45;&#45;情感(T-F)】思维型的个体会对情境作客观的、非个人的逻辑分析后再做决定,-->
+                    <!--注重因果关系并寻求事实的客观尺度,因此较少受个人感情的影响。-->
+                <!--</P>-->
+                <!--<P>-->
+                    <!--【判断&#45;&#45;知觉(J-P)】知觉型个体偏好于知觉经验,会不断的收集信息以使其生活保持弹性和自然。-->
+                    <!--知觉型个体努力使事件保持开放性,让其自然的变化,以便出现更好的事件。-->
+                <!--</P>-->
+            </div>
+
+            <div class="info fol">
+                <h2 class="pingyu">咨询师评语</h2>
+
+                    <button type="button" class="btn-edit">编辑评语</button>
+
+
+                <button type="button" class="btn-save" style="display: none">保存评语</button>
+                <!--<p class="p-pingyu">暂无评语。</p>-->
+                <input type="hidden" id="supId" th:value="${map.supId}" >
+                <textarea class="area-edit" id="area-edit" name="comment"  disabled="disabled" >
+                        [[${map.comment==null?'暂无评语':map.comment}]]
+                </textarea>
+            </div>
+
+            <div class="info fol">
+                <h2>结语</h2>
+                <p>感谢您的参与！</p>
+            </div>
+<!--            <div class="btn-back " id="goback">返回上一页</div>-->
+        </div>
+    </div>
+</div>
+<script th:replace="/common/template :: script"></script>
+<script type="text/javascript" th:src="@{/js/plugins/jquery-2.2.4.min.js}"></script>
+<script type="text/javascript" th:src="@{/lib/zTree_v3/js/jquery.ztree.core.min.js}"></script>
+<!--<script type="text/javascript" th:src="@{/js/timoTree.js}"></script>-->
+<script type="text/javascript">
+    $(".btn-edit").click(function () {
+        $("#area-edit").attr("disabled",false);
+        $(".btn-edit").toggle();
+        $(".btn-save").toggle();
+    })
+    $(".btn-save").click(function () {
+        $("#area-edit").attr("disabled",true);
+        $.get("/system/appraisal/evaluate",{id:$("#supId").val(),comment:$("#area-edit").val()},function (req) {
+            $.fn.Messager(req);
+        });
+        $(".btn-edit").toggle();
+        $(".btn-save").toggle();
+    })
+
+
+
+    // $(function () {
+    //     $.ajax({
+    //         url:"/system/appraisal/getTopic",
+    //         type:"get",
+    //         data:{"uspId":"159006129391530315"},
+    //         dataType:"json",
+    //         success:function (json) {
+    //
+    //             // console.log(JSON.stringify(json.data))
+    //         }
+    //     })
+    // })
+
+
+
+
+     // 树形菜单
+    // $.fn.selectTree({
+    //     rootTree: '全部',
+    //     onSelected: function (treeNode) {
+    //         local.setItem('deptTitle', treeNode.name);
+    //
+    //     }
+    // });
+</script>
+</body>
+</html>

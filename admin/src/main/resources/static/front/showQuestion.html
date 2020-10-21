@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>在线咨询-德宝心理咨询中心</title>
+
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrapper {
+            margin: 0;
+            padding: 0;
+            width: 1100px;
+            height: 550px;
+            border: 1px solid #DEDEDE;
+            margin: 80px auto;
+            box-shadow: 2px 2px 2px 2px gray;
+            position: relative;
+        }
+
+        .sca-tit {
+            margin: 0;
+            padding: 0;
+            height: 60px;
+            line-height: 60px;
+            text-align: center;
+            background-color: #2185D0;
+            color: white;
+            font-size: 30px;
+        }
+
+        .ele {
+            width: 100%;
+        }
+
+        .content {
+            width: 60%;
+            margin: 0 auto;
+            margin-top: 50px;
+        }
+
+        .det {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            border: 1px solid #DEDEDE;
+            margin-top: 20px;
+        }
+
+        .det p {
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .btn-ne {
+            width: 100%;
+            height: 50px;
+            background-color: #2185D0;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .btn-ne h2 {
+            margin: 0;
+            padding: 0;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-size: 20px;
+            color: white;
+            letter-spacing: 3px;
+        }
+
+        .btn-ne-l h2 {
+            margin: 0;
+            padding: 0;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-size: 20px;
+            color: white;
+            letter-spacing: 3px;
+        }
+
+        .form-list {
+            width: 55%;
+            margin: 0 auto;
+            box-shadow: 1px 1px 1px 1px gray;
+            margin-top: 100px;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+        }
+
+        .list-title {
+            width: 80%;
+            margin: 10px auto;
+            height: 50px;
+            line-height: 50px;
+            color: white;
+            background: #2185D0;
+            text-align: center;
+            position: relative;
+            bottom: -20px;
+        }
+
+        .list-ele {
+            width: 70%;
+            margin: 20px auto;
+        }
+
+        .ele-title {
+            font-size: 20px;
+            /*font-weight: 100;*/
+        }
+
+        .child {
+            width: 80%;
+            margin: 10px auto;
+        }
+
+        .child p {
+            font-size: 16px;
+        }
+
+        .child input[type=text] {
+            width: 100%;
+            height: 30px;
+        }
+
+        .child input[type=radio] {
+            width: 20px;
+            height: 20px;
+        }
+
+        .child label {
+            font-size: 18px;
+            font-weight: 100;
+            text-indent: 1em;
+            position: relative;
+            bottom: 4px;
+        }
+
+        .child input[type=checkbox] {
+            width: 20px;
+            height: 20px;
+        }
+
+        .end {
+            width: 100%;
+            height: 20px;
+            font-size: 14px;
+            color: gainsboro;
+            text-align: center;
+        }
+
+        .btn-sub {
+            width: 80%;
+            height: 40px;
+            background: #00B5AD;
+            color: white;
+            font-size: 18px;
+            text-align: center;
+            margin: 10px auto;
+            line-height: 40px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .zChecks {
+            background-color: rgba(63, 222, 164, 0.5);
+            border-radius: 7px;
+            /*padding: 2px;*/
+        }
+
+        .windows8 {
+            position: relative;
+            width: 78px;
+            height:78px;
+            margin:auto;
+        }
+
+        .windows8 .wBall {
+            position: absolute;
+            width: 74px;
+            height: 74px;
+            opacity: 0;
+            transform: rotate(225deg);
+            -o-transform: rotate(225deg);
+            -ms-transform: rotate(225deg);
+            -webkit-transform: rotate(225deg);
+            -moz-transform: rotate(225deg);
+            animation: orbit 6.96s infinite;
+            -o-animation: orbit 6.96s infinite;
+            -ms-animation: orbit 6.96s infinite;
+            -webkit-animation: orbit 6.96s infinite;
+            -moz-animation: orbit 6.96s infinite;
+        }
+
+        .windows8 .wBall .wInnerBall{
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: rgb(0,0,0);
+            left:0px;
+            top:0px;
+            border-radius: 10px;
+        }
+
+        .windows8 #wBall_1 {
+            animation-delay: 1.52s;
+            -o-animation-delay: 1.52s;
+            -ms-animation-delay: 1.52s;
+            -webkit-animation-delay: 1.52s;
+            -moz-animation-delay: 1.52s;
+        }
+
+        .windows8 #wBall_2 {
+            animation-delay: 0.3s;
+            -o-animation-delay: 0.3s;
+            -ms-animation-delay: 0.3s;
+            -webkit-animation-delay: 0.3s;
+            -moz-animation-delay: 0.3s;
+        }
+
+        .windows8 #wBall_3 {
+            animation-delay: 0.61s;
+            -o-animation-delay: 0.61s;
+            -ms-animation-delay: 0.61s;
+            -webkit-animation-delay: 0.61s;
+            -moz-animation-delay: 0.61s;
+        }
+
+        .windows8 #wBall_4 {
+            animation-delay: 0.91s;
+            -o-animation-delay: 0.91s;
+            -ms-animation-delay: 0.91s;
+            -webkit-animation-delay: 0.91s;
+            -moz-animation-delay: 0.91s;
+        }
+
+        .windows8 #wBall_5 {
+            animation-delay: 1.22s;
+            -o-animation-delay: 1.22s;
+            -ms-animation-delay: 1.22s;
+            -webkit-animation-delay: 1.22s;
+            -moz-animation-delay: 1.22s;
+        }
+
+
+
+        @keyframes orbit {
+            0% {
+                opacity: 1;
+                z-index:99;
+                transform: rotate(180deg);
+                animation-timing-function: ease-out;
+            }
+
+            7% {
+                opacity: 1;
+                transform: rotate(300deg);
+                animation-timing-function: linear;
+                origin:0%;
+            }
+
+            30% {
+                opacity: 1;
+                transform:rotate(410deg);
+                animation-timing-function: ease-in-out;
+                origin:7%;
+            }
+
+            39% {
+                opacity: 1;
+                transform: rotate(645deg);
+                animation-timing-function: linear;
+                origin:30%;
+            }
+
+            70% {
+                opacity: 1;
+                transform: rotate(770deg);
+                animation-timing-function: ease-out;
+                origin:39%;
+            }
+
+            75% {
+                opacity: 1;
+                transform: rotate(900deg);
+                animation-timing-function: ease-out;
+                origin:70%;
+            }
+
+            76% {
+                opacity: 0;
+                transform:rotate(900deg);
+            }
+
+            100% {
+                opacity: 0;
+                transform: rotate(900deg);
+            }
+        }
+
+        @-o-keyframes orbit {
+            0% {
+                opacity: 1;
+                z-index:99;
+                -o-transform: rotate(180deg);
+                -o-animation-timing-function: ease-out;
+            }
+
+            7% {
+                opacity: 1;
+                -o-transform: rotate(300deg);
+                -o-animation-timing-function: linear;
+                -o-origin:0%;
+            }
+
+            30% {
+                opacity: 1;
+                -o-transform:rotate(410deg);
+                -o-animation-timing-function: ease-in-out;
+                -o-origin:7%;
+            }
+
+            39% {
+                opacity: 1;
+                -o-transform: rotate(645deg);
+                -o-animation-timing-function: linear;
+                -o-origin:30%;
+            }
+
+            70% {
+                opacity: 1;
+                -o-transform: rotate(770deg);
+                -o-animation-timing-function: ease-out;
+                -o-origin:39%;
+            }
+
+            75% {
+                opacity: 1;
+                -o-transform: rotate(900deg);
+                -o-animation-timing-function: ease-out;
+                -o-origin:70%;
+            }
+
+            76% {
+                opacity: 0;
+                -o-transform:rotate(900deg);
+            }
+
+            100% {
+                opacity: 0;
+                -o-transform: rotate(900deg);
+            }
+        }
+
+        @-ms-keyframes orbit {
+            0% {
+                opacity: 1;
+                z-index:99;
+                -ms-transform: rotate(180deg);
+                -ms-animation-timing-function: ease-out;
+            }
+
+            7% {
+                opacity: 1;
+                -ms-transform: rotate(300deg);
+                -ms-animation-timing-function: linear;
+                -ms-origin:0%;
+            }
+
+            30% {
+                opacity: 1;
+                -ms-transform:rotate(410deg);
+                -ms-animation-timing-function: ease-in-out;
+                -ms-origin:7%;
+            }
+
+            39% {
+                opacity: 1;
+                -ms-transform: rotate(645deg);
+                -ms-animation-timing-function: linear;
+                -ms-origin:30%;
+            }
+
+            70% {
+                opacity: 1;
+                -ms-transform: rotate(770deg);
+                -ms-animation-timing-function: ease-out;
+                -ms-origin:39%;
+            }
+
+            75% {
+                opacity: 1;
+                -ms-transform: rotate(900deg);
+                -ms-animation-timing-function: ease-out;
+                -ms-origin:70%;
+            }
+
+            76% {
+                opacity: 0;
+                -ms-transform:rotate(900deg);
+            }
+
+            100% {
+                opacity: 0;
+                -ms-transform: rotate(900deg);
+            }
+        }
+
+        @-webkit-keyframes orbit {
+            0% {
+                opacity: 1;
+                z-index:99;
+                -webkit-transform: rotate(180deg);
+                -webkit-animation-timing-function: ease-out;
+            }
+
+            7% {
+                opacity: 1;
+                -webkit-transform: rotate(300deg);
+                -webkit-animation-timing-function: linear;
+                -webkit-origin:0%;
+            }
+
+            30% {
+                opacity: 1;
+                -webkit-transform:rotate(410deg);
+                -webkit-animation-timing-function: ease-in-out;
+                -webkit-origin:7%;
+            }
+
+            39% {
+                opacity: 1;
+                -webkit-transform: rotate(645deg);
+                -webkit-animation-timing-function: linear;
+                -webkit-origin:30%;
+            }
+
+            70% {
+                opacity: 1;
+                -webkit-transform: rotate(770deg);
+                -webkit-animation-timing-function: ease-out;
+                -webkit-origin:39%;
+            }
+
+            75% {
+                opacity: 1;
+                -webkit-transform: rotate(900deg);
+                -webkit-animation-timing-function: ease-out;
+                -webkit-origin:70%;
+            }
+
+            76% {
+                opacity: 0;
+                -webkit-transform:rotate(900deg);
+            }
+
+            100% {
+                opacity: 0;
+                -webkit-transform: rotate(900deg);
+            }
+        }
+
+        @-moz-keyframes orbit {
+            0% {
+                opacity: 1;
+                z-index: 99;
+                -moz-transform: rotate(180deg);
+                -moz-animation-timing-function: ease-out;
+            }
+
+            7% {
+                opacity: 1;
+                -moz-transform: rotate(300deg);
+                -moz-animation-timing-function: linear;
+                -moz-origin: 0%;
+            }
+
+            30% {
+                opacity: 1;
+                -moz-transform: rotate(410deg);
+                -moz-animation-timing-function: ease-in-out;
+                -moz-origin: 7%;
+            }
+
+            39% {
+                opacity: 1;
+                -moz-transform: rotate(645deg);
+                -moz-animation-timing-function: linear;
+                -moz-origin: 30%;
+            }
+
+            70% {
+                opacity: 1;
+                -moz-transform: rotate(770deg);
+                -moz-animation-timing-function: ease-out;
+                -moz-origin: 39%;
+            }
+
+            75% {
+                opacity: 1;
+                -moz-transform: rotate(900deg);
+                -moz-animation-timing-function: ease-out;
+                -moz-origin: 70%;
+            }
+
+            76% {
+                opacity: 0;
+                -moz-transform: rotate(900deg);
+            }
+
+            100% {
+                opacity: 0;
+                -moz-transform: rotate(900deg);
+            }
+        }
+
+    </style>
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="/js/jquery-3.4.1.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="/js/bootstrap.js"></script>
+    <script>
+        $(function () {
+            $("#head").load("header.html")
+        })
+    </script>
+</head>
+
+<body>
+<header id="head"></header>
+<div id="wrapper" class="wrapper" style="display: none">
+    <div>
+        <h1 class="sca-tit">食堂满意度</h1>
+    </div>
+    <div class="ele" id="first-box">
+        <div class="content">
+            <div class="info">
+                <h2>说明</h2>
+                <div class="det">
+                    <p>
+                        针对食堂卫生、食品满意度征求意见
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <div class="btn-ne" id="begin">
+            <h2>开始答题</h2>
+        </div>
+    </div>
+</div>
+<form action="inde" id="form-wrapper">
+    <div id="form-list" class="form-list" style="display: block">
+        <h2 class="list-title" id="sca-tit">网络环境下大学生思想政治教育调查问卷</h2>
+        <div class="content">
+            <div class="info">
+                <h2>说明</h2>
+                <div class="det">
+                    <p id="message">
+                        针对食堂卫生、食品满意度征求意见
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <div style="clear: both;height: 30px"></div>
+        <div id="quesAll">
+
+        </div>
+        <!--<div class="list-ele">-->
+        <!--<h2 class="ele-title">1.您的出生日期</h2>-->
+        <!--<div class="child">-->
+        <!--<p>年份：</p>-->
+        <!--<input type="text" class="form-control">-->
+
+        <!--</div>-->
+        <!--<div class="child">-->
+        <!--<p>月：</p>-->
+        <!--<input type="text" class="form-control">-->
+        <!--</div>-->
+        <!--<div class="child">-->
+        <!--<p>日：</p>-->
+        <!--<input type="text" class="form-control">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="list-ele">-->
+        <!--<h2 class="ele-title">2.性别</h2>-->
+        <!--<div class="child">-->
+        <!--<input type="radio" id="nan" name="sex" value="男">-->
+        <!--<label for="nan">男</label>-->
+        <!--</div>-->
+        <!--<div class="child">-->
+        <!--<input type="radio" id="nv" name="sex" value="女">-->
+        <!--<label for="nv">女</label>-->
+        <!--</div>-->
+
+        <!--</div>-->
+        <!--<div class="list-ele">-->
+        <!--<h2 class="ele-title">3.您所在年级</h2>-->
+        <!--<div class="child">-->
+        <!--<input type="radio" id="dayi" name="grade" value="1">-->
+        <!--<label for="nan">大一</label>-->
+        <!--</div>-->
+        <!--<div class="child">-->
+        <!--<input type="radio" id="daer" name="grade" value="2">-->
+        <!--<label for="daer">大二</label>-->
+        <!--</div>-->
+        <!--<div class="child">-->
+        <!--<input type="radio" id="dasan" name="grade" value="3">-->
+        <!--<label for="dasan">大三</label>-->
+        <!--</div>-->
+        <!--<div class="child">-->
+        <!--<input type="radio" id="dasi" name="grade" value="4">-->
+        <!--<label for="dasi">大四</label>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="list-ele">-->
+        <!--<h2 class="ele-title">4.最常使用的多媒体是</h2>-->
+        <!--<div class="child">-->
+        <!--<input type="checkbox" id="tv"  name="grade" value="1">-->
+        <!--<label for="tv">电视</label>-->
+        <!--</div>-->
+        <!--<div class="child">-->
+        <!--<input type="checkbox" id="phobe"  name="grade" value="2">-->
+        <!--<label for="phobe">手机</label>-->
+        <!--</div>-->
+        <!--<div class="child">-->
+        <!--<input type="checkbox" id="newspaper"  name="grade" value="3">-->
+        <!--<label for="newspaper">杂志报刊</label>-->
+        <!--</div>-->
+        <!--<div class="child">-->
+        <!--<input type="checkbox" id="broadcast"  name="grade" value="4">-->
+        <!--<label for="broadcast">电视广播</label>-->
+        <!--</div>-->
+        <!--<div class="child">-->
+        <!--<input type="checkbox"  id="internet" name="grade" value="4">-->
+        <!--<label for="internet">互联网</label>-->
+        <!--</div>-->
+        <!--<div class="child">-->
+        <!--<input type="checkbox" id="outdoor"  name="grade" value="4">-->
+        <!--<label for="outdoor">户外媒体</label>-->
+        <!--</div>-->
+        <!--<div class="child">-->
+        <!--<input type="checkbox" id="other"  name="grade" value="4">-->
+        <!--<label for="other">其他</label>-->
+        <!--</div>-->
+        <!--</div>-->
+        <div class="end">
+            已经是最后一题了~
+        </div>
+        <div class="btn-sub" id="submits">
+            提交答案
+        </div>
+    </div>
+</form>
+<div style="position: relative;top: -600px"  class="modal fade" id="myModal" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="">
+            <div class="modal-header" style="display: none">
+                <button type="button" class="close" id="btn-close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body" id="myModalContent" style="font-size: 16px;">
+                <div class="windows8">
+                    <div class="wBall" id="wBall_1">
+                        <div class="wInnerBall"></div>
+                    </div>
+                    <div class="wBall" id="wBall_2">
+                        <div class="wInnerBall"></div>
+                    </div>
+                    <div class="wBall" id="wBall_3">
+                        <div class="wInnerBall"></div>
+                    </div>
+                    <div class="wBall" id="wBall_4">
+                        <div class="wInnerBall"></div>
+                    </div>
+                    <div class="wBall" id="wBall_5">
+                        <div class="wInnerBall"></div>
+                    </div>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<button style="display: none" class='btn btn-primary join' id="btn-click" data-toggle='modal' data-target='#myModal'>点击</button>
+</body>
+<script>
+    //获取url上的请求参数
+    function queryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    }
+
+    var param = queryString("scaleId")
+    $("#begin").click(function () {
+        // $("#wrapper").hide()
+        // $("#form-list").show()
+    })
+
+    function getUrlParms(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null)
+            return decodeURI(r[2]);
+        return null;
+    }
+
+    var getQuesAll = [];
+    //获取问卷调查的题目
+    $(function () {
+        $.get("/webApi/getQuesTopic", {"id": getUrlParms("id")}, function (req) {
+            $("#sca-tit").text(req.data['ques'].title)
+            $("#message").text(req.data['ques'].message)
+            var allHtml = "";
+            var htmll = "<div class=\"list-ele\">  <h2 class=\"ele-title\">";  //题目
+            var xuan = "";    //选项
+            getQuesAll = req.data['allScale'];
+            $.each(req.data['allScale'], function (i, item) {
+                xuan = "";
+                $.each(item, function (i, red) {
+                    // var arr = Object.keys(red);
+                    htmll = "<div class=\"list-ele\">  <h2 class=\"ele-title\">" + red.no + "、" + red.dateil + "</h2>";
+                    xuan += " <div class='child' >  " +
+                        " <div onmouseover='myfun(this)' class='a' onmouseout='myfun(this)'  onclick='clickChecked(this)'> <input type='radio'    name='" + red.tocId + "' value='" + red.melId + "'> " +
+                        "   <label for='nan'>" + red.content + "</label> </div> " +
+                        " </div> ";
+                });
+                htmll += xuan + "</div>";
+                allHtml += htmll;
+            });
+            $("#quesAll").append(allHtml);
+        });
+
+        $("#submits").click(function () {
+            $.each(getQuesAll, function (i, item) {
+                $.each(item, function (i, ired) {
+                    var tocId = ired.tocId;//题目id
+                    // console.log(tocId+"tocId>>");
+                    ired.result = "否";
+                    if (ired.type == '1') { //单选题
+                        var aa = $("input[name='" + tocId + "']:checked").val();
+                        // console.log(JSON.stringify(aa)+"aa>>>");
+                        if (aa == ired.melId) {
+                            ired.result = "是";
+                        }
+                    } else if (ired.type == '2') {  //多选题
+                    }
+                })
+            })
+            $("#btn-click").trigger("click")
+            $.when(saveData()).done(function (data) {
+                // alert(data.data)
+                $("#btn-close").trigger("click")
+                // console.log(data)
+                if (data.code==200){
+                    window.location.href="index.html"
+                }
+            })
+            // console.log("########################")
+            // console.log(getQuesAll)
+
+            // $.ajax("/webApi/subQuesAnswer", {"quesId": getUrlParms("id"), "list": getQuesAll}, function (req) {
+            //     console.log("123");
+            //     console.log(req);
+            // });
+        });
+
+    })
+    function saveData() {
+        // console.log("wo jin lai le")
+        var defer = $.Deferred();
+        $.ajax({
+            type: "POST",
+            url: "/webApi/subQuesAnswer",
+            data: JSON.stringify({"quesId": getUrlParms("id"), "list":JSON.stringify(getQuesAll) }),
+            dataType: "json",
+            contentType: "application/json;charset=utf-8",
+            success: function (data) {
+                // console.log(data)
+                defer.resolve(data)
+                // console.log("123");
+                // console.log(req);
+            }
+
+        });
+        return defer
+    }
+    // function myfun(e) {
+    //     if ($(e).attr("class") == 'a') {
+    //         $(e).attr("class", "zChecks");
+    //     } else {
+    //         $(e).attr("class", "a");
+    //     }
+    // }
+
+    // function clickChecked(e) {
+    //     var names = $($(e).children("input").get(0)).attr("name");
+    //     $("input[name='" + names + "']:checked").attr("checked", false);
+    //     $($(e).children("input").get(0)).attr("checked", true);
+    // }
+
+
+</script>
+
+</html>

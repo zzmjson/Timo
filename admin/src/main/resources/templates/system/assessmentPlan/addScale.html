@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:mo="https://gitee.com/aun/Timo"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:replace="/common/template :: header(~{::title},~{::link},~{::style})">
+    <link rel="stylesheet" th:href="@{/lib/zTree_v3/css/zTreeStyle/zTreeStyle.css}" type="text/css">
+</head>
+<body class="timo-layout-page" id="win">
+<div class="layui-card">
+    <div class="layui-card-header timo-card-header">
+        <span><i class="fa fa-bars"></i>测评计划</span>
+        <i class="layui-icon layui-icon-refresh refresh-btn"></i>
+    </div>
+    <div class="layui-card-body">
+
+        <div class="layui-row timo-card-screen put-row">
+            <div class="pull-left layui-form-pane timo-search-box">
+                <div class="layui-inline" style="display: none">
+                    <label class="layui-form-label">测评列表</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="assId" th:value="${assId}" placeholder="请输入用户名"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+            </div>
+            <div class="pull-right screen-btn-group">
+                <div class="btn-group-left" style="height: 40px">
+                </div>
+                <a class="close-popup" id="close-win">
+                </a>
+                <form th:action="@{/system/assessmentPlan/addScaleToAss}" method="post" id="form-user">
+                    <input type="text" name="assId" th:value="${assId}" style="display: none">
+                    <input type="text" name="str" id="str" style="display: none">
+                    <div class="btn-group-right">
+<!--                        shiro:hasPermission="system:assessmentPlan:add"-->
+                        <button class="layui-btn ajax-submit" id="addScale"  data-size="auto">
+                            <i class="fa fa-plus"></i> 添加
+                        </button>
+                    </div>
+                </form>
+<!--                <div class="btn-group-right">-->
+<!--                    <button class="layui-btn " id="addScale" shiro:hasPermission="system:assessmentPlan:add" data-size="auto">-->
+<!--                        <i class="fa fa-plus"></i> 添加-->
+<!--                    </button>-->
+<!--                </div>-->
+            </div>
+        </div>
+        <div class="timo-table-wrap">
+            <span style="display: none"  id="assId" th:text="${assId}"></span>
+<!--            <span style="display: none"  id="list" th:text="${check}"></span>-->
+            <table class="layui-table timo-table" >
+                <thead >
+                <tr>
+                    <th class="timo-table-checkbox">
+                        <label class="timo-checkbox"><input id="checkAll" type="checkbox">
+                            <i class="layui-icon layui-icon-ok"></i></label>
+                    </th>
+                    <th style="text-align: center" class="sortable" data-field="id">量表标题</th>
+                    <th style="text-align: center" class="sortable" data-field="starTime">类型</th>
+                    <th style="text-align: center" class="sortable" data-field="state">题目数</th>
+                    <th style="text-align: center" class="sortable" >制作人</th>
+                    <th style="text-align: center" class="sortable">量表状态</th>
+                    <th style="text-align: center" class="sortable">添加时间</th>
+                </tr>
+                </thead>
+                <tbody style="text-align: center">
+                    <tr th:each="item:${list}">
+                        <td>
+                            <label class="timo-checkbox"><input class="check"   name="check" type="checkbox"  th:value="${item.id}">
+                            <i class="layui-icon layui-icon-ok"></i></label>
+                        </td>
+                        <td th:text="${item.title}">量表标题</td>
+                        <td th:text="${item.scale_type_name}">类型</td>
+                        <td th:text="${item.number}">11</td>
+                        <td th:text="${item.create_user}">制作人</td>
+                        <td th:text="${item.state==1?'已发布':''}">量表状态</td>
+                        <td th:text="${#dates.format(item.create_Date_time,'yyyy-MM-dd hh:mm')}">添加时间</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:replace="/common/fragment :: page"></div>
+    </div>
+
+</div>
+<script th:replace="/common/template :: script"></script>
+<script type="text/javascript" th:src="@{/js/plugins/jquery-2.2.4.min.js}"></script>
+<script type="text/javascript" th:src="@{/lib/zTree_v3/js/jquery.ztree.core.min.js}"></script>
+<!--<script type="text/javascript" th:src="@{/js/timoTree.js}"></script>-->
+<script type="text/javascript">
+    var local = window.localStorage;
+    var x = 1;
+    var str = "";
+    $("#addScale").click(function () {
+
+        var items = document.getElementsByName("check")
+        var arr = items.length;
+        for(var i=0;i<arr;i++){
+            if (items[i].checked==true){
+                // console.log(items[i].value)
+                str+=items[i].value+',';
+            }
+        }
+        if (str==""){
+            alert("请至少选择一项再添加！")
+            return false;
+        }
+        $("#str").val(str)
+        // $.ajax({
+        //     url:"/system/assessmentPlan/addScaleToAss",
+        //     data:{"assId":$("#assId").text(),"str":str},
+        //     type:"post",
+        //     dataType:"json",
+        //     success:function (json) {
+        //         if (json.code==200){
+        //             location.reload();
+        //             $("#close-win").trigger("click")
+        //
+        //         }
+        //
+        //     }
+        // })
+    })
+    $(function () {
+        // var list = $("#list").text();
+        // list = list.replace("[","");
+        // list = list.replace("]","");
+        // list = list.replace(" ","");
+        // var str = list.split(",");
+        // var items = document.getElementsByName("check")
+        // var arr = items.length;
+        // var number = 0;
+        // var join = 0;
+        // for(var i=0;i<arr;i++){
+        //     for(var j=0;j<str.length;j++){
+        //         str[j] = str[j].replace(" ","");
+        //         if (items[i].value==str[j]){
+        //             // join++;
+        //             items[i].disabled="disabled"
+        //             $("#checkAll").attr("disabled","disabled")
+        //         }
+        //     }
+        // }
+    })
+
+</script>
+</body>
+</html>

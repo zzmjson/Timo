@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:mo="https://gitee.com/aun/Timo"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:replace="/common/template :: header(~{::title},~{::link},~{::style})">
+    <link rel="stylesheet" th:href="@{/lib/zTree_v3/css/zTreeStyle/zTreeStyle.css}" type="text/css">
+    <style>
+
+    </style>
+</head>
+<body class="timo-layout-page">
+<div class="layui-card">
+    <div class="layui-card-header timo-card-header">
+        <span style="font-size: 24px;font-weight: bolder">访谈预约记录</span>
+        <i class="layui-icon layui-icon-refresh refresh-btn"></i>
+    </div>
+    <div class="layui-card-body">
+        <div class="layui-row timo-card-screen put-row">
+            <div class="pull-left layui-form-pane timo-search-box">
+                <div class="layui-inline">
+                    <label class="layui-form-label">来访者</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="searchText" th:value="${param.title}" placeholder="请输入来访者姓名"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline" style="width: 200px">
+                    <label class="layui-form-label">状态</label>
+                    <div class="layui-input-block timo-search-status">
+                        <select style="width: 120px" class="timo-search-select" name="state" th:value="${param.state}">
+                            <option value="0">全部</option>
+                            <option value="1">已预约</option>
+                            <option value="2">已确认</option>
+                            <option value="3">已完成</option>
+                            <option value="4">已过期</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <button class="layui-btn timo-search-btn">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="pull-right screen-btn-group">
+                <div class="btn-group-left">
+                </div>
+                <div class="btn-group-right">
+<!--                    <button class="layui-btn open-popup" data-title="添加计划" th:attr="data-url=@{/system/assessmentPlan/add}"-->
+<!--                            shiro:hasPermission="system:assessmentPlan:add" data-size="auto">-->
+<!--                        <i class="fa fa-plus"></i> 添加-->
+<!--                    </button>-->
+                </div>
+            </div>
+        </div>
+        <div class="timo-table-wrap">
+            <table class="layui-table timo-table" >
+                <thead >
+                <tr>
+
+                    <th style="text-align: center" class="sortable" data-field="scaleNumber">咨询师</th>
+                    <th style="text-align: center" class="sortable" data-field="scaleNumber">咨询类型</th>
+                    <th style="text-align: center" class="sortable" data-field="satrTime">预约时间</th>
+                    <th style="text-align: center" class="sortable" data-field="starTime">咨询地点</th>
+                    <th style="text-align: center" class="sortable" data-field="state">咨询方式</th>
+                    <th style="text-align: center" class="sortable" data-field="title">来访者</th>
+                    <th style="text-align: center" class="sortable" data-field="satrTime">申请时间</th>
+                    <th style="text-align: center" class="sortable" data-field="createUser">状态</th>
+<!--                    <th style="text-align: center" >操作</th>-->
+                    <!--<th>状态</th>-->
+                    <th style="text-align: center">更多</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr style="text-align: center" th:each="item:${list}">
+
+                        <td th:text="${item.counselorName}"></td>
+                        <td th:text="${item.resType}"></td>
+                        <td th:text="${item.resDate}+'('+${#dates.format(item.resTime,'hh:mm')}+')'"></td>
+                        <td th:text="${item.site}"></td>
+                        <td th:text="${item.manner}"></td>
+<!--                        <td th:text="${item.state}">已过期</td>-->
+                        <td th:text="${item.nikeName}"></td>
+                        <td class="tab-w-2" th:text="${#dates.format(item.createDateTime,'yyyy-MM-dd')}"></td>
+                        <td th:switch="${item.state}">
+                            <span th:case="1">已预约</span>
+                            <span th:case="2">已确认</span>
+                            <span th:case="3">已完成</span>
+                            <span th:case="4">已过期</span>
+                        </td>
+<!--                        <td>无操作</td>-->
+                        <td>
+<!--                            +${item.id}-->
+                            <a class="detail" th:attr="data-url=@{'/system/consultRese/talkReseDetail/'+${item.id}}"href="#">详细</a>
+<!--                               shiro:hasPermission="system:assessmentPlan:detail"-->
+
+<!--                            <a class="open-popup" shiro:hasPermission="system:assessmentPlan:edit"-->
+<!--                                href="/#/system/consultRese/talkReseDetail.html" >详细</a>-->
+<!--                            th:attr="data-url=@{/system/menu/add}"-->
+<!--                            <a href="#" th:attr="data-url=@{system/consultRese/talkReseDetail}"><span class="layui-nav-title"  >详细</span></a>-->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:replace="/common/fragment :: page"></div>
+    </div>
+</div>
+<script th:replace="/common/template :: script"></script>
+<script type="text/javascript" th:src="@{/js/plugins/jquery-2.2.4.min.js}"></script>
+<script type="text/javascript" th:src="@{/lib/zTree_v3/js/jquery.ztree.core.min.js}"></script>
+<!--<script type="text/javascript" th:src="@{/js/timoTree.js}"></script>-->
+<script type="text/javascript">
+    var topic = $(".detail");
+    for(var i=0;i<topic.size();i++){
+        topic.eq(i).attr("href",topic.eq(i).data('url'));
+    }
+    var local = window.localStorage;
+    // 树形菜单
+    // $.fn.selectTree({
+    //     rootTree: '全部',
+    //     onSelected: function (treeNode) {
+    //         local.setItem('deptTitle', treeNode.name);
+    //
+    //     }
+    // });
+</script>
+</body>
+</html>

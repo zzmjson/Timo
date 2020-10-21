@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/common/template :: header(~{::title},~{::link},~{::style})">
+    <style>
+        .hintInfo{
+            text-indent: 2em;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-form timo-compile">
+
+        <div class="timo-table-wrap" id="optadd" style="width: 95%;margin: 0 auto">
+            <p class="hintInfo">温馨提示:请从下面选择一个预约来见立个案,或者点击右下角按钮手动建个案</p>
+            <table class="layui-table timo-table" >
+                <thead>
+                    <tr >
+                        <th style="text-align: center">来访者</th>
+                        <th style="text-align: center">咨询类型</th>
+                        <th style="text-align: center">咨询师</th>
+                        <th style="text-align: center">预约时间</th>
+                        <th style="text-align: center">地点</th>
+                        <th style="text-align: center">状态</th>
+                        <th style="text-align: center">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="item:${list}" style="text-align: center">
+
+                        <td th:text="${item.nikeName}"></td>
+                        <td th:text="${item.resType}"></td>
+                        <td th:text="${item.counselorName}"></td>
+                        <td th:text="${item.resDate+'('+item.resTime+')'}"></td>
+                        <td th:text="${item.site}"></td>
+                        <td >已预约</td>
+                            <td>
+                                <button class="layui-btn opt-sub" type="button"  th:value="${item.id}" ></i>新建</button>
+                            </td>
+                    </tr>
+                    <tr th:if="${list.size()<1}">
+                        <td colspan="6" style="text-align: center">当前暂无预约数据，您可以手动新建个案</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="layui-btn newadd" type="button" style="float: right"></i>手动新建个案</button>
+        </div>
+
+    <form th:action="@{/system/case/saveCase}" id="addfrom" class="addfrom" style="display: none">
+        <input type="text" hidden="hidden" name="reserInfoId" id="reserInfoId">
+        <p class="hintInfo">温馨提示:请认真填写一下信息,添加后不可更改</p>
+        <div class="layui-form-item timo-finally">
+<!--            <div style="display: flex; flex-direction:row-reverse; ">-->
+<!--                <button class="layui-btn ajax-submit"><i class="fa fa-check-circle"></i> 保存</button>-->
+<!--            </div>-->
+            <!--<button class="layui-btn btn-secondary close-popup"><i class="fa fa-times-circle"></i> 关闭</button>-->
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">用户姓名</label>
+            <div class="layui-input-inline"  style="width: 600px;">
+                <select name="visitorId">
+                    <option th:each="item:${users}" th:text="${item['nickname']}" th:value="${item['id']}"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label required">个案来源</label>
+            <div class="layui-input-inline"  style="width: 600px;">
+                <select name="caseId">
+                    <option th:each="item:${sourse}" th:text="${item['content']}" th:value="${item['id']}"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label required">咨询类型</label>
+            <div class="layui-input-inline"  style="width: 600px;">
+                <select name="consultingType">
+                    <option th:each="item:${type}" th:text="${item}" th:value="${item}"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label required">处理级别</label>
+            <div class="layui-input-inline"  style="width: 600px;">
+                <select name="rankId">
+                    <option th:each="item:${level}" th:text="${item['content']}" th:value="${item['id']}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item timo-finally" id="parten">
+            <button class="layui-btn ajax-submit" id="save"><i class="fa fa-check-circle"></i> 保存</button>
+            <button class="layui-btn btn-secondary close-popup"><i class="fa fa-times-circle"></i> 关闭</button>
+        </div>
+
+
+
+<!--        <div class="layui-form-item">-->
+<!--            <label class="layui-form-label"></label>-->
+<!--            <div class="layui-input-inline">-->
+<!--                <button class="layui-btn" type="button" id="addSummary" data-title="添加结论">-->
+<!--                    <i class="fa fa-plus"></i> 添加结论-->
+<!--                </button>-->
+<!--            </div>-->
+<!--        </div>-->
+
+        <!--<div class="layui-form-item layui-form-text">-->
+        <!--<label class="layui-form-label">备注</label>-->
+        <!--<div class="layui-input-block">-->
+        <!--<textarea placeholder="请输入内容" class="layui-textarea" name="note">[[${scaleTable?.note}]]</textarea>-->
+        <!--</div>-->
+        <!--</div>-->
+
+    </form>
+</div>
+<script th:replace="/common/template :: script"></script>
+<script type="text/javascript" th:src="@{/js/plugins/jquery-2.2.4.min.js}"></script>
+<script type="text/javascript" th:src="@{/lib/zTree_v3/js/jquery.ztree.core.min.js}"></script>
+<script type="text/javascript">
+    $(".newadd").click(function () {
+        $(".addfrom").css("display","");
+        $("#optadd").css("display","none");
+    })
+    $(".opt-sub").click(function () {
+        $("#reserInfoId").val($(this).val())
+        $("#save").trigger("click")
+        // alert($(this).val())
+    })
+    /**
+    layui.use(['form'], function () {
+        window.form = layui.form;
+        // 初始化排序下拉选项
+        scaleTypeRender($("#scaleTypeId").val());
+        window.form.on('select(testSelect)', function (data) {
+            // console.log(data.elem); //得到select原始DOM对象
+            // console.log(data.value); //得到被选中的value
+            $("#scaleTypeName").val($(data.elem).find("option:selected").text())
+            form.render('select');//select是固定写法 不是选择器
+        });
+    });
+    */
+
+</script>
+</body>
+</html>

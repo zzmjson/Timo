@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/common/template :: header(~{::title},~{::link},~{::style})">
+    <style>
+        .box-sml{
+            width: 100px;
+            height: 30px;
+            border-radius: 5px;
+            background-color: #4F4F52;
+            font-size: 14px;
+            color: white;
+            margin: 0;
+            padding: 0;
+        }
+        .box-sml span{
+            height: 30px;
+            line-height: 30px;
+        }
+        .score{
+            width: 30px;
+            height: 12px;
+            margin-left: 5px;
+            background-color: #4F4F52;
+            border: none;
+            color: white;
+        }
+        .score:hover{
+            background-color:#FDF9CD ;
+            color: black;
+        }
+        .box-dis{
+            display: inline-block;
+        }
+        .box-dan{
+            font-size: 16px;
+            width: 300px;
+            height: 22px;
+            border: none;
+        }
+        .box-dan:hover{
+            background-color: #FDF9CD;
+        }
+        .box-wra{
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-form timo-compile">
+    <form th:action="@{/system/contentTopic/save}">
+        <div class="box-wra">
+            <div class="box-sml box-dis">
+                <span>分值&nbsp;&nbsp;:</span>
+                <input class="score box-dis" type="text" value="50">
+
+            </div>
+            <div class="box-dis">
+                <input class="box-dis" type="radio" name="option">
+                <input class="box-dis box-dan" type="text" value="选项1">
+            </div>
+        </div>
+
+        <!--<input type="hidden" name="id" th:if="${contentTopic}" th:value="${contentTopic.id}"/>-->
+        <!--<input type="hidden"  th:if="${topicId}" name="topicId" th:value="${topicId}"/>-->
+        <!--<div class="layui-form-item">-->
+            <!--<label class="layui-form-label required">题目</label>-->
+            <!--<div class="layui-input-inline">-->
+                <!--&lt;!&ndash;<input class="layui-input" type="text" name="title"  placeholder="题目内容" th:value="${contentTopic?.dateil}">&ndash;&gt;-->
+                <!--<textarea placeholder="题目内容" class="layui-textarea" name="dateil">[[${contentTopic?.dateil}]]</textarea>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="layui-form-item">-->
+            <!--<label class="layui-form-label required">答案</label>-->
+            <!--<div class="layui-input-inline">-->
+                <!--<input class="layui-input" type="text" name="answer"  placeholder="答案" th:value="${contentTopic?.answer}">-->
+            <!--</div>-->
+        <!--</div>-->
+
+
+        <!--<div class="layui-form-item">-->
+            <!--<label class="layui-form-label">题目类型</label>-->
+            <!--<div class="layui-input-inline">-->
+                <!--&lt;!&ndash;<input type="hidden" id="scaleTypeId" th:value="${scale?.scaleTypeId}" >&ndash;&gt;-->
+                <!--<select class="select-type"   name="type" >-->
+                  <!--<option  value="1">单选题</option>-->
+                  <!--<option  value="2">多选题</option>-->
+                <!--</select>-->
+                <!--&lt;!&ndash;<input type="hidden" name="scaleTypeName"  id="scaleTypeName" th:value="${scale?.scaleTypeName}">&ndash;&gt;-->
+            <!--</div>-->
+        <!--</div>-->
+
+
+        <!--&lt;!&ndash;<div class="layui-form-item layui-form-text">&ndash;&gt;-->
+            <!--&lt;!&ndash;<label class="layui-form-label">备注</label>&ndash;&gt;-->
+            <!--&lt;!&ndash;<div class="layui-input-block">&ndash;&gt;-->
+                <!--&lt;!&ndash;<textarea placeholder="请输入内容" class="layui-textarea" name="note">[[${scaleTable?.note}]]</textarea>&ndash;&gt;-->
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
+        <!--<div class="layui-form-item timo-finally">-->
+            <!--<button class="layui-btn ajax-submit"><i class="fa fa-check-circle"></i> 保存</button>-->
+            <!--<button class="layui-btn btn-secondary close-popup"><i class="fa fa-times-circle"></i> 关闭</button>-->
+        <!--</div>-->
+    </form>
+</div>
+<script th:replace="/common/template :: script"></script>
+<script type="text/javascript" th:src="@{/js/plugins/jquery-2.2.4.min.js}"></script>
+<script type="text/javascript" th:src="@{/lib/zTree_v3/js/jquery.ztree.core.min.js}"></script>
+<script type="text/javascript">
+
+
+
+
+
+</script>
+</body>
+</html>

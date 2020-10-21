@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>我的资料-德宝心理咨询中心</title>
+
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    [endif]-->
+    <style type="text/css">
+      @media only screen and (max-width: 1144px) {
+            /* 隐藏大屏菜单 */
+            /* #top_menu_for_large {
+                display: none;
+            } */
+            /* 主要页面内容 */
+            /* .main.content {
+                margin-top: 5em;
+            } */
+      }
+     /* 大屏显示 */
+     @media only screen and (min-width: 1145px) {
+            /* 隐藏小屏菜单 */
+            /* #top_menu_for_small {
+                display: none;
+            } */
+      }   
+      
+      body{
+        font-size: 0;
+      }
+      .my-info{
+        width: 640px;
+        height: 800px;
+        margin: 40px auto;
+
+      }
+      .my-head{
+        width: 640px;
+        height: 300px;
+        margin: 0 auto;
+        border: 1px solid #E1E1E2;
+        box-shadow: 2px 2px 2px 2px gray;
+        margin-bottom: 50px;
+      }
+      .my-head .img{
+        width: 150px;
+        margin: 15px auto;
+      }
+      .img img{
+        border-radius: 50%;
+        width: 100%;
+      }
+      .my-head h2{
+        text-align: center;
+        font-weight: bolder;
+      }
+      .sp{
+       
+        font-size: 14px;
+        background-color: #F2711C;
+        display: inline-block;
+        height: 25px;
+        line-height: 25px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 5px;
+        color: #FCDFCD;
+        margin-top: 15px;
+        
+      }
+      .sp-col{
+        font-size: 15px;
+        color: white;
+        margin-right: 10px;
+      }
+      .p-cen{
+        text-align: center;
+      }
+      .my-title{
+        font-size: 20px;
+        font-weight: bolder;
+        vertical-align: middle;
+      }
+      .my-line{
+        width: 75%;
+        height: 1px;
+        background-color: gray;
+        display: inline-block;
+      }
+      .btn-wid{
+        width: 80px;
+      }
+      table{
+        /* width: 80%;
+        margin: 0 auto; */
+        font-size: 15px;
+      }
+      tr{
+        height: 40px;
+      }
+      tr :nth-child(1){
+        width: 200px;
+        text-align:right;
+      }
+      tr :nth-child(2){
+        text-indent: 20px;
+      }
+      .fo-red{
+        color: red;
+        font-size: 18px;
+        position: relative;
+        bottom: -4px;
+        right: 2px;
+      }
+    </style>
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="/js/jquery-3.4.1.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="/js/bootstrap.js"></script>
+    <script>
+      $(function () {
+        $("#head").load("header.html")
+      })
+    </script>
+  </head>
+  <body>
+    <div id="top_menu_for_large">
+      <header id="head"></header>
+      <div class="my-info">
+        <div class="my-head">
+          <div class="img"><img id="photo"   alt=""></div>
+          <h2 id="nickname">管理员</h2>
+          <p class="p-cen">
+            <span class="sp"> 角色:&nbsp;<span class="sp-col role" >超级管理员</span> </span>
+          </p>
+        </div>
+        <form id="basicInfo">
+        <span class="my-title">基本信息</span>
+        <div class="my-line"></div>
+        <button  type="button" class="btn btn-primary btn-wid" id="btn-edit-1">编辑</button>
+        <button  style="display: none;" type="button" class="btn btn-warning btn-wid" id="btn-submit-1">保存</button>
+
+          <table >
+            <tr>
+              <td>账号</td>
+              <td id="account"></td>
+            </tr>
+            <tr>
+              <td>注册时间</td>
+              <td id="createTime"></td>
+            </tr>
+            <tr class="fo-show">
+              <td>姓名</td>
+              <td id="realname"></td>
+            </tr>
+            <tr class="fo-hide" style="display: none;">
+              <td><span class="fo-red">*</span>姓名</td>
+              <td><input style="text-align: left" id="inp-realname" name="realName" type="text"></td>
+            </tr>
+            <tr class="fo-show">
+              <td>出生日期</td>
+              <td id="birthday">1998年4月17日</td>
+            </tr>
+            <tr class="fo-hide" style="display: none;">
+              <td><span class="fo-red">*</span>出生日期</td>
+              <td><input name="birthDate" id="birthDate" style="text-align: left"  type="date"></td>
+            </tr>
+            <tr class="fo-show">
+              <td>性别</td>
+              <td id="sex"></td>
+            </tr>
+            <tr class="fo-hide" style="display: none;">
+              <td><span class="fo-red">*</span>性别</td>
+              <td>
+                <select name="sex" id="inp-sex">
+                  <option value="">请选择</option>
+                  <option value="1">男</option>
+                  <option value="2">女</option>
+                </select>
+              </td>
+            </tr>
+<!--            <tr>-->
+<!--              <td>角色权限</td>-->
+<!--              <td class="role"></td>-->
+<!--            </tr>-->
+            <tr class="fo-show">
+              <td>个人简介</td>
+              <td id="info"></td>
+            </tr>
+            <tr class="fo-hide" style="display: none;">
+              <td>个人简介</td>
+              <td><textarea style="text-align: left" name="info" id="inp-info" cols="100" rows="5"></textarea></td>
+            </tr>
+          </table>
+        </form>
+        <form action="">
+        <span class="my-title">其他信息</span>
+        <div class="my-line"></div>
+        <button type="button" class="btn btn-primary btn-wid" id="btn-edit-2">编辑</button>
+        <button  style="display: none;" type="button" class="btn btn-warning btn-wid" id="btn-submit-2">保存</button>
+          <table >
+            <tr class="form-show">
+              <td>编号</td>
+              <td id="serialNo">12138</td>
+            </tr>
+            <tr class="form-hide" style="display: none;">
+              <td>编号</td>
+              <td><input style="text-align: left" id="inp-serialNo" type="text"></td>
+            </tr>
+            <tr class="form-show">
+              <td>民族</td>
+              <td id="nation" >汉族</td>
+            </tr>
+            <tr class="form-hide" style="display: none;">
+              <td>民族</td>
+              <td><input style="text-align: left" id="inp-nation" type="text"></td>
+            </tr>
+            <tr class="form-show">
+              <td>学历</td>
+              <td id="education">大学本科</td>
+            </tr>
+            <tr class="form-hide" style="display: none;">
+              <td>学历</td>
+              <td><input style="text-align: left" id="inp-education" type="text"></td>
+            </tr>
+            <tr class="form-show">
+              <td>家庭住址</td>
+              <td id="address">我家住在黄土高坡</td>
+            </tr>
+            <tr class="form-hide" style="display: none;">
+              <td>家庭住址</td>
+              <td><input style="text-align: left" id="inp-address" type="text"></td>
+            </tr>
+<!--            <tr class="form-show">-->
+<!--              <td>籍贯</td>-->
+<!--              <td >陕西</td>-->
+<!--            </tr>-->
+<!--            <tr class="form-hide" style="display: none;">-->
+<!--              <td>籍贯</td>-->
+<!--              <td><input type="text"></td>-->
+<!--            </tr>-->
+          </table>
+        </form>
+        <hr>
+      </div>
+
+
+    <script>
+      $(function () {
+        loadDate()
+      })
+      function loadDate(){
+        $.ajax({
+          url:"/front/getuser",
+          dataType:"json",
+          type:"get",
+          success:function (json) {
+            console.log(json.data['user'])
+            $("#birthday").text(dateFormat(json.data['user'].birthDate))
+            $("#birthDate").val(dateFormat(json.data['user'].birthDate))
+            $("#photo").attr("src",json.data['user'].picture)
+            $("#nickname").text(json.data['user'].nickname)
+            $(".role").text(json.data['role'])
+            $("#account").text(json.data['user'].username)
+            var x = new Date();
+            var date = json.data['user'].createDate
+            var arr = date.split("T");
+            $("#createTime").text(arr[0])
+            $("#realname").text(json.data['user'].realName)
+            $("#sex").text(json.data['user'].sex==1?'男':'女')
+            $("#info").text(json.data['user'].info)
+            $("#serialNo").text(json.data['user'].serialNo)
+            $("#nation").text(json.data['user'].nation)
+            $("#education").text(json.data['user'].education)
+            $("#address").text(json.data['user'].address)
+            $("#inp-info").val(json.data['user'].info)
+            $("#inp-sex").val(json.data['user'].sex)
+            $("#inp-realname").val(json.data['user'].realName)
+            $("#inp-address").val(json.data['user'].address)
+            $("#inp-education").val(json.data['user'].education)
+            $("#inp-nation").val(json.data['user'].nation)
+            $("#inp-serialNo").val(json.data['user'].serialNo)
+          }
+        })
+      }
+      $("#btn-edit-1").click(function(){
+        $(this).hide()
+        $(".fo-hide").show();
+        $(".fo-show").hide();
+        $("#btn-submit-1").show();
+      })
+      $("#btn-submit-1").click(function(){
+        $(this).hide();
+        $(".fo-hide").hide();
+        $(".fo-show").show();
+        $("#btn-edit-1").show();
+      })
+      $("#btn-edit-2").click(function(){
+        $(this).hide()
+        $(".form-hide").show();
+        $(".form-show").hide();
+        $("#btn-submit-2").show();
+      })
+      $("#btn-submit-2").click(function(){
+        $(this).hide();
+        $(".form-hide").hide();
+        $(".form-show").show();
+        $("#btn-edit-2").show();
+      })
+      $("#btn-sel").click(function(){
+        if($(".nav-select").css("display")=="none"){
+          $(".nav-select").show()
+        }
+        else{
+          $(".nav-select").hide()
+        }
+        
+      })
+      function dateFormat(str) {
+        if (str==null || str==""){
+          return "未填写"
+        }
+        var date = new Date(str)
+        var year = date.getFullYear()
+        var mon = date.getMonth()+1;
+        var day = date.getDate()
+        var time = year+"-"+mon+"-"+day
+        return time;
+      }
+      $("#btn-submit-1").click(function () {
+        var date =$("#birthday").text();
+        var realname=$("#inp-realname").val();
+        var birthDate = $("#birthDate").val();
+        var sex = $("#inp-sex").val();
+        var info =$("#inp-info").val();
+        if (birthDate==""){
+          if (date=='未填写'){
+            $.ajax({
+              url:"/front/saveUserBasicInfo",
+              data:{'realName':realname,'sex':sex,'info':info},
+              dataType:'json',
+              type:'post',
+              success:function (json) {
+                window.location.reload();
+              }
+            })
+          }else {
+            birthDate=date
+            $.ajax({
+              url:"/front/saveUserBasicInfo",
+              data:{'realName':realname,'birthDate':birthDate,'sex':sex,'info':info},
+              dataType:'json',
+              type:'post',
+              success:function (json) {
+                window.location.reload();
+              }
+            })
+          }
+
+        }else {
+          $.ajax({
+            url:"/front/saveUserBasicInfo",
+            data:{'realName':realname,'birthDate':birthDate,'sex':sex,'info':info},
+            dataType:'json',
+            type:'post',
+            success:function (json) {
+              window.location.reload();
+            }
+          })
+        }
+
+        // $("#basicInfo").submit
+
+      })
+      $("#btn-submit-2").click(function () {
+       var address = $("#inp-address").val();
+       var nation = $("#inp-nation").val();
+       var education = $("#inp-education").val();
+       var serialNo = $("#inp-serialNo").val();
+        $.ajax({
+          url:"/front/saveUserOtherInfo",
+          data:{'address':address,'nation':nation,'education':education,'serialNo':serialNo},
+          dataType:'json',
+          type:'post',
+          success:function (json) {
+            window.location.reload();
+          }
+        })
+      })
+    </script>
+  </body>
+</html>

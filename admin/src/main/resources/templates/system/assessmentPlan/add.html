@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:mo="https://gitee.com/aun/Timo">
+<head th:replace="/common/template :: header(~{::title},~{::link},~{::style})">
+    <link rel="stylesheet" th:href="@{/lib/zTree_v3/css/zTreeStyle/zTreeStyle.css}" type="text/css">
+</head>
+<body>
+<div class="layui-form timo-compile">
+    <form th:action="@{/system/assessmentPlan/save}">
+
+        <div class="layui-form-item">
+            <label class="layui-form-label ">计划标题</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" type="text" name="title" placeholder="请输入计划标题" >
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label ">开始时间</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" onchange="starTimeChange()"  type="date" name="starTime" id="starTime" min="2020-05-07" max="5555-12-31" placeholder="开始时间">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label ">结束时间</label>
+            <div class="layui-input-inline">
+                <input class="layui-input"  type="date" name="endTime" id="endTime" min="2020-05-07" max="5555-12-31" placeholder="结束时间">
+            </div>
+        </div>
+
+        <div class="layui-form-item timo-finally">
+            <button class="layui-btn ajax-submit"><i class="fa fa-check-circle"></i> 保存</button>
+            <button class="layui-btn btn-secondary close-popup"><i class="fa fa-times-circle"></i> 关闭</button>
+        </div>
+    </form>
+</div>
+<script th:replace="/common/template :: script"></script>
+<script type="text/javascript" th:src="@{/js/plugins/jquery-2.2.4.min.js}"></script>
+<script type="text/javascript" th:src="@{/lib/zTree_v3/js/jquery.ztree.core.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/timoTree.js}"></script>
+<script type="text/javascript">
+    // 树形菜单
+    $.fn.selectTree();
+    $(function () {
+        //得到当前时间
+        var nowDate = new Date();
+        //得到当前年份
+        var year = nowDate.getFullYear();
+        //得到当前月份
+        var month = nowDate.getMonth()+1 < 10 ? "0"+(nowDate.getMonth()+1) : (nowDate.getMonth()+1);
+        //得到当前日子
+        var date = nowDate.getDate() < 10 ? "0"+nowDate.getDate() : nowDate.getDate();
+        //赋值给表单元素
+        $("#starTime").attr("min",year+"-"+month+"-"+date);
+        $("#endTime").attr("min",year+"-"+month+"-"+date);
+    })
+    function starTimeChange() {
+        var time = document.getElementById("starTime").value;
+        $("#endTime").attr("min",time);
+    }
+</script>
+</body>
+</html>

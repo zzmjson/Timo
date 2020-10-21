@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:mo="https://gitee.com/aun/Timo"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:replace="/common/template :: header(~{::title},~{::link},~{::style})">
+    <link rel="stylesheet" th:href="@{/lib/zTree_v3/css/zTreeStyle/zTreeStyle.css}" type="text/css">
+    <style>
+        .content{
+            width: 900px;
+            margin: 10px auto;
+            border: 1px solid #337AB7;
+            border-radius: 5px;
+        }
+        .con-head{
+            width: 100%;
+            height: 80px;
+            background: #337AB7;
+            font-size: 26px;
+            line-height: 80px;
+            text-indent: 2em;
+            color: white;
+            letter-spacing: 3px;
+        }
+        .basic{
+            width: 90%;
+            height: 300px;
+            margin: 10px auto;
+            margin-top: 30px;
+        }
+        .con-tit{
+            font-size: 24px;
+            font-weight: bolder;
+            margin-bottom: 20px;
+        }
+        .photo{
+            margin: 0;
+            padding: 0;
+            display: inline-block;
+            width: 120px;
+            height: 120px;
+            position: relative;
+            top: -100px;
+        }
+        .photo img{
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .back{
+            width: 90%;
+            margin: 0 auto;
+        }
+        .rep-tab{
+            width: 100%;
+        }
+        .rep-tab tr{
+            font-size: 16px;
+            height: 35px;
+        }
+        .tex-ind{
+            text-indent: 1em;
+        }
+        .tex-rig{
+            width: 100px;
+            text-align: right;
+        }
+        .box-odd{
+            width: 100%;
+            height: 120px;
+            background: #F9F9F9;
+        }
+        .box-f{
+            display: inline-block;
+            width: 30%;
+            height: 100%;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bolder;
+            padding-top: 5px;
+        }
+        .box-f:hover{
+            background: #FDF9CD;
+        }
+        .box-re{
+            width: 69%;
+            height: 100%;
+            display: inline-block;
+            font-size: 16px;
+            text-align: center;
+        }
+        .box-even{
+            width: 100%;
+            height: 120px;
+            background: #FFFFFF;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body class="timo-layout-page">
+<div class="layui-card" >
+    <div class="layui-card-header timo-card-header">
+        <span style="font-size: 24px;font-weight: bolder">个案报告模版编辑</span>
+        <i class="layui-icon layui-icon-refresh refresh-btn"></i>
+    </div>
+    <div class="content">
+        <div class="con-head">
+            {来访者姓名}的个案报告
+        </div>
+        <div class="basic">
+            <h2 class="con-tit">基本信息(不可修改)</h2>
+            <div class="tab-wrpper" style="width: 80%;display: inline-block">
+                <table class="rep-tab">
+                    <tr>
+                        <td class="tex-rig">来访者:</td>
+                        <td class="tex-ind">{来访者姓名}</td>
+                        <td class="tex-rig">咨询类型:</td>
+                        <td class="tex-ind">{咨询类型}</td>
+                    </tr>
+                    <tr>
+                        <td class="tex-rig">性别:</td>
+                        <td class="tex-ind">{来访者性别}</td>
+                        <td class="tex-rig">个案来源:</td>
+                        <td class="tex-ind">{个案来源}</td>
+                    </tr>
+                    <tr>
+                        <td class="tex-rig">年龄:</td>
+                        <td class="tex-ind">{来访者年龄}</td>
+                        <td class="tex-rig">处理级别:</td>
+                        <td class="tex-ind">{处理级别}</td>
+                    </tr>
+                    <tr>
+                        <td class="tex-rig">个案编号:</td>
+                        <td class="tex-ind">{个案编号}</td>
+                        <td class="tex-rig">建案日期:</td>
+                        <td class="tex-ind">{建立个案日期}</td>
+                    </tr>
+                    <tr>
+                        <td class="tex-rig">个案状态:</td>
+                        <td class="tex-ind">{个案当前状态}</td>
+                        <td class="tex-rig">访谈总次数:</td>
+                        <td class="tex-ind">{访谈总次数}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="photo">
+<!--                <img src="static/images/userhead_default.png">-->
+                <img src="/upload/images/photo.png" >
+            </div>
+        </div>
+        <div style="clear: both"></div>
+        <div class="back">
+            <h2 class="con-tit">回访信息(不可修改,未回访是不显示)</h2>
+            <div class="tab-wrpper">
+                <table class="rep-tab" >
+                    <tr>
+                        <td style="width: 100px;text-align: right">回访人:</td>
+                        <td class="tex-ind" colspan="3">{回访人姓名}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px;text-align: right">回访方式:</td>
+                        <td class="tex-ind" colspan="3">{回访方式}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px;text-align: right">回访时间:</td>
+                        <td class="tex-ind" colspan="3">{回访时间}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px;text-align: right">个案现状:</td>
+                        <td class="tex-ind" colspan="3">{个案现状的详细描述}</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 100px;text-align: right">备注:</td>
+                        <td class="tex-ind" colspan="3">{回访备注}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="back" style="margin-top: 30px">
+            <h2 class="con-tit">个案信息</h2>
+            <div class="box-odd">
+                <div class="box-f">
+                    个案自述
+                </div>
+                <div class="box-re">
+                    {这里将显示个案自述的内容}
+                </div>
+            </div>
+            <div class="box-even">
+                <div class="box-f">
+                    来访原因
+                </div>
+                <div class="box-re">
+                    {这里将显示来访原因的内容}
+                </div>
+            </div>
+        </div>
+        <div class="back" style="margin-top: 30px">
+            <h2 class="con-tit">家庭关系,人际关系及个人成长经历</h2>
+            <div class="box-odd">
+                <div class="box-f">
+                    人际关系
+                </div>
+                <div class="box-re">
+                    {这里将显示人际关系的内容}
+                </div>
+            </div>
+            <div class="box-even">
+                <div class="box-f">
+                    家庭关系
+                </div>
+                <div class="box-re">
+                    {这里将显示家庭关系的内容}
+                </div>
+            </div>
+            <div class="box-odd">
+                <div class="box-f">
+                    个人成长经历
+                </div>
+                <div class="box-re">
+                    {这里将显示个人成长经历的内容}
+                </div>
+            </div>
+        </div>
+        <div class="back" style="margin-top: 30px">
+            <h2 class="con-tit">个人的情绪、个性特征、兴趣爱好、自我认识评价及常用的应对方式</h2>
+            <div class="box-odd">
+                <div class="box-f">
+                    个人的情绪
+                </div>
+                <div class="box-re">
+                    {这里将显示个人的情绪的内容}
+                </div>
+            </div>
+            <div class="box-even">
+                <div class="box-f">
+                    个性特征
+                </div>
+                <div class="box-re">
+                    {这里将显示个性特征的内容}
+                </div>
+            </div>
+            <div class="box-odd">
+                <div class="box-f">
+                    兴趣爱好
+                </div>
+                <div class="box-re">
+                    {这里将显示兴趣爱好的内容}
+                </div>
+            </div>
+            <div class="box-even">
+                <div class="box-f">
+                    自我认识评价
+                </div>
+                <div class="box-re">
+                    {这里将显示自我认识评价的内容}
+                </div>
+            </div>
+            <div class="box-odd">
+                <div class="box-f">
+                    常用应对方式
+                </div>
+                <div class="box-re">
+                    {这里将显示常用应对方式的内容}
+                </div>
+            </div>
+        </div>
+        <div class="back" style="margin-top: 30px">
+            <h2 class="con-tit">既往病史，家族病史</h2>
+            <div class="box-odd">
+                <div class="box-f">
+                    既往病史
+                </div>
+                <div class="box-re">
+                    {这里将显示既往病史的内容}
+                </div>
+            </div>
+            <div class="box-even">
+                <div class="box-f">
+                    家族病史
+                </div>
+                <div class="box-re">
+                    {这里将显示家族病史的内容}
+                </div>
+            </div>
+        </div>
+        <div class="back" style="margin-top: 30px">
+            <h2 class="con-tit">心理测试结果</h2>
+            <div class="box-odd">
+                <div class="box-f">
+                    心理测试结果
+                </div>
+                <div class="box-re">
+                    {这里将显示心理测试结果的内容}
+                </div>
+            </div>
+        </div>
+        <div class="back" style="margin-top: 30px">
+            <h2 class="con-tit">咨询师的一般印象</h2>
+            <div class="box-odd">
+                <div class="box-f">
+                    咨询师的一般印象
+                </div>
+                <div class="box-re">
+                    {这里将显示咨询师的一般印象的内容}
+                </div>
+            </div>
+        </div>
+        <div class="back" style="margin-top: 30px">
+            <h2 class="con-tit">诊断评价与意见</h2>
+            <div class="box-odd">
+                <div class="box-f">
+                    诊断评价与意见
+                </div>
+                <div class="box-re">
+                    {这里将显示诊断评价与意见的内容}
+                </div>
+            </div>
+        </div>
+        <div class="back" style="margin-top: 30px">
+            <h2 class="con-tit">咨询各阶段效果分析</h2>
+            <div class="box-odd">
+                <div class="box-f">
+                    咨询各阶段效果分析
+                </div>
+                <div class="box-re">
+                    {这里将显示咨询各阶段效果分析的内容}
+                </div>
+            </div>
+        </div>
+        <div class="back" style="margin-top: 30px">
+            <h2 class="con-tit">咨询师分析总结</h2>
+            <div class="box-odd">
+                <div class="box-f">
+                    咨询师分析总结
+                </div>
+                <div class="box-re">
+                    {这里将显示咨询师分析总结的内容}
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 40px"></div>
+    </div>
+
+</div>
+<script th:replace="/common/template :: script"></script>
+<script type="text/javascript" th:src="@{/js/plugins/jquery-2.2.4.min.js}"></script>
+<script type="text/javascript" th:src="@{/lib/zTree_v3/js/jquery.ztree.core.min.js}"></script>
+<!--<script type="text/javascript" th:src="@{/js/timoTree.js}"></script>-->
+<script type="text/javascript">
+
+    var local = window.localStorage;
+    // 树形菜单
+    // $.fn.selectTree({
+    //     rootTree: '全部',
+    //     onSelected: function (treeNode) {
+    //         local.setItem('deptTitle', treeNode.name);
+    //
+    //     }
+    // });
+</script>
+</body>
+</html>

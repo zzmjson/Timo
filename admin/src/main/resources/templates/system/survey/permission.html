@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:mo="https://gitee.com/aun/Timo"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:replace="/common/template :: header(~{::title},~{::link},~{::style})">
+    <link rel="stylesheet" th:href="@{/lib/zTree_v3/css/zTreeStyle/zTreeStyle.css}" type="text/css">
+    <style>
+        .tab-p{
+            display: inline-block;
+            font-size: 16px;
+            line-height: 40px;
+            height: 40px;
+        }
+        .tab-ind{
+            /*text-indent: 2em;*/
+            width: 120px;
+            text-align: right;
+        }
+        .info-wrapper{
+            width: 400px;
+            margin-left: 200px;
+        }
+        .clo-hide{
+            text-indent: 2em;
+        }
+    </style>
+</head>
+<body class="timo-layout-page">
+<div class="layui-card">
+    <div class="layui-card-header timo-card-header">
+        <i class="layui-icon layui-icon-refresh refresh-btn"></i>
+    </div>
+    <div class="layui-card-body">
+        <div class="layui-row timo-card-screen put-row">
+            <div class="pull-left layui-form-pane timo-search-box">
+
+            </div>
+            <div class="pull-right screen-btn-group">
+                <div class="btn-group-left">
+                </div>
+            </div>
+        </div>
+        <div class="timo-table-wrap">
+<!--            <i class="refresh-btn">刷新</i>-->
+            <div class="btn-group-right" style="float: right;margin-bottom: 10px">
+                <button class="layui-btn rest" data-title="详情" style="background: #215fb4">
+                    <i class="fa fa-reply"></i> 返回
+                </button>
+<!--                shiro:hasPermission="system:assessmentPlan:add"-->
+            </div>
+<!--            <i class="layui-icon layui-icon-refresh refresh-btn"></i>-->
+
+            <h2 style="margin-top: 40px">测评计划对用户的筛选条件</h2>
+            <hr style="height: 1px;background: #555555">
+            <div class="btn-group-right" style="float: right;margin-bottom: 10px">
+                <button class="layui-btn refresh-btn" style="background: #337AB7">
+                    <i class="layui-icon layui-icon-refresh"></i> 刷新列表
+<!--                    shiro:hasPermission="system:assessmentPlan:add"-->
+                </button>
+                <button class="layui-btn open-popup" data-title="添加条件" th:attr="data-url=@{/system/question/addPerList(quesId=${quesId})}"
+                        data-size="1000,600">
+                    <i class="fa fa-plus"></i> 添加条件
+<!--                    shiro:hasPermission="system:assessmentPlan:add"-->
+                </button>
+            </div>
+            <table class="layui-table timo-table" >
+                <thead >
+                <tr>
+<!--                    <th style="text-align: center;width: 100px" class="sortable">编号</th>-->
+                    <th style="text-align: center" class="sortable" data-field="id">拥有权限部门</th>
+                    <th style="text-align: center" class="sortable" data-field="starTime">拥有权限用户</th>
+                    <th style="text-align: center;width: 100px">操作</th>
+                </tr>
+                </thead>
+
+                <tbody style="text-align: center">
+                    <tr th:each="ele:${permission}">
+                        <td th:text="${ele['map']['deptName']}"></td>
+                        <td th:text="${ele['map']['nickname']}"></td>
+                        <td>
+                            <a class="ajax-get" data-msg="您是否确认删除"
+                               th:href="@{/system/question/deletePerList(quesId=${quesId},type=${ele['map']['type']},deptName=${ele['map']['deptName']},nickname=${ele['map']['nickname']})}"
+                               >删除</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+<!--        <span style="display: none"  id="assId" th:text="${assId}"></span>-->
+    </div>
+</div>
+<script th:replace="/common/template :: script"></script>
+<script type="text/javascript" th:src="@{/js/plugins/jquery-2.2.4.min.js}"></script>
+<script type="text/javascript" th:src="@{/lib/zTree_v3/js/jquery.ztree.core.min.js}"></script>
+<!--<script type="text/javascript" th:src="@{/js/timoTree.js}"></script>-->
+<script type="text/javascript">
+    $(function () {
+        // alert("页面加载完成")
+        // alert($("#assId").text())
+        // if ($("#assId").Text()==""){
+        //     alert($("#assId").text())
+        //     // window.location.reload();
+        // }
+    })
+    window.onload = function (ev) {
+    }
+    var topic = $(".addscale");
+    for(var i=0;i<topic.size();i++){
+        topic.eq(i).attr("href",topic.eq(i).data('url'));
+    }
+    $(".rest").click(function () {
+        window.location.href="/system/question/index"
+    })
+    var local = window.localStorage;
+</script>
+</body>
+</html>

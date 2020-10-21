@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:mo="https://gitee.com/aun/Timo">
+<head th:replace="/common/template :: header(~{::title},~{::link},~{::style})">
+    <link rel="stylesheet" th:href="@{/lib/zTree_v3/css/zTreeStyle/zTreeStyle.css}" type="text/css">
+</head>
+<body>
+<div class="layui-form timo-compile">
+    <form th:action="@{/system/group/save}">
+        <input name="id" hidden="hidden" th:value="${item.id}">
+        <input name="scaleId" hidden="hidden" th:value="${item.scaleId}">
+        <div class="layui-form-item" style="display: none">
+            <label class="layui-form-label ">序号</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" type="text" name="serial"  placeholder="请输入序号" th:value="${item.serial}" >
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label ">标题</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" type="text" name="info" placeholder="请输入标题" th:value="${item.info}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否参与统计</label>
+            <div class="layui-input-inline">
+                <select name="isStat" th:value="${item.isStat}">
+                    <option value="1">参与统计</option>
+                    <option value="0">不统计</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">统计方式</label>
+            <div class="layui-input-inline">
+                <select name="statType" th:value="${item.statType}">
+                    <option value="">不参与统计</option>
+                    <option value="AVG">平均分</option>
+                    <option value="SUM">总分</option>
+                    <option value="COUNT">计数</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item timo-finally">
+            <button class="layui-btn ajax-submit"><i class="fa fa-check-circle"></i> 保存</button>
+            <button class="layui-btn btn-secondary close-popup"><i class="fa fa-times-circle"></i> 关闭</button>
+        </div>
+    </form>
+</div>
+<script th:replace="/common/template :: script"></script>
+<script type="text/javascript" th:src="@{/js/plugins/jquery-2.2.4.min.js}"></script>
+<script type="text/javascript" th:src="@{/lib/zTree_v3/js/jquery.ztree.core.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/timoTree.js}"></script>
+<script type="text/javascript">
+    // 树形菜单
+    $.fn.selectTree();
+</script>
+</body>
+</html>

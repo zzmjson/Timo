@@ -1,0 +1,159 @@
+{
+  "groups": [
+    {
+      "name": "project",
+      "type": "com.linln.common.config.properties.ProjectProperties",
+      "sourceType": "com.linln.common.config.properties.ProjectProperties"
+    },
+    {
+      "name": "project.xxs",
+      "type": "com.linln.common.config.properties.ProjectProperties$Xxs",
+      "sourceType": "com.linln.common.config.properties.ProjectProperties"
+    },
+    {
+      "name": "prop",
+      "type": "com.linln.common.utils.ParamsUtil",
+      "sourceType": "com.linln.common.utils.ParamsUtil"
+    }
+  ],
+  "properties": [
+    {
+      "name": "project.captcha-open",
+      "type": "java.lang.Boolean",
+      "description": "是否开启验证码",
+      "sourceType": "com.linln.common.config.properties.ProjectProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "project.swagger-enabled",
+      "type": "java.lang.Boolean",
+      "description": "是否开启Swagger数据接口文档",
+      "sourceType": "com.linln.common.config.properties.ProjectProperties",
+      "defaultValue": true
+    },
+    {
+      "name": "project.xxs.default-excludes",
+      "type": "java.lang.String",
+      "description": "默认忽略规则（无需修改）",
+      "sourceType": "com.linln.common.config.properties.ProjectProperties$Xxs",
+      "defaultValue": "\/favicon.ico,\/img\/*,\/js\/*,\/css\/*,\/lib\/*"
+    },
+    {
+      "name": "project.xxs.enabled",
+      "type": "java.lang.Boolean",
+      "description": "xss防护开关",
+      "sourceType": "com.linln.common.config.properties.ProjectProperties$Xxs",
+      "defaultValue": true
+    },
+    {
+      "name": "project.xxs.excludes",
+      "type": "java.lang.String",
+      "description": "忽略规则，可通过“,”隔开多个",
+      "sourceType": "com.linln.common.config.properties.ProjectProperties$Xxs",
+      "defaultValue": ""
+    },
+    {
+      "name": "project.xxs.url-patterns",
+      "type": "java.lang.String",
+      "description": "拦截规则，可通过“,”隔开多个",
+      "sourceType": "com.linln.common.config.properties.ProjectProperties$Xxs",
+      "defaultValue": "\/*"
+    },
+    {
+      "name": "prop.access-key-id",
+      "type": "java.lang.String",
+      "sourceType": "com.linln.common.utils.ParamsUtil"
+    },
+    {
+      "name": "prop.access-key-secret",
+      "type": "java.lang.String",
+      "sourceType": "com.linln.common.utils.ParamsUtil"
+    },
+    {
+      "name": "prop.btc-price-url",
+      "type": "java.lang.String",
+      "sourceType": "com.linln.common.utils.ParamsUtil"
+    },
+    {
+      "name": "prop.bucket",
+      "type": "java.lang.String",
+      "sourceType": "com.linln.common.utils.ParamsUtil"
+    },
+    {
+      "name": "prop.bucket-name",
+      "type": "java.lang.String",
+      "sourceType": "com.linln.common.utils.ParamsUtil"
+    },
+    {
+      "name": "prop.client-url",
+      "type": "java.lang.String",
+      "sourceType": "com.linln.common.utils.ParamsUtil"
+    },
+    {
+      "name": "prop.endpoint",
+      "type": "java.lang.String",
+      "sourceType": "com.linln.common.utils.ParamsUtil"
+    },
+    {
+      "name": "prop.eth-url",
+      "type": "java.lang.String",
+      "sourceType": "com.linln.common.utils.ParamsUtil"
+    },
+    {
+      "name": "prop.host-url",
+      "type": "java.lang.String",
+      "sourceType": "com.linln.common.utils.ParamsUtil"
+    },
+    {
+      "name": "prop.img-dir",
+      "type": "java.lang.String",
+      "sourceType": "com.linln.common.utils.ParamsUtil"
+    },
+    {
+      "name": "prop.rj-key",
+      "type": "java.lang.String",
+      "sourceType": "com.linln.common.utils.ParamsUtil"
+    },
+    {
+      "name": "prop.sms-id",
+      "type": "java.lang.String",
+      "sourceType": "com.linln.common.utils.ParamsUtil"
+    },
+    {
+      "name": "prop.sms-key",
+      "type": "java.lang.String",
+      "sourceType": "com.linln.common.utils.ParamsUtil"
+    },
+    {
+      "name": "prop.sms-signname",
+      "type": "java.lang.String",
+      "sourceType": "com.linln.common.utils.ParamsUtil"
+    },
+    {
+      "name": "prop.sms-template",
+      "type": "java.lang.String",
+      "sourceType": "com.linln.common.utils.ParamsUtil"
+    },
+    {
+      "name": "prop.upload-img",
+      "type": "java.lang.String",
+      "sourceType": "com.linln.common.utils.ParamsUtil"
+    },
+    {
+      "name": "prop.ytl-appid",
+      "type": "java.lang.String",
+      "sourceType": "com.linln.common.utils.ParamsUtil"
+    },
+    {
+      "name": "prop.ytl-appsec",
+      "type": "java.lang.String",
+      "sourceType": "com.linln.common.utils.ParamsUtil"
+    },
+    {
+      "name": "prop.ytl-url",
+      "type": "java.lang.String",
+      "sourceType": "com.linln.common.utils.ParamsUtil"
+    }
+  ],
+  "hints": []
+}

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>安全中心-德宝心理咨询中心</title>
+
+    <!-- Bootstrap -->
+<!--    <link href="/css/bootstrap.css" rel="stylesheet">-->
+    <link href="sweetalert/sweetalert.css" rel="stylesheet">
+
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    [endif]-->
+    <style type="text/css">
+
+        body {
+            font-size: 0;
+        }
+
+
+
+        .h-na img {
+            width: 40px;
+            height: auto;
+            padding-right: 5px;
+        }
+
+
+        .ass-title {
+            width: 1000px;
+            height: 60px;
+            margin: 30px auto;
+        }
+
+        .ass-title img {
+            width: 50px;
+            margin-right: 20px;
+            vertical-align: middle;
+        }
+
+        .ass-title span {
+            font-size: 30px;
+            font-weight: bolder;
+            vertical-align: middle;
+        }
+        .box-form {
+            width: 1000px;
+            margin: 0 auto;
+            font-size: 15px;
+        }
+
+        .form-title {
+            width: 100%;
+            height: 50px;
+            border-radius: 5px;
+            background-color: #52AAEC;
+            line-height: 50px;
+            text-align: center;
+            font-size: 25px;
+            color: white;
+            letter-spacing: 5px;
+            margin-bottom: 20px;
+        }
+    </style>
+  <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+  <script src="/js/jquery-3.4.1.js"></script>
+  <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+  <script src="/js/bootstrap.js"></script>
+  <script src="sweetalert/sweetalert-dev.js"></script>
+  <script>
+    $(function () {
+      $("#head").load("header.html")
+    })
+  </script>
+</head>
+<body>
+<div id="top_menu_for_large">
+    <header id="head"></header>
+    <div class="ass-title">
+        <img src="../images/img/dunpai1.png">
+        <span style="color: #009688">安全中心</span>
+    </div>
+    <div class="box-form">
+        <div class="form-title">
+            修改密码
+        </div>
+            <div class="form-group">
+                <label for="password">当前密码</label>
+                <input type="password" class="form-control" id="password" placeholder="请输入当前密码">
+            </div>
+            <div class="form-group">
+                <label for="newPassword">新密码</label>
+                <input type="password" class="form-control" id="newPassword" placeholder="请输入新密码">
+            </div>
+            <div class="form-group">
+                <label for="newPassword1">确认密码</label>
+                <input type="password" class="form-control" id="newPassword1" placeholder="再次输入新密码">
+            </div>
+
+            <button type="button" class="btn center " id="btn-sub"
+                    style="width: 100rem;background-color: #F2711C;font-size: 1.5rem;color: white;font-weight: bolder;">
+                保存密码
+            </button>
+    </div>
+</div>
+
+
+    <script>
+      $(function () {
+        $("#head").load("header.html")
+      })
+        $("#btn-sel").click(function () {
+            if ($(".nav-select").css("display") == "none") {
+                $(".nav-select").show()
+            } else {
+                $(".nav-select").hide()
+            }
+
+        })
+        $("#btn-sub").click(function () {
+            if (validPassword()){
+            $.ajax({
+                url:"/front/changPassword",
+                type:"post",
+                data:{"password":$("#password").val(),"newPassword":$("#newPassword").val()},
+                dataType:"json",
+                success:function(json){
+                    if (json.code=="400"){
+                        swal(json.msg)
+                        return false;
+                    }
+                    if (json.code="200"){
+                        swal("密码修改成功，请重新登录!")
+                        setTimeout(
+                            function () {
+                                window.location.href="/logout"
+                            },500
+                        )
+
+                    }
+                }
+            })
+            }
+        })
+
+        function validPassword() {
+
+            if ($("#password").val()==""){
+                swal("请输入当前密码！")
+                return false;
+            }
+            if ($("#newPassword").val()==""){
+                swal("请输入新密码！")
+                return false;
+            }
+            if ($("#newPassword").val().length<6){
+                swal("新密码至少是6位数！");
+                return false;
+            }
+            if ($("#newPassword1").val()==""){
+                swal("请再次输入新密码！")
+                return false;
+            }
+            if ($("#newPassword1").val()!=$("#newPassword").val()){
+                swal("两次输入密码不一致，请从新输入！")
+                return false;
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:mo="https://gitee.com/aun/Timo"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:replace="/common/template :: header(~{::title},~{::link},~{::style})">
+    <link rel="stylesheet" th:href="@{/lib/zTree_v3/css/zTreeStyle/zTreeStyle.css}" type="text/css">
+    <style>
+        .tab-head{
+            font-size: 28px;
+            height: 80px;
+            line-height: 80px;
+            text-align: center;
+        }
+        .tab-wrpper{
+            width: 800px;
+            margin: 10px auto;
+            border: 1px solid #DDDDDD;
+            height: 100px;
+        }
+        .temp-tab{
+            width: 100%;
+        }
+        .fon-w{
+            font-weight: bolder;
+        }
+        .te-al{
+            text-align: center;
+        }
+        .tr-h{
+            height: 120px;
+        }
+    </style>
+</head>
+<body class="timo-layout-page">
+<div class="layui-card" style="height: 800px">
+    <div class="layui-card-header timo-card-header">
+        <span style="font-size: 24px;font-weight: bolder">访谈模版编辑</span>
+        <i class="layui-icon layui-icon-refresh refresh-btn"></i>
+    </div>
+    <h2 class="tab-head">个案访谈记录表</h2>
+    <div class="tab-wrpper">
+        <table class="temp-tab layui-table timo-table">
+            <tr class="te-al">
+                <td class="fon-w">咨询师</td>
+                <td>{这里将显示咨询师姓名}</td>
+                <td class="fon-w">访谈时间</td>
+                <td>{这里将显示访谈时间}</td>
+            </tr>
+            <tr class="te-al">
+                <td class="fon-w">咨询地点</td>
+                <td>{这里将显示咨询地点}</td>
+                <td class="fon-w">咨询方式</td>
+                <td>{这里将显示咨询方式}</td>
+            </tr>
+            <tr class="te-al tr-h">
+                <td class="fon-w">基本信息</td>
+                <td colspan="3">{这里将显示基本信息的内容}</td>
+            </tr>
+            <tr class="te-al tr-h">
+                <td class="fon-w">咨询过程</td>
+                <td colspan="3">{这里将显示咨询过程的内容}</td>
+            </tr>
+            <tr class="te-al tr-h">
+                <td class="fon-w">个案自述</td>
+                <td colspan="3">{这里将显示个案自述的内容}</td>
+            </tr>
+            <tr class="te-al tr-h">
+                <td class="fon-w">咨询评估</td>
+                <td colspan="3">{这里将显示咨询评估的内容}</td>
+            </tr>
+
+        </table>
+    </div>
+</div>
+<script th:replace="/common/template :: script"></script>
+<script type="text/javascript" th:src="@{/js/plugins/jquery-2.2.4.min.js}"></script>
+<script type="text/javascript" th:src="@{/lib/zTree_v3/js/jquery.ztree.core.min.js}"></script>
+<!--<script type="text/javascript" th:src="@{/js/timoTree.js}"></script>-->
+<script type="text/javascript">
+
+    var local = window.localStorage;
+    // 树形菜单
+    // $.fn.selectTree({
+    //     rootTree: '全部',
+    //     onSelected: function (treeNode) {
+    //         local.setItem('deptTitle', treeNode.name);
+    //
+    //     }
+    // });
+</script>
+</body>
+</html>

@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>德宝心理咨询中心</title>
+  <link href="sweetalert/sweetalert.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .wrapper {
+      margin: 0;
+      padding: 0;
+      width: 1100px;
+      /*height: 550px;*/
+      border: 1px solid #DEDEDE;
+      margin: 80px auto;
+      box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),
+      0 2px 10px 0 rgba(34,36,38,.15);
+      position: relative;
+    }
+    .sca-tit {
+      margin: 0;
+      padding: 0;
+      height: 60px;
+      line-height: 60px;
+      text-align: center;
+      background-color: #2185D0;
+      color: white;
+      font-size: 30px;
+    }
+    .ele{
+      width: 100%;
+    }
+
+    .content {
+      width: 60%;
+      margin: 0 auto;
+      margin-top: 50px;
+    }
+    .content h3{
+      font-size: 20px;
+    }
+
+    .det {
+        margin: 0;
+        padding: 0;
+      width: 100%;
+      border: 1px solid #DEDEDE;
+      margin-top: 20px;
+    }
+    .det p{
+      width: 100%;
+      height: 100%;
+      padding: 10px;
+        font-size: 16px;
+    }
+
+    .btn-ne {
+      width: 100%;
+      height: 50px;
+      background-color: #2185D0;
+      position: absolute;
+      bottom: 0;
+    }
+
+    .btn-ne h2 {
+        margin: 0;
+        padding: 0;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      font-size: 20px;
+      color: white;
+
+      letter-spacing: 3px;
+    }
+    .btn-ne-l {
+      width: 100%;
+      height: 50px;
+      background-color: #00B5AD;
+      position: absolute;
+      bottom: 0;
+    }
+
+    .btn-ne-l h2 {
+        margin: 0;
+        padding: 0;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      font-size: 20px;
+      color: white;
+
+      letter-spacing: 3px;
+    }
+    .chose{
+      width: 80%;
+      height: 30px;
+      margin-left: 30px;
+      margin-top: 30px;
+      font-size: 18px;
+    }
+    .che-rao{
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      position: relative;
+      bottom: -3px;
+    }
+    #btn-sub{
+      width: 80%;
+      margin-left: 10%;
+      height: 50px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      /*margin: 10px auto;*/
+    }
+    .chose{
+      font-size: 16px;
+    }
+    .btn-left{
+      display: inline-block;
+      width: 49%;
+      height: 100%;
+      background-color: #008C86;
+    }
+    .btn-right{
+      display: inline-block;
+      width: 49%;
+      height: 100%;
+      background-color: #00B5AD;
+    }
+
+
+
+    .windows8 {
+      position: relative;
+      width: 78px;
+      height:78px;
+      margin:auto;
+    }
+
+    .windows8 .wBall {
+      position: absolute;
+      width: 74px;
+      height: 74px;
+      opacity: 0;
+      transform: rotate(225deg);
+      -o-transform: rotate(225deg);
+      -ms-transform: rotate(225deg);
+      -webkit-transform: rotate(225deg);
+      -moz-transform: rotate(225deg);
+      animation: orbit 6.96s infinite;
+      -o-animation: orbit 6.96s infinite;
+      -ms-animation: orbit 6.96s infinite;
+      -webkit-animation: orbit 6.96s infinite;
+      -moz-animation: orbit 6.96s infinite;
+    }
+
+    .windows8 .wBall .wInnerBall{
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: rgb(0,0,0);
+      left:0px;
+      top:0px;
+      border-radius: 10px;
+    }
+
+    .windows8 #wBall_1 {
+      animation-delay: 1.52s;
+      -o-animation-delay: 1.52s;
+      -ms-animation-delay: 1.52s;
+      -webkit-animation-delay: 1.52s;
+      -moz-animation-delay: 1.52s;
+    }
+
+    .windows8 #wBall_2 {
+      animation-delay: 0.3s;
+      -o-animation-delay: 0.3s;
+      -ms-animation-delay: 0.3s;
+      -webkit-animation-delay: 0.3s;
+      -moz-animation-delay: 0.3s;
+    }
+
+    .windows8 #wBall_3 {
+      animation-delay: 0.61s;
+      -o-animation-delay: 0.61s;
+      -ms-animation-delay: 0.61s;
+      -webkit-animation-delay: 0.61s;
+      -moz-animation-delay: 0.61s;
+    }
+
+    .windows8 #wBall_4 {
+      animation-delay: 0.91s;
+      -o-animation-delay: 0.91s;
+      -ms-animation-delay: 0.91s;
+      -webkit-animation-delay: 0.91s;
+      -moz-animation-delay: 0.91s;
+    }
+
+    .windows8 #wBall_5 {
+      animation-delay: 1.22s;
+      -o-animation-delay: 1.22s;
+      -ms-animation-delay: 1.22s;
+      -webkit-animation-delay: 1.22s;
+      -moz-animation-delay: 1.22s;
+    }
+
+
+
+    @keyframes orbit {
+      0% {
+        opacity: 1;
+        z-index:99;
+        transform: rotate(180deg);
+        animation-timing-function: ease-out;
+      }
+
+      7% {
+        opacity: 1;
+        transform: rotate(300deg);
+        animation-timing-function: linear;
+        origin:0%;
+      }
+
+      30% {
+        opacity: 1;
+        transform:rotate(410deg);
+        animation-timing-function: ease-in-out;
+        origin:7%;
+      }
+
+      39% {
+        opacity: 1;
+        transform: rotate(645deg);
+        animation-timing-function: linear;
+        origin:30%;
+      }
+
+      70% {
+        opacity: 1;
+        transform: rotate(770deg);
+        animation-timing-function: ease-out;
+        origin:39%;
+      }
+
+      75% {
+        opacity: 1;
+        transform: rotate(900deg);
+        animation-timing-function: ease-out;
+        origin:70%;
+      }
+
+      76% {
+        opacity: 0;
+        transform:rotate(900deg);
+      }
+
+      100% {
+        opacity: 0;
+        transform: rotate(900deg);
+      }
+    }
+
+    @-o-keyframes orbit {
+      0% {
+        opacity: 1;
+        z-index:99;
+        -o-transform: rotate(180deg);
+        -o-animation-timing-function: ease-out;
+      }
+
+      7% {
+        opacity: 1;
+        -o-transform: rotate(300deg);
+        -o-animation-timing-function: linear;
+        -o-origin:0%;
+      }
+
+      30% {
+        opacity: 1;
+        -o-transform:rotate(410deg);
+        -o-animation-timing-function: ease-in-out;
+        -o-origin:7%;
+      }
+
+      39% {
+        opacity: 1;
+        -o-transform: rotate(645deg);
+        -o-animation-timing-function: linear;
+        -o-origin:30%;
+      }
+
+      70% {
+        opacity: 1;
+        -o-transform: rotate(770deg);
+        -o-animation-timing-function: ease-out;
+        -o-origin:39%;
+      }
+
+      75% {
+        opacity: 1;
+        -o-transform: rotate(900deg);
+        -o-animation-timing-function: ease-out;
+        -o-origin:70%;
+      }
+
+      76% {
+        opacity: 0;
+        -o-transform:rotate(900deg);
+      }
+
+      100% {
+        opacity: 0;
+        -o-transform: rotate(900deg);
+      }
+    }
+
+    @-ms-keyframes orbit {
+      0% {
+        opacity: 1;
+        z-index:99;
+        -ms-transform: rotate(180deg);
+        -ms-animation-timing-function: ease-out;
+      }
+
+      7% {
+        opacity: 1;
+        -ms-transform: rotate(300deg);
+        -ms-animation-timing-function: linear;
+        -ms-origin:0%;
+      }
+
+      30% {
+        opacity: 1;
+        -ms-transform:rotate(410deg);
+        -ms-animation-timing-function: ease-in-out;
+        -ms-origin:7%;
+      }
+
+      39% {
+        opacity: 1;
+        -ms-transform: rotate(645deg);
+        -ms-animation-timing-function: linear;
+        -ms-origin:30%;
+      }
+
+      70% {
+        opacity: 1;
+        -ms-transform: rotate(770deg);
+        -ms-animation-timing-function: ease-out;
+        -ms-origin:39%;
+      }
+
+      75% {
+        opacity: 1;
+        -ms-transform: rotate(900deg);
+        -ms-animation-timing-function: ease-out;
+        -ms-origin:70%;
+      }
+
+      76% {
+        opacity: 0;
+        -ms-transform:rotate(900deg);
+      }
+
+      100% {
+        opacity: 0;
+        -ms-transform: rotate(900deg);
+      }
+    }
+
+    @-webkit-keyframes orbit {
+      0% {
+        opacity: 1;
+        z-index:99;
+        -webkit-transform: rotate(180deg);
+        -webkit-animation-timing-function: ease-out;
+      }
+
+      7% {
+        opacity: 1;
+        -webkit-transform: rotate(300deg);
+        -webkit-animation-timing-function: linear;
+        -webkit-origin:0%;
+      }
+
+      30% {
+        opacity: 1;
+        -webkit-transform:rotate(410deg);
+        -webkit-animation-timing-function: ease-in-out;
+        -webkit-origin:7%;
+      }
+
+      39% {
+        opacity: 1;
+        -webkit-transform: rotate(645deg);
+        -webkit-animation-timing-function: linear;
+        -webkit-origin:30%;
+      }
+
+      70% {
+        opacity: 1;
+        -webkit-transform: rotate(770deg);
+        -webkit-animation-timing-function: ease-out;
+        -webkit-origin:39%;
+      }
+
+      75% {
+        opacity: 1;
+        -webkit-transform: rotate(900deg);
+        -webkit-animation-timing-function: ease-out;
+        -webkit-origin:70%;
+      }
+
+      76% {
+        opacity: 0;
+        -webkit-transform:rotate(900deg);
+      }
+
+      100% {
+        opacity: 0;
+        -webkit-transform: rotate(900deg);
+      }
+    }
+
+    @-moz-keyframes orbit {
+      0% {
+        opacity: 1;
+        z-index: 99;
+        -moz-transform: rotate(180deg);
+        -moz-animation-timing-function: ease-out;
+      }
+
+      7% {
+        opacity: 1;
+        -moz-transform: rotate(300deg);
+        -moz-animation-timing-function: linear;
+        -moz-origin: 0%;
+      }
+
+      30% {
+        opacity: 1;
+        -moz-transform: rotate(410deg);
+        -moz-animation-timing-function: ease-in-out;
+        -moz-origin: 7%;
+      }
+
+      39% {
+        opacity: 1;
+        -moz-transform: rotate(645deg);
+        -moz-animation-timing-function: linear;
+        -moz-origin: 30%;
+      }
+
+      70% {
+        opacity: 1;
+        -moz-transform: rotate(770deg);
+        -moz-animation-timing-function: ease-out;
+        -moz-origin: 39%;
+      }
+
+      75% {
+        opacity: 1;
+        -moz-transform: rotate(900deg);
+        -moz-animation-timing-function: ease-out;
+        -moz-origin: 70%;
+      }
+
+      76% {
+        opacity: 0;
+        -moz-transform: rotate(900deg);
+      }
+
+      100% {
+        opacity: 0;
+        -moz-transform: rotate(900deg);
+      }
+    }
+
+  </style>
+  <script src="../js/jquery-3.4.1.js"></script>
+  <script src="/js/bootstrap.js"></script>
+  <script src="sweetalert/sweetalert-dev.js"></script>
+    <script>
+        $(function () {
+            $("#head").load("header.html")
+        })
+    </script>
+</head>
+
+<body>
+  <header id="head"></header>
+  <div id="wrapper" class="wrapper">
+    <div>
+      <h1 class="sca-tit" id="title">中学生心理健康诊断测验</h1>
+    </div>
+
+    <div class="ele"  id="first-box">
+      <div class="content">
+        <div class="info">
+          <h2>说明</h2>
+          <div class="det">
+              <p id="info">
+                  A.这些测题是调查你的心情和感受的，不是测验智力和学习能力，与学习成绩无关，答案也没有好坏之分，请按照你平时所想的如实回答。
+                  B.回答方法。本测验每一问题都有只有"是"和"否"两种可供选择答案。
+                  C.请根据看完题后的第一反应进行作答,不要漏题,答案没有对错之分,不要有所顾忌。
+              </p>
+
+          </div>
+        </div>
+
+      </div>
+<!--      <div class="btn-ne" id="nextPage">-->
+<!--        <h2>下一页</h2>-->
+<!--      </div>-->
+    </div>
+    <div class="ele" id="two-box" >
+      <div class="content">
+        <div class="info">
+          <h2>指导语</h2>
+          <div class="det">
+            <p id="instruction">
+              A.这些测题是调查你的心情和感受的，不是测验智力和学习能力，与学习成绩无关，答案也没有好坏之分，请按照你平时所想的如实回答。
+              B.回答方法。本测验每一问题都有只有"是"和"否"两种可供选择答案。
+              C.请根据看完题后的第一反应进行作答,不要漏题,答案没有对错之分,不要有所顾忌。
+            </p>
+          </div>
+        </div>
+
+      </div>
+<!--      <div class="btn-ne" id="begin">-->
+<!--        <h2>开始答题</h2>-->
+<!--      </div>-->
+    </div>
+    <form action="inde" id="form-wrapper">
+<!--      <div class="ele" id="list-1" style="display: none;">-->
+<!--        <div class="content" >-->
+<!--            <h3><span>1</span>.题目类容请根据看完题后的第一反应进行作答,不要漏题,答案没有对错之分,不要有所顾忌。</h3>-->
+<!--            <div class="list">-->
+<!--                <div class="chose">-->
+<!--                  <input class="che-rao" type="radio" name="id" value="1">A.选项1-->
+<!--                </div>-->
+<!--                <div class="chose">-->
+<!--                  <input class="che-rao" type="radio" name="id" value="2">B.选项2-->
+<!--                </div>-->
+<!--                <div class="chose">-->
+<!--                  <input class="che-rao" type="radio" name="id" value="3">C.选项3-->
+<!--                </div>-->
+<!--                <div class="chose">-->
+<!--                  <input class="che-rao" type="radio" name="id" value="4">D.选项4-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="btn-ne-l">-->
+<!--          <div class="btn-left" data-self="list-1">-->
+<!--            <h2>上一题</h2>-->
+<!--          </div>-->
+<!--          <div class="btn-right" data-no="list-2" data-self="list-1">-->
+<!--            <h2>下一题</h2>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="ele" id="list-2" style="display: none;">-->
+<!--        <div class="content" >-->
+<!--            <h3><span>2</span>.题目类容请根据看完题后的第一反应进行作答,不要漏题,答案没有对错之分,不要有所顾忌。</h3>-->
+<!--            <div class="list">-->
+<!--                <div class="chose">-->
+<!--                  <input class="che-rao" type="radio" name="id" value="1">A.选项1-->
+<!--                </div>-->
+<!--                <div class="chose">-->
+<!--                  <input class="che-rao" type="radio" name="id" value="2">B.选项2-->
+<!--                </div>-->
+<!--                <div class="chose">-->
+<!--                  <input class="che-rao" type="radio" name="id" value="3">C.选项3-->
+<!--                </div>-->
+<!--                <div class="chose">-->
+<!--                  <input class="che-rao" type="radio" name="id" value="4">D.选项4-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="btn-ne-l">-->
+<!--          <div class="btn-left" id="x" data-no="list-1" data-self="list-2">-->
+<!--            <h2>上一题</h2>-->
+<!--          </div>-->
+<!--          <div class="btn-right" data-no="list-3" data-self="list-2">-->
+<!--            <h2>下一题</h2>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+
+    </form>
+    <div style="position: relative;top: -600px"  class="modal fade" id="myModal" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="">
+          <div class="modal-header" style="display: none">
+            <button type="button" class="close" id="btn-close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+          <div class="modal-body" id="myModalContent" style="font-size: 16px;">
+            <div class="windows8">
+              <div class="wBall" id="wBall_1">
+                <div class="wInnerBall"></div>
+              </div>
+              <div class="wBall" id="wBall_2">
+                <div class="wInnerBall"></div>
+              </div>
+              <div class="wBall" id="wBall_3">
+                <div class="wInnerBall"></div>
+              </div>
+              <div class="wBall" id="wBall_4">
+                <div class="wInnerBall"></div>
+              </div>
+              <div class="wBall" id="wBall_5">
+                <div class="wInnerBall"></div>
+              </div>
+            </div>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal -->
+    </div>
+    <button style="display: none" class='btn btn-primary join' id="btn-click" data-toggle='modal' data-target='#myModal'>点击</button>
+  </div>
+</body>
+<script>
+    var items="";
+    var arraylist="";
+    function queryString(name) {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  unescape(r[2]); return null;
+    }
+    var param = queryString("scaleId")
+    var assId = queryString("assId")
+    function loadDate(){
+        $.ajax({
+            url:"/webApi/getTopic",
+            type:"get",
+            data:{"scaleId":param},
+            datatype:"json",
+            success:function (json) {
+              items=json.data['topics']
+              // console.log(json.data['scale'])
+              $("#info").text(json.data['scale'].info)
+              $("#title").text(json.data['scale'].title)
+              $("#instruction").text(json.data['scale'].instruction)
+              // console.log(items)
+              // var list = JSON.stringify(json.data);
+              // console.log(json.data.length)
+                var index = 1;
+                for(var item=0;item<json.data['topics'].length;item++){
+                    // console.log(JSON.stringify(json.data[item][index]))
+                    // console.log(">>>>"+JSON.stringify(json.data[item][index]))
+                    var line = "<div class='ele'  id='list-'"+json.data['topics'][item][index][0].no+"><div class='content' ><h3><span>"+json.data['topics'][item][index][0].no+"</span>."+json.data['topics'][item][index][0].dateil+"</h3><div class='list'>";
+                    for (var map =0; map<json.data['topics'][item][index].length;map++){
+                        line +="<div class='chose'><input class='che-rao' type='radio' name='zed"+json.data['topics'][item][index][map].no+"' value="+json.data['topics'][item][index][map].melId+">&nbsp;"+json.data['topics'][item][index][map].content+"</div>"
+                        // console.log(json.data[item][index][map].melId)
+                        // console.log(json.data[item][index][map].content)
+
+                        // console.log(json.data[item]["1"][map].get("content"));
+                    }
+                    index++;
+                    line+="</div></div></div>"
+                          // <div class='btn-ne-l'>
+                          //   <div class='btn-left' data-self='list-1'><h2>上一题</h2>
+                          //   </div>
+                          //   <div class='btn-right' data-no='list-2' data-self='list-1'><h2>下一题</h2>
+                          //   </div>
+                          // </div>
+
+                    $("#form-wrapper").append(line)
+                }
+                $("#form-wrapper").append("<button type='button' id='btn-sub' style='font-size: 18px'>提交答案</button>")
+            }
+        })
+    }
+    $(function(){
+        loadDate()
+    })
+
+      $("#nextPage").click(function(){
+        $("#first-box").hide()
+        $("#two-box").show()
+      })
+      $("#begin").click(function(){
+        $("#two-box").hide()
+        var x = "#list-1";
+        $(x).show()
+      })
+      $(".btn-left").click(function(x){
+          alert($(x).attr("data-no"))
+          // alert($("#x").attr("data-no"))
+      })
+    $("#form-wrapper").delegate("#btn-sub","click",function () {
+      var count = 0;
+      var arr = [];
+      var skip = 1;
+      for(var i=0;i<items.length;i++){
+        var j ='zed'+(i+1);
+        var value = $("input[name="+j+"]:checked").val();
+        for(var x=0;x<items[i][skip].length;x++){
+          if (value==items[i][skip][x].melId){
+            items[i][skip][x].result="是";
+            arr.push(items[i][skip][x].no)
+            count++;
+          }else {
+            items[i][skip][x].result="否";
+          }
+        }
+        skip++;
+      }
+      if (skip-1!=count){
+
+        // alert("请将答题做完再提交！")
+        //   mizhu.alert('温馨提示','请将答题做完再提交!')
+        swal("请将题做完再提交!")
+        return false;
+      }
+      // alert("提交成功！")
+      arraylist = JSON.stringify(items);
+
+      swal({
+        title: "确定提交答案？",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "确定提交",
+        cancelButtonText: "取消提交",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      },
+          function(isConfirm){
+            if (isConfirm) {
+              swal('上传中，请稍后！')
+              $("#btn-click").trigger("click")
+              $.when(saveDate()).done(function (data) {
+                $("#btn-close").trigger("click")
+                // console.log(data)
+                if (data.code==200){
+                  window.location.href="index.html"
+                } else {
+                  swal("系统错误，请稍后再试")
+                }
+              })
+            }else {
+              swal('取消')
+            }
+            });
+
+
+
+    })
+    function saveDate(){
+      var defer = $.Deferred();
+      $.ajax({
+        url:"/webApi/subScaleAnswer",
+        type:"post",
+        data:{"scaleId":param,"list":arraylist,"assId":assId},
+        dataType:"json",
+        success:function (json) {
+          defer.resolve(json)
+          // console.log(json)
+          // if (json.code==200){
+          //   window.location.href="index.html"
+          // }
+        }
+      })
+      return defer
+    }
+    $("#btn-sub").click(function () {
+
+    })
+
+
+</script>
+
+</html>

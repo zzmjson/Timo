@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>测评记录-德宝心理咨询中心</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    .ass-title{
+      width: 1000px;
+      height: 60px;
+      margin: 0 auto;
+      margin-top: 30px;
+    }
+    .ass-title img{
+      width: 50px;
+      margin-right: 20px;
+      vertical-align: middle;
+    }
+    .ass-title span{
+      font-size: 30px;
+      font-weight: bolder;
+      vertical-align: middle;
+    }
+    .wrapper {
+      margin: 0;
+      padding: 0;
+      width: 1100px;
+      border: 1px solid #DEDEDE;
+      margin: 10px auto;
+      box-shadow: 1px 1px 1px 1px gray;
+      position: relative;
+    }
+    .con-head{
+      width: 100%;
+      height: 60px;
+      margin-top: 20px;
+    }
+    .head-spin{
+      display: inline-block;
+      width: 44px;
+      height: 44px;
+      background-color:#2185D0 ;
+      margin-left: 20px;
+      -ms-transform:rotate(45deg); /* IE 9 */
+      -webkit-transform:rotate(45deg); /* Safari and Chrome */
+      transform:rotate(45deg);
+      position: relative;
+      top: 8px;
+      right: -20px;
+    }
+    .head-wid{
+      display: inline-block;
+      /*width: 500px;*/
+      padding-right: 50px;
+      padding-left: 50px;
+      height: 60px;
+      background: #2185D0;
+    }
+    .head-wid h2{
+      font-size: 28px;
+      color: white;
+      font-weight: bolder;
+      text-align: center;
+      letter-spacing: 3px;
+    }
+    .head-ra{
+      width: 15px;
+      height: 15px;
+      background: white;
+      border-radius: 50%;
+      position: relative;
+      top: 20px;
+      left: 10px;
+    }
+    .que-list{
+      width: 70%;
+      margin: 10px auto;
+    }
+    .que-list h2{
+      font-size: 24px;
+      font-weight: bolder;
+    }
+    .describe{
+      width: 100%;
+      height: 100px;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 50px;
+      border: 1px solid #dedede;
+      box-shadow: 0 2px 4px 0 rgba(34,36,38,.12),
+                  0 2px 10px 0 rgba(34,36,38,.15);
+    }
+    .describe p{
+      font-size: 14px;
+    }
+    .que-ele{
+      margin-top: 30px;
+    }
+    .que-ele h3{
+      font-size: 20px;
+      letter-spacing: 3px;
+
+    }
+    .ele-opt{
+      width: 85%;
+      margin: 20px auto;
+    }
+    .ele-opt input[type=radio]{
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      position: relative;
+      top: 4px;
+    }
+    .ele-opt span{
+      font-size: 16px;
+    }
+    .btn-back{
+      width: 90%;
+      margin: 20px auto;
+      border-radius: 5px;
+      font-size: 22px;
+      background: #2185D0;
+      height: 50px;
+      line-height: 50px;
+      color: white;
+      text-align: center;
+      cursor: pointer;
+    }
+  </style>
+  <script src="../js/jquery-3.4.1.js"></script>
+    <script>
+        $(function () {
+            $("#head").load("header.html")
+        })
+    </script>
+</head>
+
+<body>
+  <header id="head"></header>
+  <div class="ass-title">
+    <img src="../images/img/yemian3.png">
+    <span id="title"></span>
+  </div>
+  <div id="wrapper" class="wrapper">
+      <div class="con-head">
+        <div class="head-spin">
+          <div class="head-ra"></div>
+        </div>
+        <div class="head-wid">
+          <h2 id="scaleName">中学生心理健康诊断测验</h2>
+        </div>
+      </div>
+      <div class="que-list">
+        <h2>描述</h2>
+        <div class="describe">
+          <p id="miaoshu">贝克抑郁自评问卷(Beck Depression Inventory，BDI)，又名Beck抑郁自评量表(Beck Depression Rating Scale)，
+            由美国著名心理学家A．T．Beck编制于60年代量表的每一个条目便代表一种类别，这些类别是：心情、悲观、失败感、不满、
+            罪感、惩罚感、自厌、自责、自杀意向、痛哭、易激惹、社会退缩、犹豫不绝、体象歪曲、活动爱限制、睡眠障碍、疲劳、
+            食欲下降、体重减轻、有关驱体的先占观念和性欲减退等。其目的是评价抑郁的严重程度。
+          </p>
+        </div>
+        <h2>答题记录</h2>
+        <div id="list-wrapper">
+<!--          <div class="que-ele" >-->
+<!--            <h3>1.心情</h3>-->
+<!--            <div class="ele-opt">-->
+<!--                <input type="radio" name="one" checked="checked" >-->
+<!--                <span>我不感到忧愁</span>-->
+<!--            </div>-->
+<!--            <div class="ele-opt">-->
+<!--              <input type="radio" name="one" disabled >-->
+<!--              <span>我感到忧愁</span>-->
+<!--            </div>-->
+<!--            <div class="ele-opt">-->
+<!--              <input type="radio" name="one" disabled >-->
+<!--              <span>我整天都感到忧愁，且不能改变这种情绪</span>-->
+<!--            </div>-->
+<!--            <div class="ele-opt">-->
+<!--              <input type="radio" name="one" disabled >-->
+<!--              <span>我非常忧伤或不愉快，以致我不能忍受</span>-->
+<!--            </div>-->
+<!--          </div>-->
+        </div>
+
+
+
+      </div>
+    <div id="rest-box">
+      <div class="btn-back" id="goback">返回上一页</div>
+    </div>
+  </div>
+
+
+
+</body>
+<script>
+    $("#goback").click(function () {
+        history.go(-1)
+    })
+    function queryString(name) {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  unescape(r[2]); return null;
+    }
+    var param = queryString("id")
+    /**
+    function loadDate(){
+        $.ajax({
+            url:"/webApi/getTopic",
+            type:"get",
+            data:{"scaleId":param},
+            datatype:"json",
+            success:function (json) {
+                var index = 1;
+                for(var item=0;item<json.data.length;item++){
+                    console.log(JSON.stringify(json.data[item][index]))
+                    // console.log(">>>>"+JSON.stringify(json.data[item][index]))
+                    var line = "<div class='ele'  id='list-'"+json.data[item][index][0].no+"><div class='content' ><h3><span>"+json.data[item][index][0].no+"</span>."+json.data[item][index][0].dateil+"</h3><div class='list'>";
+                    for (var map =0; map<json.data[item][index].length;map++){
+                        line +="<div class='chose'><input class='che-rao' type='radio' name='zed"+json.data[item][index][map].no+"' value="+json.data[item][index][map].melId+">&nbsp;"+json.data[item][index][map].content+"</div>"
+                        // console.log(json.data[item][index][map].melId)
+                        // console.log(json.data[item][index][map].content)
+
+                        // console.log(json.data[item]["1"][map].get("content"));
+                    }
+                    index++;
+                    line+="</div></div><div class='btn-ne-l'><div class='btn-left' data-self='list-1'><h2>上一题</h2></div><div class='btn-right' data-no='list-2' data-self='list-1'><h2>下一题</h2></div></div></div>"
+                    $("#form-wrapper").append(line)
+                }
+                $("#form-wrapper").append("<button type='button' id='btn-sub' style='font-size: 18px'>提交答案</button>")
+            }
+        })
+    }
+     */
+    function loadData(){
+      $.ajax({
+        url:"/front/getAsseRecord",
+        type:"get",
+        data:{"rid":param},
+        dataType:"json",
+        success:function (json) {
+          console.log(json.data['info'])
+          $("#title").text(json.data['info'].nickname+"的测评记录")
+          $("#scaleName").text(json.data['scale'].title)
+          $("#miaoshu").text(json.data['scale'].info)
+          // console.log(json.data['list'])
+          for(var item of json.data['list']){
+            var line = "<div class='que-ele'><h3>"+item[0].no+item[0].dateil+"</h3>"
+            for(var x of item){
+              if (x.result=="是"){
+                line += "<div class='ele-opt'><input type='radio' name="+x.no+" checked='checked'><span>"+x.content+"</span></div>"
+              }else {
+                line += "<div class='ele-opt'><input type='radio' name="+x.no+" disabled ><span>"+x.content+"</span></div>"
+              }
+
+            }
+            line +="</div>"
+            $("#list-wrapper").append(line)
+
+          }
+
+        }
+      })
+    }
+    $(function(){
+      // alert(param)
+      loadData()
+    })
+
+</script>
+
+</html>

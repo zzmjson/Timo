@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>在线咨询-德宝心理咨询中心</title>
+
+    <!-- Bootstrap -->
+    <link href="../css/bootstrap.css" rel="stylesheet">
+
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    [endif]-->
+    <style type="text/css">
+      body{
+        font-size: 0;
+      }
+      .ass-title{
+        width: 700px;
+        height: 60px;
+        margin: 30px auto;
+      }
+      .ass-title img{
+        width: 50px;
+        margin-right: 20px;
+        vertical-align: middle;
+      }
+      .ass-title span{
+        font-size: 30px;
+        font-weight: bolder;
+        vertical-align: middle;
+      }
+      .tab-wrapper{
+        width: 700px;
+        height: 400px;
+        margin: 10px auto;
+        border-top: 3px solid #7CB440;
+        border-bottom: 3px solid #7CB440;
+        border-left: 1px solid #7CB440;
+        border-right: 1px solid #7CB440;
+      }
+      .detail{
+        width: 700px;
+        height: 100px;
+        margin: 10px auto;
+      }
+      .detail h2{
+        font-size: 20px;
+        font-weight: bolder;
+      }
+      .detail p{
+        font-size: 16px;
+      }
+      .box-head{
+        width: 100%;
+        height: 35px;
+        line-height: 35px;
+        font-size: 16px;
+        border-bottom: 1px solid #7CB440;
+        text-indent: 1em;
+      }
+      .tab-wrapper p{
+        font-size: 14px;
+        color: grey;
+        text-align: center;
+        height: 40px;
+        line-height: 40px;
+      }
+      #input{
+        width: 698px;
+        height: 150px;
+        border-radius: 5px;
+        border: 1px solid #DEDEDE;
+        position: relative;
+        bottom: -380px;
+      }
+      .box-area{
+        width: 700px;
+        height: 150px;
+        margin: 10px auto;
+      }
+      .btn-sub{
+        width: 698px;
+        height: 50px;
+        margin: 10px auto;
+        color: white;
+        font-size: 24px;
+        font-weight: bolder;
+        text-align: center;
+        cursor: pointer;
+        background-color: #1BB23F;
+        border-radius: 5px;
+        line-height: 50px;
+        position: relative;
+        bottom: -160px;
+      }
+    </style>
+
+    <script src="/js/plugins/jquery-2.2.4.js"></script>
+    <script src="/js/bootstrap.js"></script>
+    <script>
+      $(function () {
+        $("#head").load("header.html")
+      })
+
+    </script>
+  </head>
+  <body>
+    <div id="top_menu_for_large">
+      <header id="head"></header>
+      <div class="ass-title">
+        <img src="../images/img/zaixianzixun.png">
+        <span>朴老师(离线)</span>
+
+        <div style="clear: both;"></div>
+      </div>
+      <div class="detail">
+
+          <h2>咨询主题: 总是莫名其妙挑剔别人</h2>
+          <p ><span>详细描述 : </span><span id="temp">总是莫名其妙的挑剔别人，导致和他人关系紧张</span></p>
+        <p><span>咨询时间 : </span><span>2019-12-18 18:38:15</span></p>
+      </div>
+      <div class="tab-wrapper">
+        <div class="box-head">
+          请在下方的文本框中输入并发送消息。
+          <textarea id="input">
+
+          </textarea>
+
+        </div>
+        <p>没有更多消息记录了！</p>
+      </div>
+      <div style="clear: both"></div>
+      <div class="btn-sub" id="submit">
+        发送消息
+      </div>
+
+
+
+
+    </div>
+
+    
+  <script>
+    // $(function () {
+    //   setTimeout(function () {
+    //     $("#temp").text("123456")
+    //   },2000)
+    // })
+  </script>
+  </body>
+</html>

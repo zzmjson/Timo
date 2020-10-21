@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/common/template :: header(~{::title},~{::link},~{::style})">
+</head>
+<body>
+<div class="layui-form timo-compile">
+    <form th:action="@{/system/contentTopic/save}">
+        <div class="layui-form-item timo-finally">
+            <div style="display: flex; flex-direction:row-reverse; ">
+                <button class="layui-btn ajax-submit"><i class="fa fa-check-circle"></i> 保存</button>
+            </div>
+            <!--<button class="layui-btn btn-secondary close-popup"><i class="fa fa-times-circle"></i> 关闭</button>-->
+        </div>
+        <input type="hidden" name="id" th:if="${contentTopic}" th:value="${contentTopic.id}"/>
+        <input type="hidden" th:if="${scaleId}" name="scaleId" th:value="${scaleId}"/>
+        <input type="hidden" th:if="${superior}" name="superior" th:value="${superior}"/>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">题目</label>
+            <div class="layui-input-inline">
+                <!--<input class="layui-input" type="text" name="title"  placeholder="题目内容" th:value="${contentTopic?.dateil}">-->
+                <textarea placeholder="题目内容" style="width:700px;height: 200px" class="layui-textarea" name="dateil">[[${contentTopic?.dateil}]]</textarea>
+            </div>
+        </div>
+
+        <!--<div class="layui-form-item">-->
+        <!--<label class="layui-form-label required">答案</label>-->
+        <!--<div class="layui-input-inline">-->
+        <!--<input class="layui-input" type="text" name="answer"  placeholder="答案" th:value="${contentTopic?.answer}">-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">题目类型</label>
+            <div class="layui-input-inline">
+                <!--<input type="hidden" id="scaleTypeId" th:value="${scale?.scaleTypeId}" >-->
+                <select style="width:550px;" class="select-type" name="type">
+                    <option value="1">单选题</option>
+                    <option value="2">多选题</option>
+                </select>
+                <!--<input type="hidden" name="scaleTypeName"  id="scaleTypeName" th:value="${scale?.scaleTypeName}">-->
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">选择因子分组</label>
+            <div class="layui-input-inline">
+                <!--<input type="hidden" id="scaleTypeId" th:value="${scale?.scaleTypeId}" >-->
+                <select name="serial">
+                    <option th:each="item:${groups}" th:value="${item.serial}" th:text="${item.info}"></option>
+                </select>
+                <!--<input type="hidden" name="scaleTypeName"  id="scaleTypeName" th:value="${scale?.scaleTypeName}">-->
+            </div>
+        </div>
+        <div id="answerAll">
+            <th:block th:each="item,itemStat : ${topicMaterials}">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">选项<span th:text="${itemStat.index+1}"></span></label>
+                    <div class="layui-input-inline">
+                        <input class="layui-input" style="width:400px;" type="text" th:value="${item.content}"
+                               name="content" placeholder="答案">
+                        <div class="removeDel" style=" display: flex;justify-content : space-between; width:500px;">
+                            <input class="layui-input" style="width:400px;" type="number" th:value="${item.score}"
+                                   name="scores" placeholder="分数">
+                            <button type="button" class="layui-btn" onclick='remOption(this)'
+                                    style="background-color: #f7a54a; border-color: #f7a54a; color: #FFFFFF; "><i
+                                    class="fa fa-remove"></i></button>
+                    </div>
+                </div>
+
+            </th:block>
+            <!--<div class="layui-form-item">-->
+            <!--<label class="layui-form-label">选项1</label>-->
+            <!--<div class="layui-input-inline">-->
+            <!--<input class="layui-input" style="width:400px;" type="text" name="content" placeholder="答案">-->
+            <!--<div class="removeDel" style=" display: flex;justify-content : space-between; width:500px;">-->
+            <!--<input class="layui-input" style="width:400px;" type="number" name="scores" placeholder="分数">-->
+            <!--&lt;!&ndash;<button type="button" class="layui-btn removeDel"  onclick='remOption(this)' style="background-color: #f7a54a; border-color: #f7a54a; color: #FFFFFF; "><i class="fa fa-remove"></i></button>&ndash;&gt;-->
+            <!--</div>-->
+            <!--</div>-->
+            <!--</div>-->
+
+
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-inline">
+                <button class="layui-btn" type="button" id="addOption" data-title="添加选项">
+                    <i class="fa fa-plus"></i> 添加
+                </button>
+            </div>
+        </div>
+
+
+        <!--<div class="layui-form-item layui-form-text">-->
+        <!--<label class="layui-form-label">备注</label>-->
+        <!--<div class="layui-input-block">-->
+        <!--<textarea placeholder="请输入内容" class="layui-textarea" name="note">[[${scaleTable?.note}]]</textarea>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="layui-form-item timo-finally">-->
+            <!--<button class="layui-btn ajax-submit"><i class="fa fa-check-circle"></i> 保存</button>-->
+            <!--<button class="layui-btn btn-secondary close-popup"><i class="fa fa-times-circle"></i> 关闭</button>-->
+        <!--</div>-->
+
+
+    </form>
+</div>
+<script th:replace="/common/template :: script"></script>
+<script type="text/javascript" th:src="@{/js/plugins/jquery-2.2.4.min.js}"></script>
+<script type="text/javascript" th:src="@{/lib/zTree_v3/js/jquery.ztree.core.min.js}"></script>
+<script type="text/javascript">
+    function addTopic(size) {
+        var option =
+            "            <div class=\"layui-form-item\">\n" +
+            "                <label class=\"layui-form-label\">选项" + size + "</label>\n" +
+            "                <div class=\"layui-input-inline\">\n" +
+            "                    <input class='layui-input answer' style=\"width:400px;\" type=\"text\" name=\"content\" placeholder=\"答案\">\n" +
+            "                    <div class=\"removeDel\" style=\" display: flex;justify-content : space-between; width:500px;\">\n" +
+            "                        <input class='layui-input answer' style=\"width:400px;\"  value='0' type=\"number\" name=\"scores\" placeholder=\"分数\">\n" +
+            "                          <button type=\"button\" class=\"layui-btn\" onclick='remOption(this)' style=\"background-color: #f7a54a; border-color: #f7a54a; color: #FFFFFF; \"><i class=\"fa fa-remove\"></i></button> " +
+            "                    </div>\n" +
+            "                </div>\n" +
+            "            </div>\n";
+        return option;
+    }
+
+    var size = $(".removeDel").size();
+    var addNumber = 0;
+    if (size <= 1) {
+        addNumber = 1;
+    } else {
+        addNumber = 0;
+    }
+    for (var i = 1; i <= addNumber; i++) {
+        var option = "";
+        if (addNumber === 3) {
+            option = addTopic(i);
+        } else {
+            option = addTopic((addNumber + size));
+        }
+
+        $("#answerAll").append(option);
+    }
+
+
+    $("#addOption").click(function () {
+        var size1 = $(".removeDel").size() + 1;
+        var option = addTopic(size1);
+        $("#answerAll").append(option)
+    });
+
+    function remOption(e) {
+        $(e).parent().parent().parent().remove();
+    }
+
+    // $(".removeDel").click(function () {
+    //   console.log(123)
+    //   console.log($(this))
+    // });
+    // layui.use(['form'], function () {answer
+    //     window.form = layui.form;
+    //     // 初始化排序下拉选项
+    //     scaleTypeRender($("#scaleTypeId").val());
+    //     window.form.on('select(testSelect)', function(data){
+    //         // console.log(data.elem); //得到select原始DOM对象
+    //         // console.log(data.value); //得到被选中的value
+    //         $("#scaleTypeName").val($(data.elem).find("option:selected").text())
+    //         form.render('select');//select是固定写法 不是选择器
+    //     });
+    // });
+    //
+    // // 更新渲染排序下拉选项
+    // function scaleTypeRender(seelectedType) {
+    //     var sort = $(".select-type");
+    //     var url = sort.data('url') ;
+    //     $.get(url, function (result) {
+    //         var options = '';
+    //         var sortNum = Object.keys(result).length;
+    //         result[0] = "请选择";
+    //         for(var key in result){
+    //             if(seelectedType===key){
+    //                 options += "<option value='"+ key+"' selected>"+ result[key] +"</option>";
+    //             }else{
+    //                 options += "<option value='"+ key+"'>"+ result[key] +"</option>";
+    //             }
+    //         }
+    //         sort.html(options);
+    //         form.render('select');
+    //     });
+    // }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:mo="https://gitee.com/aun/Timo"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:replace="/common/template :: header(~{::title},~{::link},~{::style})">
+    <link rel="stylesheet" th:href="@{/lib/zTree_v3/css/zTreeStyle/zTreeStyle.css}" type="text/css">
+    <style>
+        .content{
+            width: 900px;
+            margin: 10px auto;
+            border: 1px solid #337AB7;
+            border-radius: 5px;
+        }
+        .con-head{
+            width: 100%;
+            height: 80px;
+            background: #337AB7;
+            font-size: 26px;
+            line-height: 80px;
+            text-indent: 2em;
+            color: white;
+            letter-spacing: 3px;
+        }
+        .basic{
+            width: 90%;
+            margin: 10px auto;
+            margin-top: 30px;
+        }
+        .con-tit{
+            font-size: 24px;
+            font-weight: bolder;
+            margin-bottom: 20px;
+        }
+        .photo{
+            margin: 0;
+            padding: 0;
+            display: inline-block;
+            width: 120px;
+            height: 120px;
+            position: relative;
+            top: -100px;
+        }
+        .photo img{
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+        .rep-tab{
+            width: 100%;
+        }
+        .rep-tab tr{
+            font-size: 16px;
+            height: 35px;
+        }
+        .tex-ind{
+            text-indent: 1em;
+        }
+        .tex-rig{
+            width: 100px;
+            text-align: right;
+        }
+        .btn-bl{
+            width: 100px;
+            background: #337AB7;
+            border: 1px solid #337AB7;
+            border-radius: 3px;
+            color: white;
+        }
+        .btn-bl:hover{
+            background: #64B4FF;
+            cursor:pointer;
+        }
+
+        .tab-wrpper{
+            width: 100%;
+            border: 1px solid #DDDDDD;
+            margin-top: 20px;
+        }
+        .temp-tab{
+            width: 100%;
+        }
+        .fon-w{
+            font-weight: bolder;
+            width: 150px;
+        }
+        .te-al{
+            text-align: center;
+        }
+        .tr-h{
+            height: 150px;
+        }
+        .input{
+            margin: 0;
+            padding: 0;
+            width: 600px;
+            height: 150px;
+        }
+        .mar-pad{
+            margin: 0;
+            padding: 0;
+        }
+        .btn-sub{
+            width: 150px;
+            height: 30px;
+            color: white;
+            background: #009688;
+            border: 1px solid #00F7DE;
+            border-radius: 5px;
+            margin: 20px auto;
+            margin-left: 200px;
+            cursor:pointer;
+        }
+        .btn-del{
+            width: 150px;
+            height: 30px;
+            color: white;
+            background: #D9534F;
+            border: 1px solid deeppink;
+            border-radius: 5px;
+            cursor:pointer;
+            margin-top: 10px;
+            float: right;
+            margin-bottom: 10px;
+        }
+        .man-box{
+            width: 100%;
+            margin: 10px auto;
+        }
+    </style>
+</head>
+<body class="timo-layout-page">
+<div class="layui-card" >
+    <div class="content">
+        <div class="con-head" th:text="${report.visitorName}+'的个案信息'">
+        </div>
+        <div class="basic">
+            <h2 class="con-tit">基本信息</h2>
+            <div  style="width: 80%;display: inline-block">
+                <table class="rep-tab">
+                    <tr>
+                        <td class="tex-rig" >来访者:</td>
+                        <td class="tex-ind" th:text="${report.visitorName}">李玉龙</td>
+                        <td class="tex-rig">咨询类型:</td>
+                        <td class="tex-ind" th:text="${report.consultingType}">学习压力</td>
+                    </tr>
+                    <tr>
+                        <td class="tex-rig">性别:</td>
+                        <td class="tex-ind" th:text="${report.sex==null?'未填写':report.sex}">男</td>
+                        <td class="tex-rig">个案来源:</td>
+                        <td class="tex-ind" th:text="${report.caseTitle}">心理评测</td>
+                    </tr>
+                    <tr>
+                        <td class="tex-rig">年龄:</td>
+                        <td class="tex-ind" th:text="${report.age==null?'未填写':report.age}">35</td>
+                        <td class="tex-rig">处理级别:</td>
+                        <td class="tex-ind" th:text="${report.rankContent}">
+<!--                            <select>-->
+<!--                                <option>未设置级别</option>-->
+<!--                                <option>紧急</option>-->
+<!--                                <option>一般</option>-->
+<!--                                <option>危机</option>-->
+<!--                            </select>-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="tex-rig">个案编号:</td>
+                        <td class="tex-ind" th:text="${report.only}">
+<!--                            <input type="text" value="GA20190228141713468">-->
+                        </td>
+                        <td class="tex-rig">建案日期:</td>
+                        <td class="tex-ind" th:text="${#dates.format(report.createDateTime,'yyyy-MM-dd hh:mm:ss')}">2020-02-13 14:25:38</td>
+                    </tr>
+                    <tr>
+                        <td class="tex-rig">个案状态:</td>
+                        <td class="tex-ind" th:text="${report.state=='1'?'进行中':'已结案'}">已结案</td>
+                        <td class="tex-rig">相关操作:</td>
+                        <td class="tex-ind"  th:switch="${report.state}">
+<!--                            <form th:case="1" action="/system/case/updateState">-->
+<!--                                <input hidden="hidden" name="id" th:value="${report.id}">-->
+<!--                                <button class="layui-btn ajax-submit btn-bl">结束个案</button>-->
+<!--                                <button  type="submit" class="btn-bl">结束个案</button>-->
+<!--                            </form>-->
+
+                            <button th:if="${report.state=='2' && report.replyTime==null}"  type="button" class="btn-bl" id="addReply">个案回访</button>
+                            <button th:case="2" type="button" class="btn-bl" th:value="${report.id}" id="toCaseReport">个案报告</button>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="photo">
+<!--                <img src="static/images/userhead_default.png">-->
+                <img src="/upload/images/userhead_default.png" th:src="${report.picture}" >
+            </div>
+        </div>
+        <div class="basic">
+            <div class="layui-form timo-compile" id="replyBox" style="border: 1px solid grey;display: none">
+                <p style="font-size: 16px;height: 30px;line-height: 30px;text-indent: 2em">添加回访信息</p>
+                <form>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label required">回访人:</label>
+                        <div class="layui-input-inline" >
+                            <select name="id" id="id" >
+                                <option th:value="${report.id}" th:text="${report.replyName}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label required">回访方式:</label>
+                        <div class="layui-input-inline" >
+                            <select name="replyType" id="replyType">
+                                <option value="">请选择</option>
+                                <option th:each="i:${ways}" th:text="${i}" th:value="${i}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label required">回访时间:</label>
+                        <div class="layui-input-inline" >
+                            <input type="text" autocomplete="off" id="replyTime" name="replyTime" class="layui-input" >
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label required">个案现状:</label>
+                        <div class="layui-input-inline" >
+                            <textarea style="width: 270px;height: 100px;" name="replyState" id="replyState"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label required">备注:</label>
+                        <div class="layui-input-inline" >
+                            <textarea style="width: 270px;height: 100px;" name="note" id="note"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label ">&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                        <div class="layui-input-inline" >
+                            <button class="layui-btn " type="button" id="saveReply"><i class="fa fa-check-circle"></i> 保存</button>
+                            <button class="layui-btn btn-secondary" type="button" id="closeReply"><i class="fa fa-times-circle"></i> 关闭</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <div class="basic" id="replay" th:if="${report.replyTime}" >
+            <h2 class="con-tit">回访信息</h2>
+            <div  style="width: 80%;display: inline-block">
+                <table class="rep-tab">
+                    <tr>
+                        <td class="tex-rig" >回访人:</td>
+                        <td class="tex-ind" th:text="${report.replyName}" >超级管理员</td>
+                        <td class="tex-rig">回访方式:</td>
+                        <td class="tex-ind" th:text="${report.replyType}"></td>
+                    </tr>
+                    <tr>
+                        <td class="tex-rig" >回访人时间:</td>
+                        <td colspan="3" class="tex-ind" th:text="${report.replyTime}"></td>
+                    </tr>
+                    <tr>
+                        <td class="tex-rig" >个案现状:</td>
+                        <td colspan="3" class="tex-ind" th:text="${report.replyState}"></td>
+                    </tr>
+                    <tr>
+                        <td class="tex-rig" >备注:</td>
+                        <td colspan="3" class="tex-ind" th:text="${report.note}"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="basic">
+            <h2 class="con-tit">访谈记录</h2>
+            <button class="layui-btn" id="btn-add">添加访谈</button>
+            <button class="layui-btn btn-cut"  th:each="item:${intviews}" th:text="'访谈'+${itemStat.index+1}" th:value="${item.id}"></button>
+            <span th:text="${intviews.size()}" id="isShow" style="display: none"></span>
+            <div class="addWrapper" id="add-wrapper" >
+
+                <div class="timo-table-wrap" id="tab-box">
+                    <p style="font-size: 16px;height: 30px;line-height: 30px">可用的预约信息</p>
+                    <table class="layui-table timo-table" >
+                        <thead>
+                        <tr>
+                            <th style="text-align: center"  data-field="id">咨询师</th>
+                            <th style="text-align: center"  data-field="title">预约时间</th>
+                            <th style="text-align: center"  data-field="scaleNumber">预约地点</th>
+                            <th style="text-align: center"  data-field="satrTime">咨询方式</th>
+                            <th style="text-align: center"  data-field="starTime">状态</th>
+                            <th style="text-align: center">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="item:${list}" style="text-align: center">
+                                <td th:text="${item.counselorName}"></td>
+                                <td th:text="${item.resDate+'('+item.resTime+')'}"></td>
+                                <td th:text="${item.site}"></td>
+                                <td th:text="${item.manner}"></td>
+                                <td >已确定</td>
+                                <td>
+                                    <form action="/system/case/saveInterview" id="tab-from">
+                                        <input style="display: none" type="text" name="demanderSite"  th:value="${item.site}">
+                                        <input style="display: none" type="text" name="demanderMode"  th:value="${item.manner}">
+                                        <input style="display: none" type="text"  name="demanderTime" class="layui-input" th:value="${item.resDate+' '+item.resTime}">
+                                        <input style="display: none" type="text" name="consultId"  th:value="${item.counselorId}">
+                                        <input style="display: none" type="text" name="demanderId"  th:value="${report.visitorId}">
+                                        <input style="display: none" type="text" name="demanderName"  th:value="${report.visitorName}">
+                                        <input style="display: none" type="text" name="consultName"  th:value="${item.counselorName}">
+                                        <input style="display: none" type="text" name="reportId"  th:value="${report.id}">
+                                        <input style="display: none" type="text" name="reserId"  th:value="${item.id}">
+<!--                                        <input style="display: none" type="text" name="reportId"  th:value="${report.id}">-->
+                                        <button class="layui-btn " type="button" id="opt-sub"  ></i>新建</button>
+<!--                                        ajax-submit-->
+                                    </form>
+                                </td>
+                            </tr>
+                            <tr th:if="${list.size()<1}">
+                                <td colspan="6" style="text-align: center">当前暂无预约数据，您可以手动新建访谈记录</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="layui-btn newadd" type="button" style="float: right;margin-top: 20px"></i>手动新建个案</button>
+                </div>
+                <div class="man-box">
+                    <div class="layui-form timo-compile" id="form-box" style="display: none">
+                        <p style="font-size: 16px;height: 30px;line-height: 30px">请确认访谈信息：</p>
+                        <form action="/system/case/saveInterview" id="cu-from">
+                            <input style="display: none" type="text" name="demanderId"  th:value="${report.visitorId}">
+                            <input style="display: none" type="text" name="demanderName"  th:value="${report.visitorName}">
+                            <input style="display: none" type="text" name="consultName"  th:value="${report.replyName}">
+                            <input style="display: none" type="text" name="reportId"  th:value="${report.id}">
+                            <input style="display: none" type="text" name="reserId"  value="">
+<!--                            <input style="display: none" type="text" name="reportId"  th:value="${report.id}">-->
+                            <div class="layui-form-item">
+                                <label class="layui-form-label required">咨询师</label>
+                                <div class="layui-input-inline" >
+                                    <select name="consultId" >
+                                        <option   th:text="${report.replyName}" th:value="${report.replyId}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label ">时间</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" autocomplete="off" id="demanderTime" name="demanderTime" class="layui-input" >
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label required" >地点</label>
+                                <div class="layui-input-inline">
+                                    <select name="demanderSite" id="site">
+                                        <option value="">请选择</option>
+                                        <option th:each="i:${sites}" th:text="${i}" th:value="${i}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label required" >方式</label>
+                                <div class="layui-input-inline">
+                                    <select name="demanderMode" id="demanderMode">
+                                        <option value="">请选择</option>
+                                        <option th:each="i:${ways}" th:text="${i}" th:value="${i}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="layui-form-item timo-finally" id="parten">
+                                <button class="layui-btn " type="button" id="save"><i class="fa fa-check-circle"></i> 添加访谈</button>
+                                <button class="layui-btn btn-secondary" id="btn-close" type="button"><i class="fa fa-times-circle"></i> 关闭</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div id="tab-wrpper" >
+                <div th:if="${intviews.size()>0}" th:each="item:${intviews}" th:id="${item.id}" th:class="${'one'+itemStat.index}" class="tab-wrpper" >
+<!--                    <span style="display: none" id="interview_id" th:text="${interviewContent.get('基本信息').interviewId}"></span>-->
+                    <h2 style="height: 50px;font-size: 30px;text-align: center">个案访谈记录表(访谈<span th:text="${itemStat.index+1}+')'"></span></h2>
+                    <table class="temp-tab layui-table timo-table">
+                        <tr class="te-al">
+                            <td class="fon-w">咨询师</td>
+                            <td th:text="${item.consultName}">李老师</td>
+                            <td class="fon-w">访谈时间</td>
+                            <td th:text="${item.demanderTime}">2020-05-08 15:30</td>
+                        </tr>
+                        <tr class="te-al">
+                            <td class="fon-w">咨询地点</td>
+                            <td th:text="${item.demanderSite}">心理中心302</td>
+                            <td class="fon-w">咨询方式</td>
+                            <td th:text="${item.demanderMode}">线上</td>
+                        </tr>
+                        <tr class="te-al tr-h">
+                            <td class="fon-w">基本信息</td>
+                            <td colspan="3" class="mar-pad">
+                                <textarea class="input" th:if="${interviewContent.size()>0}" th:text="${interviewContent.get('基本信息'+itemStat.index).content}"  id="basicInfo" th:onblur="saveContent(this,[[${interviewContent.get('基本信息'+itemStat.index).id}]])"></textarea>
+                            </td>
+                        </tr>
+                        <tr class="te-al tr-h">
+                            <td class="fon-w">咨询过程</td>
+                            <td colspan="3">
+                                <textarea class="input" th:if="${interviewContent.size()>0}" th:text="${interviewContent.get('咨询过程'+itemStat.index).content}" th:onblur="saveContent(this,[[${interviewContent.get('咨询过程'+itemStat.index).id}]])"></textarea>
+                            </td>
+                        </tr>
+                        <tr class="te-al tr-h">
+                            <td class="fon-w">个案自述</td>
+                            <td colspan="3">
+                                <textarea class="input" th:if="${interviewContent.size()>0}" th:text="${interviewContent.get('个案自述'+itemStat.index).content}" th:onblur="saveContent(this,[[${interviewContent.get('个案自述'+itemStat.index).id}]])"></textarea>
+                            </td>
+                        </tr>
+                        <tr class="te-al tr-h">
+                            <td class="fon-w">咨询评估</td>
+                            <td colspan="3">
+                                <textarea class="input" th:if="${interviewContent.size()>0}" th:text="${interviewContent.get('咨询评估'+itemStat.index).content}" th:onblur="saveContent(this,[[${interviewContent.get('咨询评估'+itemStat.index).id}]])"></textarea>
+                            </td>
+                        </tr>
+                        <tr >
+                            <td class="fon-w" style="text-align: center">说明</td>
+                            <td colspan="3">
+                                <h3>1.请直接单击表格进行编辑</h3>
+                                <h3>2.编辑完成后（编辑框失去焦点时）会自动保存数据</h3>
+                            </td>
+                        </tr>
+                    </table>
+<!--                    <button class="btn-sub">保存此访谈</button>-->
+                    <button class="btn-del del-interview"  type="button" th:value="${item.id}">删除此访谈</button>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px"></div>
+    </div>
+    <span style="display: none" th:text="${report.id} " id="reportId"></span>
+</div>
+<script th:replace="/common/template :: script"></script>
+<script type="text/javascript" th:src="@{/js/plugins/jquery-2.2.4.min.js}"></script>
+<script type="text/javascript" th:src="@{/lib/zTree_v3/js/jquery.ztree.core.min.js}"></script>
+<!--<script type="text/javascript" th:src="@{/js/timoTree.js}"></script>-->
+<script type="text/javascript">
+    var reportId = $("#reportId").text();
+    layui.use('laydate',function () {
+        var lauyiDate = layui.laydate;
+        lauyiDate.render({
+            elem:"#demanderTime",
+            type:"datetime",
+            min:-0
+        })
+        lauyiDate.render({
+            elem:"#replyTime",
+            min:-0
+        })
+    })
+    var local = window.localStorage;
+    // 树形菜单
+    // $.fn.selectTree({
+    //     rootTree: '全部',
+    //     onSelected: function (treeNode) {
+    //         local.setItem('deptTitle', treeNode.name);
+    //
+    //     }
+    // });
+    $(".newadd").click(function () {
+        $("#form-box").show()
+        $("#tab-box").hide()
+    })
+
+    function saveContent(item,id) {
+        // var interId = $("#interview_id").text()
+        // console.log(item.value+"-"+name+'-'+id+"-"+interId)
+        $.get("/system/case/saveInterviewContent",{id:id,content:item.value},function (req) {
+            $.fn.Messager(req);
+
+        })
+        // alert(item.value+"-"+name+'-'+id)
+        // alert(":"+name)
+    }
+    $("#closeReply").click(function () {
+        $("#replyBox").hide()
+    })
+    $("#saveReply").click(function () {
+        if (validData()){
+            saveReply()
+        }
+
+
+    })
+    $("#addReply").click(function () {
+        $("#replyBox").show()
+    })
+    function validData() {
+        if ($("#replyType").val()==""){
+            alert("请选择回访方式")
+            return false;
+        }
+        if ($("#replyTime").val()==""){
+            alert("请选择回访时间")
+            return false;
+        }
+        if ($("#replyState").val()==""){
+            alert("请输入个案现状")
+            return false;
+        }
+        if ($("#note").val()==""){
+            alert("请输入个案备注")
+            // $.fn.Messager("请输入个案备注");
+            return false;
+        }
+        return true;
+    }
+    function saveReply() {
+        var id =$("#id").val();
+        var replyType=$("#replyType").val();
+        var replyTime=$("#replyTime").val();
+        var replyState=$("#replyState").val();
+        var note=$("#note").val();
+        // console.log(id+replyType+replyTime+replyState+note)
+        $.post("/system/case/saveReply",{id:id,replyType:replyType,replyTime:replyTime,replyState:replyState,note:note},function (req) {
+            $.fn.Messager(req);
+            console.log(req)
+            $("#replyBox").hide()
+            $("#replay").show()
+        })
+    }
+    $("#toCaseReport").click(function () {
+        window.location.href="/system/case/caseReport/"+$(this).val()
+        // $.get("/system/case/caseReport",{id:$(this).val()})
+        // alert($(this).val())
+    })
+    $("#btn-close").click(function () {
+        $("#form-box").hide()
+        $("#tab-box").show()
+    })
+    $(function () {
+        var isShow = $("#isShow").text();
+        if (isShow>=1){
+            // $("#tab-box").show()
+            $("#tab-box").hide()
+        }
+        $(".one0").siblings().hide()
+    })
+    $("#btn-add").click(function () {
+        $("#tab-box").show()
+        $(".one0").hide()
+        $(".one0").siblings().hide()
+        // $("#tab-wrpper").css("display","none")
+        // $(".tab-wrpper").hide()
+        // alert("1")
+    })
+    $(".btn-cut").click(function () {
+        var item = $(this).val();
+        $("#"+item+"").show()
+        $("#"+item+"").siblings().hide()
+        $("#tab-box").hide()
+    })
+    $("#save").click(function () {
+
+        // alert("jinbuqu")
+        if ($("#demanderTime").val()==""){
+           alert("请选择时间")
+            return false;
+        }
+        if ($("#site").val()==""){
+            alert("请选择地点")
+            return false;
+        }
+        if ($("#demanderMode").val()==""){
+            alert("请选择方式")
+            return false;
+        }
+        $.post("/system/case/saveInterview",$("#cu-from").serialize(),function (req) {
+            $.fn.Messager(req);
+        })
+    })
+    $(".del-interview").click(function () {
+        if (confirm("确认删除吗？删除后不可恢复")){
+            $.post("/system/case/deleteInterview",{id:$(this).val(),reportId:reportId},function (req) {
+                $.fn.Messager(req);
+            })
+        }
+    })
+    $("#opt-sub").click(function () {
+        $.post("/system/case/saveInterview",$("#tab-from").serialize(),function (req) {
+            $.fn.Messager(req);
+        })
+    })
+</script>
+</body>
+</html>

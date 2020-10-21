@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>预约咨询-德宝心理咨询中心</title>
+
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="sweetalert/sweetalert.css" rel="stylesheet">
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.js"></script>
+    [endif]-->
+    <style type="text/css">
+
+      body{
+        font-size: 0;
+      }
+      .h-na img{
+        width: 40px;
+        height: auto;
+        padding-right: 5px;
+      }
+
+      .ass-title{
+        width: 800px;
+        height: 60px;
+        margin: 30px auto;
+      }
+      .ass-title img{
+        width: 50px;
+        margin-right: 20px;
+        vertical-align: middle;
+      }
+      .ass-title span{
+        font-size: 30px;
+        font-weight: bolder;
+        vertical-align: middle;
+      }
+      .rc-wrappser{
+        width: 800px;
+        height: 600px;
+        /*border: solid 1px sandybrown;*/
+        margin: 0 auto;
+        font-size: 18px;
+      }
+      .rc-wrappser table{
+        width: 100%;
+      }
+      .tab-w-1{
+        width: 150px;
+      }
+      .tab-w-2{
+        width: 250px;
+      }
+      .tr-h{
+        height: 55px;
+        text-align: left;
+        text-indent: 1em;
+      }
+      .tr-h-2{
+        height: 150px;
+        text-align: left;
+        padding: 0;
+        width: 800px;
+        /*text-indent: 1em;*/
+      }
+      .btn-sub{
+        width: 100%;
+        height: 45px;
+        border-radius: 5px;
+        text-align: center;
+        line-height: 45px;
+        background: #21BA45;
+        cursor: pointer;
+        font-size: 24px;
+        color: white;
+        margin-top: 20px;
+        margin-bottom: 100px;
+      }
+
+
+      .windows8 {
+        position: relative;
+        width: 78px;
+        height:78px;
+        margin:auto;
+      }
+
+      .windows8 .wBall {
+        position: absolute;
+        width: 74px;
+        height: 74px;
+        opacity: 0;
+        transform: rotate(225deg);
+        -o-transform: rotate(225deg);
+        -ms-transform: rotate(225deg);
+        -webkit-transform: rotate(225deg);
+        -moz-transform: rotate(225deg);
+        animation: orbit 6.96s infinite;
+        -o-animation: orbit 6.96s infinite;
+        -ms-animation: orbit 6.96s infinite;
+        -webkit-animation: orbit 6.96s infinite;
+        -moz-animation: orbit 6.96s infinite;
+      }
+
+      .windows8 .wBall .wInnerBall{
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: rgb(0,0,0);
+        left:0px;
+        top:0px;
+        border-radius: 10px;
+      }
+
+      .windows8 #wBall_1 {
+        animation-delay: 1.52s;
+        -o-animation-delay: 1.52s;
+        -ms-animation-delay: 1.52s;
+        -webkit-animation-delay: 1.52s;
+        -moz-animation-delay: 1.52s;
+      }
+
+      .windows8 #wBall_2 {
+        animation-delay: 0.3s;
+        -o-animation-delay: 0.3s;
+        -ms-animation-delay: 0.3s;
+        -webkit-animation-delay: 0.3s;
+        -moz-animation-delay: 0.3s;
+      }
+
+      .windows8 #wBall_3 {
+        animation-delay: 0.61s;
+        -o-animation-delay: 0.61s;
+        -ms-animation-delay: 0.61s;
+        -webkit-animation-delay: 0.61s;
+        -moz-animation-delay: 0.61s;
+      }
+
+      .windows8 #wBall_4 {
+        animation-delay: 0.91s;
+        -o-animation-delay: 0.91s;
+        -ms-animation-delay: 0.91s;
+        -webkit-animation-delay: 0.91s;
+        -moz-animation-delay: 0.91s;
+      }
+
+      .windows8 #wBall_5 {
+        animation-delay: 1.22s;
+        -o-animation-delay: 1.22s;
+        -ms-animation-delay: 1.22s;
+        -webkit-animation-delay: 1.22s;
+        -moz-animation-delay: 1.22s;
+      }
+
+
+
+      @keyframes orbit {
+        0% {
+          opacity: 1;
+          z-index:99;
+          transform: rotate(180deg);
+          animation-timing-function: ease-out;
+        }
+
+        7% {
+          opacity: 1;
+          transform: rotate(300deg);
+          animation-timing-function: linear;
+          origin:0%;
+        }
+
+        30% {
+          opacity: 1;
+          transform:rotate(410deg);
+          animation-timing-function: ease-in-out;
+          origin:7%;
+        }
+
+        39% {
+          opacity: 1;
+          transform: rotate(645deg);
+          animation-timing-function: linear;
+          origin:30%;
+        }
+
+        70% {
+          opacity: 1;
+          transform: rotate(770deg);
+          animation-timing-function: ease-out;
+          origin:39%;
+        }
+
+        75% {
+          opacity: 1;
+          transform: rotate(900deg);
+          animation-timing-function: ease-out;
+          origin:70%;
+        }
+
+        76% {
+          opacity: 0;
+          transform:rotate(900deg);
+        }
+
+        100% {
+          opacity: 0;
+          transform: rotate(900deg);
+        }
+      }
+
+      @-o-keyframes orbit {
+        0% {
+          opacity: 1;
+          z-index:99;
+          -o-transform: rotate(180deg);
+          -o-animation-timing-function: ease-out;
+        }
+
+        7% {
+          opacity: 1;
+          -o-transform: rotate(300deg);
+          -o-animation-timing-function: linear;
+          -o-origin:0%;
+        }
+
+        30% {
+          opacity: 1;
+          -o-transform:rotate(410deg);
+          -o-animation-timing-function: ease-in-out;
+          -o-origin:7%;
+        }
+
+        39% {
+          opacity: 1;
+          -o-transform: rotate(645deg);
+          -o-animation-timing-function: linear;
+          -o-origin:30%;
+        }
+
+        70% {
+          opacity: 1;
+          -o-transform: rotate(770deg);
+          -o-animation-timing-function: ease-out;
+          -o-origin:39%;
+        }
+
+        75% {
+          opacity: 1;
+          -o-transform: rotate(900deg);
+          -o-animation-timing-function: ease-out;
+          -o-origin:70%;
+        }
+
+        76% {
+          opacity: 0;
+          -o-transform:rotate(900deg);
+        }
+
+        100% {
+          opacity: 0;
+          -o-transform: rotate(900deg);
+        }
+      }
+
+      @-ms-keyframes orbit {
+        0% {
+          opacity: 1;
+          z-index:99;
+          -ms-transform: rotate(180deg);
+          -ms-animation-timing-function: ease-out;
+        }
+
+        7% {
+          opacity: 1;
+          -ms-transform: rotate(300deg);
+          -ms-animation-timing-function: linear;
+          -ms-origin:0%;
+        }
+
+        30% {
+          opacity: 1;
+          -ms-transform:rotate(410deg);
+          -ms-animation-timing-function: ease-in-out;
+          -ms-origin:7%;
+        }
+
+        39% {
+          opacity: 1;
+          -ms-transform: rotate(645deg);
+          -ms-animation-timing-function: linear;
+          -ms-origin:30%;
+        }
+
+        70% {
+          opacity: 1;
+          -ms-transform: rotate(770deg);
+          -ms-animation-timing-function: ease-out;
+          -ms-origin:39%;
+        }
+
+        75% {
+          opacity: 1;
+          -ms-transform: rotate(900deg);
+          -ms-animation-timing-function: ease-out;
+          -ms-origin:70%;
+        }
+
+        76% {
+          opacity: 0;
+          -ms-transform:rotate(900deg);
+        }
+
+        100% {
+          opacity: 0;
+          -ms-transform: rotate(900deg);
+        }
+      }
+
+      @-webkit-keyframes orbit {
+        0% {
+          opacity: 1;
+          z-index:99;
+          -webkit-transform: rotate(180deg);
+          -webkit-animation-timing-function: ease-out;
+        }
+
+        7% {
+          opacity: 1;
+          -webkit-transform: rotate(300deg);
+          -webkit-animation-timing-function: linear;
+          -webkit-origin:0%;
+        }
+
+        30% {
+          opacity: 1;
+          -webkit-transform:rotate(410deg);
+          -webkit-animation-timing-function: ease-in-out;
+          -webkit-origin:7%;
+        }
+
+        39% {
+          opacity: 1;
+          -webkit-transform: rotate(645deg);
+          -webkit-animation-timing-function: linear;
+          -webkit-origin:30%;
+        }
+
+        70% {
+          opacity: 1;
+          -webkit-transform: rotate(770deg);
+          -webkit-animation-timing-function: ease-out;
+          -webkit-origin:39%;
+        }
+
+        75% {
+          opacity: 1;
+          -webkit-transform: rotate(900deg);
+          -webkit-animation-timing-function: ease-out;
+          -webkit-origin:70%;
+        }
+
+        76% {
+          opacity: 0;
+          -webkit-transform:rotate(900deg);
+        }
+
+        100% {
+          opacity: 0;
+          -webkit-transform: rotate(900deg);
+        }
+      }
+
+      @-moz-keyframes orbit {
+        0% {
+          opacity: 1;
+          z-index:99;
+          -moz-transform: rotate(180deg);
+          -moz-animation-timing-function: ease-out;
+        }
+
+        7% {
+          opacity: 1;
+          -moz-transform: rotate(300deg);
+          -moz-animation-timing-function: linear;
+          -moz-origin:0%;
+        }
+
+        30% {
+          opacity: 1;
+          -moz-transform:rotate(410deg);
+          -moz-animation-timing-function: ease-in-out;
+          -moz-origin:7%;
+        }
+
+        39% {
+          opacity: 1;
+          -moz-transform: rotate(645deg);
+          -moz-animation-timing-function: linear;
+          -moz-origin:30%;
+        }
+
+        70% {
+          opacity: 1;
+          -moz-transform: rotate(770deg);
+          -moz-animation-timing-function: ease-out;
+          -moz-origin:39%;
+        }
+
+        75% {
+          opacity: 1;
+          -moz-transform: rotate(900deg);
+          -moz-animation-timing-function: ease-out;
+          -moz-origin:70%;
+        }
+
+        76% {
+          opacity: 0;
+          -moz-transform:rotate(900deg);
+        }
+
+        100% {
+          opacity: 0;
+          -moz-transform: rotate(900deg);
+        }
+      }
+    </style>
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="/js/plugins/jquery-2.2.4.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="/js/bootstrap.js"></script>
+    <script src="sweetalert/sweetalert-dev.js"></script>
+    <script>
+      $(function () {
+        $("#head").load("header.html")
+      })
+
+    </script>
+  </head>
+  <body>
+    <div id="top_menu_for_large">
+      <header id="head"></header>
+      <div class="ass-title">
+        <img src="../images/img/tianxie.png">
+        <span style="color: #009688">填写预约信息</span>
+      </div>
+    </div>
+    <div class="rc-wrappser">
+      <form id="reseInfo">
+        <table border="1">
+          <tr class="tr-h">
+            <td class="tab-w-1">预约日期</td>
+            <td class="tab-w-2">
+              <input type="date" name="resDate" id="resDate">
+            </td>
+            <td class="tab-w-1">咨询师</td>
+            <td class="tab-w-2">
+              <select style="width: 200px;height: 40px;border: none" name="counselorId" id="counselors">
+                <option value="">请选择</option>
+              </select>
+            </td>
+          </tr>
+          <tr class="tr-h">
+            <td class="tab-w-1">咨询地点</td>
+            <td class="tab-w-2">
+              <select style="width: 200px;height: 40px;border: none" name="site" id="site">
+                <option value="">请选择</option>
+              </select>
+            </td>
+            <td class="tab-w-1">咨询方式</td>
+            <td class="tab-w-2">
+              <select style="width: 200px;height: 40px;border: none" name="manner" id="manner">
+                <option value="">请选择</option>
+              </select>
+            </td>
+          </tr>
+          <tr class="tr-h">
+            <td class="tab-w-1">预约时间</td>
+            <td class="tab-w-2">
+              <select name="resTime" id="resTime" style="width: 200px;height: 40px;border: none" >
+                <option value="">请选择</option>
+                <option value="09:00:00">09:00-10:00</option>
+                <option value="10:00:00">10:00-11:00</option>
+                <option value="11:00:00">11:00-12:00</option>
+                <option value="12:00:00">12:00-13:00</option>
+                <option value="14:00:00">14:00-15:00</option>
+                <option value="15:00:00">15:00-16:00</option>
+                <option value="16:00:00">16:00-17:00</option>
+                <option value="17:00:00">17:00-18:00</option>
+              </select>
+            </td>
+            <td class="tab-w-1">咨询类型</td>
+            <td class="tab-w-2">
+              <select name="resType" id="resType" style="width: 200px;height: 40px;border: none" >
+                <option value="">请选择</option>
+              </select>
+            </td>
+          </tr>
+          <tr class="tr-h-2">
+            <td style="text-indent: 1em;">现状</td>
+            <td colspan="3" style="height: 150px">
+              <textarea name="actuality" id="actuality" style="width: 100%;height:100%;position: relative;top: 3px;border: none"></textarea>
+            </td>
+          </tr>
+          <tr class="tr-h-2">
+            <td style="text-indent: 1em;">个人近况总结</td>
+            <td colspan="3" style="height: 150px">
+              <textarea name="persionalState" id="persionalState" style="width: 100%;height:100%;position: relative;top: 3px;border: none"></textarea>
+            </td>
+          </tr>
+          <tr class="tr-h-2">
+            <td style="text-indent: 1em;">家庭情况</td>
+            <td colspan="3" style="height: 150px">
+              <textarea name="familyState" id="familyState" style="width: 100%;height:100%;position: relative;top: 3px;border: none"></textarea>
+            </td>
+          </tr>
+          <tr class="tr-h-2">
+            <td style="text-indent: 1em;">咨询问题</td>
+            <td colspan="3" style="height: 150px">
+              <textarea name="problem" id="problem" style="width: 100%;height:100%;position: relative;top: 3px;border: none"></textarea>
+            </td>
+          </tr>
+          <tr style="height: 80px">
+            <td style="text-indent: 1em;">说明</td>
+            <td colspan="3" style="height: 80px;padding: 1em">
+              请您先选择预约时间,咨询师,咨询类型,并填写相关信息,然后点击下方的"提交预约"按钮,完成预约
+            </td>
+          </tr>
+        </table>
+        <div class="btn-sub" id="btn-sub">
+          提交预约
+        </div>
+      </form>
+      <div style="position: relative;top: -600px" class="modal fade" id="myModal" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="">
+            <div class="modal-header" style="display: none">
+              <button type="button" class="close" id="btn-close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body" id="myModalContent" style="font-size: 16px;">
+              <div class="windows8">
+                <div class="wBall" id="wBall_1">
+                  <div class="wInnerBall"></div>
+                </div>
+                <div class="wBall" id="wBall_2">
+                  <div class="wInnerBall"></div>
+                </div>
+                <div class="wBall" id="wBall_3">
+                  <div class="wInnerBall"></div>
+                </div>
+                <div class="wBall" id="wBall_4">
+                  <div class="wInnerBall"></div>
+                </div>
+                <div class="wBall" id="wBall_5">
+                  <div class="wInnerBall"></div>
+                </div>
+              </div>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+      </div>
+    <button class='btn btn-primary join' id="btn-click" data-toggle='modal' data-target='#myModal' style="display: none">点击</button>
+    </div>
+
+
+      <script>
+        function vaildata(){
+          if ($("#problem").val()==""){
+
+            swal("请填写咨询问题！")
+            return false;
+          }
+          if ($("#familyState").val()==""){
+            swal("请填写家庭近况！")
+            return false;
+          }
+          if ($("#persionalState").val()==""){
+            swal("请填写个人近况！")
+            return false;
+          }
+          if ($("#actuality").val()==""){
+            swal("请填写现状！")
+            return false;
+          }
+          if ($("#resType").val()==""){
+            swal("请选择预约类型！")
+            return false;
+          }
+          if ($("#resTime").val()==""){
+            swal("请选择预约时间！")
+            return false;
+          }
+          if ($("#manner").val()==""){
+            swal("请选择咨询方式！")
+            return false;
+          }
+          if ($("#site").val()==""){
+            swal("请选择咨询地点！")
+            return false;
+          }
+          if ($("#counselors").val()==""){
+            swal("请选择咨询师！")
+            return false;
+          }
+          if ($("#resDate").val()==""){
+            swal("请选择预约日期！")
+            return false;
+          }
+          return true;
+        }
+        function saveDate(){
+          var defer = $.Deferred();
+          $.ajax({
+            url:"/front/saveRese",
+            type:"post",
+            data:$("#reseInfo").serialize(),
+            dataType:"json",
+            success:function (json) {
+              defer.resolve(json)
+              // if (json.code==200){
+              //   window.location.href="index.html";
+              // }
+            }
+          })
+          return defer;
+        }
+        $("#btn-sub").click(function () {
+          vaildata();
+          // $("#myModal").modal
+          // return false;
+          // confirm("确定提交？")
+
+          swal({
+            title: "确定提交预约信息？",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "确定提交",
+            cancelButtonText: "取消提交",
+            closeOnConfirm: false,
+            closeOnCancel: false
+          },function(isConfirm){
+            if (isConfirm) {
+              $("#btn-click").trigger("click")
+              $.when(saveDate()).done(function (data) {
+                //隐藏等待图标
+                $("#btn-close").trigger("click")
+                // confirm("隐藏等待图标")
+                //执行其他方法
+                if (data.code==200){
+                  window.location.href="index.html";
+                }
+              })
+            }else {
+              swal('取消')
+            }
+          });
+
+          if (vaildata()){
+            //显示等待图标
+            $("#btn-click").trigger("click")
+
+            //   $("#box").show();
+            // $("#myModal").modal('show')
+            // confirm("显示等待图标")
+            //执行异步方法
+
+
+          }
+        })
+        $(function () {
+          // $("#myModal").modal('show')
+          // 得到当前时间
+          var nowDate = new Date();
+          //得到当前年份
+          var year = nowDate.getFullYear();
+          //得到当前月份
+          var month = nowDate.getMonth()+1 < 10 ? "0"+(nowDate.getMonth()+1) : (nowDate.getMonth()+1);
+          //得到当前日子
+          var date = nowDate.getDate() < 10 ? "0"+nowDate.getDate() : nowDate.getDate();
+          //赋值给表单元素
+          $("#resDate").attr("min",year+"-"+month+"-"+date);
+          loadData()
+        })
+        function loadData(){
+          $.ajax({
+            url:"/front/findReses",
+            type:"get",
+            datatype:"json",
+            success:function (json) {
+              //咨询类型
+              for (item of json.data['consultType']){
+                var line1 = "<option value='"+item+"'>"+item+"</option>";
+                $("#resType").append(line1)
+              }
+              //咨询师列表
+              // console.log(json.data['counselors'])
+              for (item of json.data['counselors']){
+                var line2="<option value='"+item['id']+"'>"+item['nickname']+"</option>"
+                $("#counselors").append(line2)
+              }
+              //咨询方式
+              // console.log(json.data['ways'])
+              for (item of json.data['ways']){
+                var line3="<option value='"+item+"'>"+item+"</option>"
+                $("#manner").append(line3)
+              }
+              //预约地址
+              // console.log(json.data['sites'])
+              for (item of json.data['sites']){
+                var line4="<option value='"+item+"'>"+item+"</option>"
+                $("#site").append(line4)
+              }
+
+            }
+          })
+        }
+
+      </script>
+  </body>
+</html>

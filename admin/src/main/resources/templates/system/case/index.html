@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:mo="https://gitee.com/aun/Timo"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:replace="/common/template :: header(~{::title},~{::link},~{::style})">
+    <link rel="stylesheet" th:href="@{/lib/zTree_v3/css/zTreeStyle/zTreeStyle.css}" type="text/css">
+    <style>
+        .case-tit{
+            font-size: 20px;
+            text-indent: 2em;
+            margin-top: 10px;
+        }
+        .case-hr{
+            width: 95%;
+            height: 2px;
+            background: #808080;
+            margin: 10px auto;
+        }
+        .case-box{
+            overflow: auto;
+            width: 85%;
+            height: 250px;
+            border: solid 1px #95B8E7;
+            margin-top: 20px;
+            margin-left: 100px;
+        }
+        .box-head{
+            height: 30px;
+            padding-left: 20px;
+        }
+        .box-btn{
+            width: 55px;
+            height: 28px;
+            font-size: 16px;
+            line-height: 28px;
+            padding-left: 5px;
+            border: 1px solid white;
+            display: inline-block;
+        }
+        .box-btn:hover{
+            background: #E0ECFF;
+            border-radius: 3px;
+            border: 1px solid #E0ECFF;
+            cursor:pointer;
+
+        }
+        .marg-r{
+            color: #00B83F;
+            margin-right: 5px;
+        }
+        .add-box{
+            display: none;
+            background: white;
+            width: 300px;
+            height: 150px;
+            border: 1px solid #E0ECFF;
+            /*z-index: 999;*/
+
+        }
+        .pos-1{
+            position: relative;
+            top: -600px;
+            right: -300px;
+        }
+        .pos-2{
+            position: relative;
+            top: -270px;
+            right: -300px;
+        }
+
+        .add-box h3{
+            font-size: 18px;
+            background: #E0ECFF;
+            text-indent: 1em;
+        }
+        .btn-add{
+            width: 75%;
+            height: 30px;
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body class="timo-layout-page">
+<div class="layui-card">
+    <div class="layui-card-header timo-card-header">
+        <span style="font-size: 24px;font-weight: bolder">个案配置</span>
+        <i class="layui-icon layui-icon-refresh refresh-btn"></i>
+    </div>
+    <div class="layui-card-body">
+        <h2 class="case-tit">个案来源管理</h2>
+        <div class="case-hr"></div>
+        <div class="case-box">
+            <div class="box-head">
+                <div class="box-btn">
+                    <i class="fa fa-refresh marg-r" ></i>刷新
+                </div>
+                <div class="box-btn" id="add-res">
+                    <i class="fa fa-plus marg-r" ></i>添加
+                </div>
+            </div>
+
+            <div class="timo-table-wrap">
+                <table class="layui-table timo-table">
+                    <thead>
+                    <tr>
+                        <th style="text-align: center">来源名称</th>
+                        <th style="text-align: center">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody style="text-align: center">
+                    <tr>
+                        <td>心理测评</td>
+                        <td>
+                            <a class="ajax-get" th:attr="data-msg='您是否删除'">删除</a>
+                            <!--                                   th:href="@{/system/user/status/delete(ids=${item.id})}"-->
+                            <!--                                   shiro:hasPermission="system:user:status">删除</a>-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>心理测评</td>
+                        <td>
+                            <a class="ajax-get" th:attr="data-msg='您是否删除'">删除</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>心理测评</td>
+                        <td>
+                            <a class="ajax-get" th:attr="data-msg='您是否删除'">删除</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>心理测评</td>
+                        <td>
+                            <a class="ajax-get" th:attr="data-msg='您是否删除'">删除</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>心理测评</td>
+                        <td>
+                            <a class="ajax-get" th:attr="data-msg='您是否删除'">删除</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div style="margin-top: 20px"></div>
+        <h2 class="case-tit">个案处理级别管理</h2>
+        <div class="case-hr"></div>
+        <div class="case-box">
+            <div class="box-head">
+                <div class="box-btn">
+                    <i class="fa fa-refresh marg-r" ></i>刷新
+                </div>
+                <div class="box-btn" id="add-le">
+                    <i class="fa fa-plus marg-r" ></i>添加
+                </div>
+            </div>
+            <div class="timo-table-wrap">
+                <table class="layui-table timo-table">
+                    <thead>
+                    <tr>
+                        <th style="text-align: center">处理级别</th>
+                        <th style="text-align: center">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody style="text-align: center">
+                    <tr>
+                        <td>紧急</td>
+                        <td>
+                            <a class="ajax-get" th:attr="data-msg='您是否删除'">删除</a>
+                            <!--                                   th:href="@{/system/user/status/delete(ids=${item.id})}"-->
+                            <!--                                   shiro:hasPermission="system:user:status">删除</a>-->
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>一般</td>
+                        <td>
+                            <a class="ajax-get" th:attr="data-msg='您是否删除'">删除</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>危机</td>
+                        <td>
+                            <a class="ajax-get" th:attr="data-msg='您是否删除'">删除</a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="add-sou" class="add-box pos-1">
+        <h3>添加来源</h3>
+        <form>
+            <input class="layui-input" style="width: 80%;margin: 20px auto" placeholder="请输入来源名称">
+            <button type="button" class="btn-add" id="btn-sub-1"><i class="fa fa-plus marg-r" ></i>添加</button>
+        </form>
+    </div>
+    <div id="add-leve" class="add-box pos-2">
+        <h3>添加处理级别</h3>
+        <form>
+            <input class="layui-input" style="width: 80%;margin: 20px auto" placeholder="请输入处理级别">
+            <button type="button" class="btn-add" id="btn-sub-2"><i class="fa fa-plus marg-r" ></i>添加</button>
+        </form>
+    </div>
+</div>
+<script th:replace="/common/template :: script"></script>
+<script type="text/javascript" th:src="@{/js/plugins/jquery-2.2.4.min.js}"></script>
+<script type="text/javascript" th:src="@{/lib/zTree_v3/js/jquery.ztree.core.min.js}"></script>
+<!--<script type="text/javascript" th:src="@{/js/timoTree.js}"></script>-->
+<script type="text/javascript">
+    $("#add-res").click(function () {
+        // $(".add-box").css("display","none")
+        // $("#add-sou").hide()
+        $("#add-sou").show()
+    })
+    $("#add-le").click(function () {
+        $("#add-leve").show()
+    })
+    $("#btn-sub-1").click(function () {
+        $("#add-sou").hide()
+    })
+    $("#btn-sub-2").click(function () {
+        $("#add-leve").hide()
+    })
+
+    var local = window.localStorage;
+    // 树形菜单
+    // $.fn.selectTree({
+    //     rootTree: '全部',
+    //     onSelected: function (treeNode) {
+    //         local.setItem('deptTitle', treeNode.name);
+    //
+    //     }
+    // });
+</script>
+</body>
+</html>

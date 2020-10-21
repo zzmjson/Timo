@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:mo="https://gitee.com/aun/Timo">
+<head th:replace="/common/template :: header(~{::title},~{::link},~{::style})">
+    <link rel="stylesheet" th:href="@{/lib/zTree_v3/css/zTreeStyle/zTreeStyle.css}" type="text/css">
+    <style>
+        .down{
+            display: inline-block;
+            width: 120px;
+            height: 40px;
+            color: white;
+            line-height: 40px;
+            text-align: center;
+            font-size: 16px;
+            background-color: #009688;
+            margin-bottom: 20px;
+        }
+        .info{
+            display: inline-block;
+            width: 560px;
+            padding: 10px;
+            border: 1px solid grey;
+            border-radius: 5px;
+            line-height: 30px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-form timo-compile" style="margin-left: 20px">
+    <div>
+        <h2>注意事项</h2>
+        <p class="info">
+            1.请先下载excel模板，将用户数据输入在excel表中<br>
+            2.手机号码长度为11位，且无法重复注册！<br>
+            3.用户性别请填"男"或者"女"请不要填写其他字段！<br>
+        </p>
+    </div>
+    <a class="down" th:href="@{/system/user/downloadUserTemplate}">下载用户模版</a>
+
+    <br>
+    <form action="/system/user/importUser" method="post" enctype="multipart/form-data">
+
+        <input type="file" name="file" id="file"><br>
+        <button style="margin-top: 20px" class="layui-btn" data-title="上传文件" type="button" id="sub-file">
+            <i class="fa fa-plus"></i> 上传文件
+        </button>
+    </form>
+</div>
+<script th:replace="/common/template :: script"></script>
+<script type="text/javascript" th:src="@{/js/plugins/jquery-2.2.4.min.js}"></script>
+<script type="text/javascript" th:src="@{/lib/zTree_v3/js/jquery.ztree.core.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/timoTree.js}"></script>
+<script type="text/javascript" th:src="@{/front/sweetalert/sweetalert-dev.js}"></script>
+<script type="text/javascript">
+    // 树形菜单
+    $.fn.selectTree();
+    $("#sub-file").click(function () {
+        var formData = new FormData();
+        formData.append("file", document.getElementById("file").files[0]);
+        $.ajax({
+            url: "/system/user/importUser",
+            type: "POST",
+            data: formData,
+            /**
+             *必须false才会自动加上正确的Content-Type
+             */
+            contentType: false,
+            /**
+             * 必须false才会避开jQuery对 formdata 的默认处理
+             * XMLHttpRequest会对 formdata 进行正确的处理
+             */
+            processData: false,
+            dataType:"json",
+            success: function (data) {
+                // $.fn.Messager(data.msg)
+                alert(data.msg)
+                // console.log(data)
+                // swal(data.msg)
+            }
+        });
+    })
+</script>
+</body>
+</html>

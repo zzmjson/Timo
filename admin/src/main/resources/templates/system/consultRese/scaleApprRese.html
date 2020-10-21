@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:mo="https://gitee.com/aun/Timo"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:replace="/common/template :: header(~{::title},~{::link},~{::style})">
+    <link rel="stylesheet" th:href="@{/lib/zTree_v3/css/zTreeStyle/zTreeStyle.css}" type="text/css">
+    <style>
+
+    </style>
+</head>
+<body class="timo-layout-page">
+<div class="layui-card">
+    <div class="layui-card-header timo-card-header">
+        <span style="font-size: 24px;font-weight: bolder">量表测评预约</span>
+        <i class="layui-icon layui-icon-refresh refresh-btn"></i>
+    </div>
+    <div class="layui-card-body">
+        <div class="layui-row timo-card-screen put-row">
+            <div class="pull-left layui-form-pane timo-search-box">
+            </div>
+            <div class="pull-right screen-btn-group">
+                <div class="btn-group-left">
+                </div>
+                <div class="btn-group-right">
+                    <button class="layui-btn open-popup" data-title="测评量表预约" th:attr="data-url=@{/system/consultRese/addScaleRese}"
+                             data-size="1000,600">
+                        <i class="fa fa-plus"></i> 添加预约
+<!--                        shiro:hasPermission="system:assessmentPlan:add"-->
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="timo-table-wrap">
+            <table class="layui-table timo-table" >
+                <thead >
+                <tr>
+                    <th style="text-align: center" class="sortable" data-field="title">预约主体</th>
+                    <th style="text-align: center" class="sortable" data-field="scaleNumber">预约地点</th>
+                    <th style="text-align: center" class="sortable" data-field="satrTime">预约日期</th>
+                    <th style="text-align: center" class="sortable" data-field="satrTime">预约时间</th>
+                    <th style="text-align: center" class="sortable" data-field="createUser">状态</th>
+                    <th style="text-align: center" >操作</th>
+                    <!--<th>状态</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                    <tr style="text-align: center" th:each="item:${list}">
+                        <td th:text="${item.visitor}">研发部</td>
+                        <td th:text="${item.site}">心理中心302</td>
+                        <td th:text="${item.resDate}">2020-05-01</td>
+                        <td th:text="${item.resTime}">2020-05-01</td>
+                        <td th:switch="${item.state}">
+                            <span th:case="1">已预约</span>
+                            <span th:case="2">已完成</span>
+                            <span th:case="3">已过期</span>
+                        </td>
+                        <td>
+                            <a class="open-popup" data-title="测评量表预约详情" th:attr="data-url=@{'/system/consultRese/scaleReseDetail/'+${item.id}}"
+                               href="#">详细</a>
+<!--                            shiro:hasPermission="system:assessmentPlan:detail"-->
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:replace="/common/fragment :: page"></div>
+    </div>
+</div>
+<script th:replace="/common/template :: script"></script>
+<script type="text/javascript" th:src="@{/js/plugins/jquery-2.2.4.min.js}"></script>
+<script type="text/javascript" th:src="@{/lib/zTree_v3/js/jquery.ztree.core.min.js}"></script>
+<!--<script type="text/javascript" th:src="@{/js/timoTree.js}"></script>-->
+<script type="text/javascript">
+    var topic = $(".detail");
+    for(var i=0;i<topic.size();i++){
+        topic.eq(i).attr("href",topic.eq(i).data('url'));
+    }
+    var local = window.localStorage;
+    // 树形菜单
+    // $.fn.selectTree({
+    //     rootTree: '全部',
+    //     onSelected: function (treeNode) {
+    //         local.setItem('deptTitle', treeNode.name);
+    //
+    //     }
+    // });
+</script>
+</body>
+</html>

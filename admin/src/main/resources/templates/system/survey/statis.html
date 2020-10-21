@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:mo="https://gitee.com/aun/Timo"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:replace="/common/template :: header(~{::title},~{::link},~{::style})">
+    <link rel="stylesheet" th:href="@{/lib/zTree_v3/css/zTreeStyle/zTreeStyle.css}" type="text/css">
+</head>
+<body class="timo-layout-page">
+<div class="layui-card">
+    <div class="layui-card-header timo-card-header">
+        <span><i class="fa fa-bars"></i>题目表</span>
+        <i class="layui-icon layui-icon-refresh refresh-btn"></i>
+    </div>
+    <div class="layui-card-body">
+        <div class="layui-row timo-card-screen put-row">
+            <div class="pull-left layui-form-pane timo-search-box">
+                <!--<div class="layui-inline">-->
+                <!--<label class="layui-form-label">状态</label>-->
+                <!--<div class="layui-input-block timo-search-status">-->
+                <!--<select class="timo-search-select" name="status" mo:dict="SEARCH_STATUS"-->
+                <!--mo-selected="${param.status}"></select>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--<div class="layui-inline">-->
+                <!--<label class="layui-form-label">所在部门</label>-->
+                <!--<div class="layui-input-block">-->
+                <!--<input class="layui-input select-tree"-->
+                <!--th:attr="data-url=@{/system/dept/list}, data-value=${dept?.id}" th:value="${dept?.title}"-->
+                <!--type="text" name="dept" placeholder="请选择部门">-->
+                <!--</div>-->
+                <!--</div>-->
+                <div class="layui-inline">
+                    <label class="layui-form-label">标题</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="searchText" th:value="${param.title}" placeholder="请输入标题"
+                               autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <!--<div class="layui-inline">-->
+                <!--<label class="layui-form-label">用户昵称</label>-->
+                <!--<div class="layui-input-block">-->
+                <!--<input type="text" name="nickname" th:value="${param.nickname}" placeholder="请输入用户昵称"-->
+                <!--autocomplete="off" class="layui-input">-->
+                <!--</div>-->
+                <!--</div>-->
+                <div class="layui-inline">
+                    <button class="layui-btn timo-search-btn">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="pull-right screen-btn-group">
+                <div class="btn-group-left">
+                    <!--<button class="layui-btn open-popup-param" data-title="修改密码" th:attr="data-url=@{/system/user/pwd}"-->
+                    <!--shiro:hasPermission="system:user:pwd" data-size="456,242">-->
+                    <!--<i class="fa fa-refresh"></i> 修改密码-->
+                    <!--</button>-->
+                    <!--<button class="layui-btn open-popup-param" data-type="radio" data-title="角色分配"-->
+                    <!--th:attr="data-url=@{/system/user/role}" shiro:hasPermission="system:user:role"-->
+                    <!--data-size="480,400">-->
+                    <!--<i class="fa fa-user-secret"></i> 角色分配-->
+                    <!--</button>-->
+                </div>
+                <div class="btn-group-right">
+                    <a  href="javascript:;" onclick="javascript:history.go(-1);"   >
+                        <button class="layui-btn" data-title="返回问卷调查"  >
+                            <i class="fa fa-plus"></i> 返回
+                        </button>
+                    </a>
+                    <!--<button class="layui-btn open-popup" data-title="添加类型" th:attr="data-url=@{'/system/contentTopic/add/'+${scaleId}+'/'+${superior}}"-->
+                            <!--shiro:hasPermission="system:contentTopic:add" data-size="max">-->
+                        <!--<i class="fa fa-plus"></i> 添加-->
+                    <!--</button>-->
+                    <!--<div class="btn-group" shiro:hasPermission="system:user:status">-->
+                    <!--<button class="layui-btn">操作<span class="caret"></span></button>-->
+                    <!--<dl class="layui-nav-child layui-anim layui-anim-upbit">-->
+                    <!--<dd><a class="ajax-status" th:href="@{/system/user/status/ok}">启用</a></dd>-->
+                    <!--<dd><a class="ajax-status" th:href="@{/system/user/status/freezed}">冻结</a></dd>-->
+                    <!--<dd><a class="ajax-status" th:href="@{/system/user/status/delete}">删除</a></dd>-->
+                    <!--</dl>-->
+                    <!--</div>-->
+                </div>
+            </div>
+        </div>
+        <div class="timo-table-wrap">
+            <table class="layui-table timo-table">
+                <thead>
+                <tr>
+                    <th class="timo-table-checkbox">
+                        <label class="timo-checkbox"><input type="checkbox">
+                            <i class="layui-icon layui-icon-ok"></i></label>
+                    </th>
+                    <th class="sortable" data-field="id">编号</th>
+                    <th class="sortable" data-field="userName">姓名</th>
+                    <!--<th class="sortable" data-field="scaleId">量表id</th>-->
+                    <th class="sortable" data-field="calculateTime">开始时间</th>
+                    <th class="sortable" data-field="answerRequired">答题时长</th>
+                    <th class="sortable" data-field="getNumber">是否参与统计</th>
+                    <!--<th class="sortable" data-field="score">分数</th>-->
+                    <!--<th class="sortable" data-field="warnScope">分数预警范围</th>-->
+                    <!--<th>状态</th>-->
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item:${list}">
+                    <td><label class="timo-checkbox"><input type="checkbox" th:value="${item.id}">
+                        <i class="layui-icon layui-icon-ok"></i></label></td>
+                    <td th:text="${item.id}">题目编号</td>
+                    <td th:text="${item.userName}">姓名</td>
+                    <!--<td th:text="${item.scaleId}">量表id</td>-->
+                    <td th:text="${item.calculateTime}">开始时间</td>
+                    <td th:text="${item.answerRequired}">答题时长</td>
+                    <td th:text="${item.getNumber==0?'不计入统计(包含)':'计入统计(排除)'}" style="cursor:pointer; text-decoration:underline; font-weight: bold; " th:onclick="updateQueSS([[${item}]])">是否参与统计</td>
+                    <!--<td th:text="${item.score}">分数</td>-->
+                    <!--<td th:text="${item.warnScope}">分数预警范围</td>-->
+                    <!--<td th:text="${#dicts.dataStatus(item.status)}">状态</td>-->
+                    <td>
+                        <a class="open-popup" data-title="记录详情" th:attr="data-url=@{'/system/question/quesRecord/'+${item.id}}"
+                           shiro:hasPermission="system:question:quesRecord"
+                           data-size="max" href="#">记录详情</a>
+
+                        <!--<a class="open-popup" data-title="编辑选项" th:attr="data-url=@{'/system/contentTopic/addOption/'+${item.id}}"-->
+                        <!--shiro:hasPermission="system:contentTopic:addOption"-->
+                        <!--data-size="800,600" href="#">选项</a>-->
+
+                        <!--<a class="ajax-get" th:attr="data-msg='您是否删除'"-->
+                           <!--th:href="@{/system/user/status/delete(ids=${item.id})}"-->
+                           <!--shiro:hasPermission="system:scaleTable:status">删除</a>-->
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:replace="/common/fragment :: page"></div>
+    </div>
+</div>
+<script th:replace="/common/template :: script"></script>
+<script type="text/javascript" th:src="@{/js/plugins/jquery-2.2.4.min.js}"></script>
+<script type="text/javascript" th:src="@{/lib/zTree_v3/js/jquery.ztree.core.min.js}"></script>
+<!--<script type="text/javascript" th:src="@{/js/timoTree.js}"></script>-->
+<script type="text/javascript">
+    var local = window.localStorage;
+
+
+    function  updateQueSS(item) {
+        $.get("/system/question/updateNumber",{id:item.id,getNumber:item.getNumber},function (req) {
+            // console.log(req)
+            $.fn.Messager(req);
+        });
+    }
+    // 树形菜单
+    // $.fn.selectTree({
+    //     rootTree: '全部',
+    //     onSelected: function (treeNode) {
+    //         local.setItem('deptTitle', treeNode.name);
+    //
+    //     }
+    // });
+</script>
+</body>
+</html>

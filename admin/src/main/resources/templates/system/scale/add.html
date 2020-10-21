@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/common/template :: header(~{::title},~{::link},~{::style})">
+</head>
+<body>
+<div class="layui-form timo-compile">
+    <form th:action="@{/system/scale/save}">
+        <div class="layui-form-item timo-finally">
+            <div style="display: flex; flex-direction:row-reverse; ">
+                <button class="layui-btn ajax-submit"><i class="fa fa-check-circle"></i> 保存</button>
+            </div>
+            <!--<button class="layui-btn btn-secondary close-popup"><i class="fa fa-times-circle"></i> 关闭</button>-->
+        </div>
+        <input type="hidden" name="id" th:if="${scale}" th:value="${scale.id}"/>
+        <div class="layui-form-item">
+            <label class="layui-form-label required">量表标题</label>
+            <div class="layui-input-inline"  style="width: 600px;">
+                <input class="layui-input" type="text" name="title" placeholder="量表标题" th:value="${scale?.title}">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label required">量表别名</label>
+            <div class="layui-input-inline"  style="width: 600px;">
+                <input class="layui-input" type="text" name="alias" placeholder="量表别名" th:value="${scale?.alias}">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label required">唯一编号</label>
+            <div class="layui-input-inline"  style="width: 600px;">
+                <input class="layui-input" type="text" name="onlyNo" placeholder="唯一编号" th:value="${scale?.onlyNo}">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">量表类别</label>
+            <div class="layui-input-inline"  style="width: 600px;">
+                <input type="hidden" id="scaleTypeId" th:value="${scale?.scaleTypeId}">
+                <select class="select-type" name="scaleTypeId"
+                        th:attr="data-url=@{/system/scale/scaleTypeList} " lay-filter="testSelect"
+                        lay-verify="sort"></select>
+                <input type="hidden" name="scaleTypeName" id="scaleTypeName" th:value="${scale?.scaleTypeName}">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">是否添加因子分组</label>
+            <div class="layui-input-inline"  style="width: 600px;">
+                <select class="" name="isGroup">
+                    <option value=1>添加</option>
+                    <option value=0>不添加</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label required">量表说明</label>
+            <div class="layui-input-inline"  style="width: 600px;">
+                <textarea class="layui-textarea" name="info" placeholder="量表说明"  >[[${scale?.info}]]</textarea>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label required">测评指导语</label>
+            <div class="layui-input-inline"  style="width: 600px;" >
+                <textarea class="layui-textarea" name="instruction" placeholder="测评指导语"  >[[${scale?.instruction}]]</textarea>
+            </div>
+        </div>
+
+        <div id="summaryAll">
+            <th:block th:each="item,itemStat : ${summaries}">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">分数范围</label>
+                    <div class="layui-input-inline"   >
+                        <div style=" display: flex; justify-content : space-between; ">
+                            <input class="layui-input" type="number" name="grade1" oninput="summaryGradesPrior(this)"
+                                   th:value="${(item.grade.substring(0,item.grade.indexOf('-')))}">
+                            <input class="layui-input grades" type="number" name="grade2"
+                                   oninput="summaryGradesAfter(this)"
+                                   th:value="${item.grade.substring(item.grade.indexOf('-' )+1)}">
+                            <input type="hidden" name="grade" th:value="${item.grade}">
+                        </div>
+                        <div style="display: flex; justify-content: space-between; width: 1200px ;">
+                            <textarea placeholder="结论" style="width:550px;" class="layui-textarea" name="contentSummary">[[${item.contentSummary}]]</textarea>
+                            <div>
+                                <label style="color: rgba(255,3,0,0.74);">辅导建议</label>
+                                <textarea placeholder="辅导建议" style="width:550px;" class="layui-textarea" name="suggest">[[${item.suggest}]]</textarea>
+                            </div>
+                        </div>
+
+                        <button type="button" class="layui-btn" onclick="remOption(this)" style="background-color: #f7a54a; border-color: #f7a54a; color: #FFFFFF; margin-top: 10px;"><i class="fa fa-remove"></i></button>
+                    </div>
+                </div>
+            </th:block>
+
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <div class="layui-input-inline">
+                <button class="layui-btn" type="button" id="addSummary" data-title="添加结论">
+                    <i class="fa fa-plus"></i> 添加结论
+                </button>
+            </div>
+        </div>
+
+        <!--<div class="layui-form-item layui-form-text">-->
+        <!--<label class="layui-form-label">备注</label>-->
+        <!--<div class="layui-input-block">-->
+        <!--<textarea placeholder="请输入内容" class="layui-textarea" name="note">[[${scaleTable?.note}]]</textarea>-->
+        <!--</div>-->
+        <!--</div>-->
+
+    </form>
+</div>
+<script th:replace="/common/template :: script"></script>
+<script type="text/javascript" th:src="@{/js/plugins/jquery-2.2.4.min.js}"></script>
+<script type="text/javascript" th:src="@{/lib/zTree_v3/js/jquery.ztree.core.min.js}"></script>
+<script type="text/javascript">
+    layui.use(['form'], function () {
+        window.form = layui.form;
+        // 初始化排序下拉选项
+        scaleTypeRender($("#scaleTypeId").val());
+        window.form.on('select(testSelect)', function (data) {
+            // console.log(data.elem); //得到select原始DOM对象
+            // console.log(data.value); //得到被选中的value
+            $("#scaleTypeName").val($(data.elem).find("option:selected").text())
+            form.render('select');//select是固定写法 不是选择器
+        });
+    });
+
+    // 更新渲染排序下拉选项
+    function scaleTypeRender(seelectedType) {
+        var sort = $(".select-type");
+        var url = sort.data('url');
+        $.get(url, function (result) {
+            var options = '';
+            var sortNum = Object.keys(result).length;
+            result[0] = "请选择";
+            for (var key in result) {
+                if (seelectedType === key) {
+                    options += "<option value='" + key + "' selected>" + result[key] + "</option>";
+                } else {
+                    options += "<option value='" + key + "'>" + result[key] + "</option>";
+                }
+            }
+            sort.html(options);
+            form.render('select');
+        });
+    }
+    var summary = " <div class=\"layui-form-item\"> " +
+        "                <label class=\"layui-form-label\">分数范围</label> " +
+        "                <div class=\"layui-input-inline\"> " +
+        "                    <div style=\" display: flex; justify-content : space-between; \"> " +
+        "                        <input   class=\"layui-input\"  type=\"number\" oninput='summaryGradesPrior(this)' name=\"grade1\"   value='0'  > " +
+        "                        <input  class=\"layui-input grades\"  type=\"number\" oninput=\"summaryGradesAfter(this)\"  name=\"grade2\"   value='0' > " +
+        "                        <input type=\"hidden\" th:value=\"0-0\" name=\"grade\"> " +
+        "                    </div> " +
+        "                    <div style=\"display: flex; justify-content: space-between; width: 1200px ;\"> " +
+        "                            <textarea placeholder=\"结论\" style=\"width:550px;\" class=\"layui-textarea\" name=\"contentSummary\"> </textarea> " +
+        "                            <div> " +
+        "                                <label style=\"color: rgba(255,3,0,0.74);\">辅导建议</label> " +
+        "                                <textarea placeholder=\"辅导建议\" style=\"width:550px;\" class=\"layui-textarea\" name=\"suggest\"> </textarea> " +
+        "                            </div> " +
+        "                        </div>   " +
+            " <button type=\"button\" class=\"layui-btn\" onclick=\"remOption(this)\" style=\"background-color: #f7a54a; border-color: #f7a54a; color: #FFFFFF; margin-top: 10px;\"><i class=\"fa fa-remove\"></i></button> "+
+        "                </div> " +
+        "            </div> ";
+
+
+    $("#addSummary").click(function () {
+
+        $("#summaryAll").append(summary);
+    });
+    // $('.grades').on('input propertychange', function() {
+    //     console.log($(this).val()+">>K")
+    //     $(this).next().val($(this).prev().val()+"-"+$(this).val());
+    // });
+    function summaryGradesAfter(e) {
+        $(e).next().val($(e).prev().val() + "-" + $(e).val());
+    }
+
+    function summaryGradesPrior(e) {
+        $(e).next().next().val($(e).val() + "-" + $(e).next().val());
+    }
+
+    function remOption(e) {
+        $(e).parent().parent().remove();
+    }
+</script>
+</body>
+</html>

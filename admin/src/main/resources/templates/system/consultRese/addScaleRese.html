@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:mo="https://gitee.com/aun/Timo">
+<head th:replace="/common/template :: header(~{::title},~{::link},~{::style})">
+    <link rel="stylesheet" th:href="@{/lib/zTree_v3/css/zTreeStyle/zTreeStyle.css}" type="text/css">
+</head>
+<body>
+<div class="layui-form timo-compile">
+    <form th:action="@{/system/consultRese/saveScaleAsseRese}" method="post">
+        <!--        <input type="hidden" name="id" th:if="${user}" th:value="${user.id}"/>-->
+        <div class="layui-form-item">
+            <label class="layui-form-label required" style="width: 120px">预约人(部门)</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" name="visitor" id="visitor" type="text"  placeholder="请在下方选择预约人或预约部门"  readonly>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label " style="width: 120px">预约人</label>
+            <div class="layui-input-inline">
+                <select name="" id="reseUser" lay-filter="user" >
+                    <option value="">请选择</option>
+                    <option th:each="j:${users}" th:text="${j['nickname']}" th:value="${j['nickname']}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label " style="width: 120px">预约部门</label>
+            <div class="layui-input-inline">
+                <select name="" id="dept" lay-filter="dept" value="1">
+                    <option value="">请选择</option>
+                    <option th:each="j:${depts}" th:text="${j.title}" th:value="${j.title}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label " style="width: 120px">预约日期</label>
+            <div class="layui-input-inline">
+                <input type="text" autocomplete="off" id="resDate" name="resDate" class="layui-input" >
+            </div>
+        </div>
+        <div class="layui-form-item" >
+            <label class="layui-form-label required" style="width: 120px">咨询师</label>
+            <div class="layui-input-inline">
+                <select name="counId" id="counselorId">
+                    <option value="">请选择</option>
+                    <option th:each="x:${counselor}" th:text="${x['nickname']}" th:value="${x['id']}"></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label " style="width: 120px">预约时间</label>
+            <div class="layui-input-inline">
+                <select name="resTime" id="resTime">
+                    <option value="">请选择</option>
+                    <option value="09:00">09:00</option>
+                    <option value="10:00">10:00</option>
+                    <option value="11:00">11:00</option>
+                    <option value="12:00">12:00</option>
+                    <option value="14:00">14:00</option>
+                    <option value="15:00">15:00</option>
+                    <option value="16:00">16:00</option>
+                    <option value="17:00">17:00</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required" style="width: 120px">咨询地点</label>
+            <div class="layui-input-inline">
+                <!--                <input class="layui-input" type="text" name="realName" >
+                -->
+                <select name="site" id="site">
+                    <option value="">请选择</option>
+                    <option th:each="i:${sites}" th:text="${i}" th:value="${i}"></option>
+                    <!--                    <option>默认地点</option>-->
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item timo-finally">
+            <button class="layui-btn ajax-submit" id="btn-sub"><i class="fa fa-check-circle"></i> 添加</button>
+            <button class="layui-btn btn-secondary close-popup"><i class="fa fa-times-circle"></i> 取消</button>
+        </div>
+    </form>
+</div>
+<script th:replace="/common/template :: script"></script>
+<script type="text/javascript" th:src="@{/js/plugins/jquery-2.2.4.min.js}"></script>
+<script type="text/javascript" th:src="@{/lib/zTree_v3/js/jquery.ztree.core.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/timoTree.js}"></script>
+<script type="text/javascript">
+    // 树形菜单
+    $.fn.selectTree();
+    var star;
+    var end;
+    // 时间选择
+    layui.use('laydate',function () {
+        var lauyiDate = layui.laydate;
+        lauyiDate.render({
+            elem:"#resDate",
+            min:-0
+        })
+    })
+    $("#btn-sub").click(function () {
+        return checkData();
+    })
+    layui.use(['form'], function () {
+        var form = layui.form;
+        form.on('select(user)', function(data){
+            $("#visitor").val(data.value)
+            $("#dept").val("")
+            layui.form.render('select')
+           // layui.layer.msg(data.value);//得到被选中的值
+           // layui.layer.msg(data.elem); //得到select原始DOM对象
+        })
+        form.on('select(dept)', function(data){
+            $("#visitor").val(data.value)
+            $("#reseUser").val("")
+            layui.form.render('select')
+        })
+    })
+    function checkData() {
+        if ($("#visitor").val()==""){
+            alert("请选择预约人或部门")
+            return false;
+        }
+        if ($("#resDate").val()==""){
+            alert("请选择预约日期")
+            return false;
+        }
+        if ($("#counselorId").val()==""){
+            alert("请选择咨询师")
+            return false;
+        }
+        if ($("#resTime").val()==""){
+            alert("请选择预约时间")
+            return false;
+        }
+        if ($("#site").val()==""){
+            alert("请选择预约地点")
+            return false;
+        }
+        return true
+    }
+</script>
+</body>
+</html>

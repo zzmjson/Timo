@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>测评计划-德宝心理咨询中心</title>
+
+    <!-- Bootstrap -->
+    <link href="../css/bootstrap.css" rel="stylesheet">
+
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    [endif]-->
+    <style type="text/css">
+      @media only screen and (max-width: 1144px) {
+            /* 隐藏大屏菜单 */
+            /* #top_menu_for_large {
+                display: none;
+            } */
+            /* 主要页面内容 */
+            /* .main.content {
+                margin-top: 5em;
+            } */
+      }
+     /* 大屏显示 */
+     @media only screen and (min-width: 1145px) {
+            /* 隐藏小屏菜单 */
+            /* #top_menu_for_small {
+                display: none;
+            } */
+      }   
+      
+      body{
+        font-size: 0;
+      }
+      .ass-title{
+        width: 1000px;
+        height: 60px;
+        margin: 30px auto;
+      }
+      .ass-title img{
+        width: 50px;
+        margin-right: 20px;
+        vertical-align: middle;
+      }
+      .ass-title span{
+        font-size: 30px;
+        font-weight: bolder;
+        vertical-align: middle;
+      }
+      table{
+        width: 1000px;
+        font-size: 15px;
+        border-radius: 5px;
+        border-top: 1px solid #DEDEDE;
+        border-left: 1px solid #DEDEDE;
+        border-right: 1px solid #DEDEDE;
+        border-bottom: 1px solid #DEDEDE;
+      }
+      .ass-table{
+        width: 1000px;
+        margin: 10px auto;
+        
+      }
+      table thead{
+        font-size: 15px;
+        font-weight: bolder;
+        background-color: #F9FAFB;
+      }
+      table tfoot{
+        background-color: #F9FAFB;
+        color: #808080;
+      }
+      th{
+        height: 3em;
+        text-align: center;
+      }
+      td{
+        height: 4em;
+        text-align: center;
+        border-top: 1px solid #DEDEDE;
+      }
+      tfoot td{
+        height: 3em;
+        
+      }
+      thead td{
+        height: 3em;
+      }
+      .btn-wid{
+        width: 150px;
+      }
+      .cen{
+        text-align: center;
+      }
+    </style>
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="/js/jquery-3.4.1.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="/js/bootstrap.js"></script>
+    <script>
+      $(function () {
+        $("#head").load("header.html")
+      })
+    </script>
+  </head>
+  <body>
+    <div id="top_menu_for_large">
+      <header id="head"></header>
+    <div class="ass-title">
+      <img src="../images/img/book.png">
+      <span>测评计划</span>
+    </div>
+    <div class="ass-table">
+      <table>
+        <thead>
+          <tr style="background-color: #00B7A6;color: white">
+            <th class="cen">量表标题</th>
+            <th class="cen">题目数量</th>
+            <th class="cen">答题限制时间</th>
+            <th class="cen">操作</th>
+          </tr>
+        </thead>
+        <tbody id="wrapper">
+
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="4">已经是最后一条了~</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+    <script>
+      //获取路径参数传参
+      function queryString(name) {
+        var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        var r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  unescape(r[2]); return null;
+      }
+      var param = queryString("asseId")
+      function loadDate(){
+        $.ajax({
+          url:"/front/getScales",
+          type:"get",
+          data:{"assId":param},
+          dataType:"json",
+          success:function (json) {
+            // console.log(json.data)
+            for(var item of json.data){
+              var line = "<tr><td>"+item.title+"</td><td>"+item.number+"</td><td>无限制</td><td>" ;
+              console.log(item.state+"?>>")
+              if(item.state=="是"){
+                line+= " <button type='button' value='"+item.id+"'  style=' background-color: white; color:black;' class='btn btn-primary btn-wid'>已完成</button></td></tr>"
+              }else {
+                line+=" <button type='button' value='"+item.id+"' class='btn btn-primary btn-wid join'>进入答题</button></td></tr>"
+              }
+
+              $("#wrapper").append(line)
+            }
+          }
+        })
+      }
+      $("#wrapper").delegate(".join","click",function () {
+        // confirm("tongyi")
+        window.location="showScale.html?scaleId="+$(this).val()+"&assId="+param
+      })
+      $(function () {
+        loadDate()
+      })
+    </script>
+  </body>
+</html>

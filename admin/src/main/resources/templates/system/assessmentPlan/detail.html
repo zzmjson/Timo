@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:mo="https://gitee.com/aun/Timo"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:replace="/common/template :: header(~{::title},~{::link},~{::style})">
+    <link rel="stylesheet" th:href="@{/lib/zTree_v3/css/zTreeStyle/zTreeStyle.css}" type="text/css">
+    <style>
+        .tab-p{
+            display: inline-block;
+            font-size: 16px;
+            line-height: 40px;
+            height: 40px;
+        }
+        .tab-ind{
+            /*text-indent: 2em;*/
+            width: 120px;
+            text-align: right;
+        }
+        .info-wrapper{
+            width: 400px;
+            margin-left: 200px;
+        }
+        .clo-hide{
+            text-indent: 2em;
+        }
+    </style>
+</head>
+<body class="timo-layout-page">
+<div class="layui-card">
+    <div class="layui-card-header timo-card-header">
+        <i class="layui-icon layui-icon-refresh refresh-btn"></i>
+    </div>
+    <div class="layui-card-body">
+        <div class="layui-row timo-card-screen put-row">
+            <div class="pull-left layui-form-pane timo-search-box">
+
+            </div>
+            <div class="pull-right screen-btn-group">
+                <div class="btn-group-left">
+                </div>
+            </div>
+        </div>
+        <div class="timo-table-wrap">
+            <h2>测评计划的基本信息</h2>
+<!--            <i class="refresh-btn">刷新</i>-->
+            <div class="btn-group-right" style="float: right;margin-bottom: 10px">
+                <button class="layui-btn rest" data-title="详情" style="background: #215fb4">
+                    <i class="fa fa-reply"></i> 返回
+                </button>
+<!--                shiro:hasPermission="system:assessmentPlan:add"-->
+            </div>
+            <hr style="height: 1px;background: #555555">
+            <div class="info-wrapper">
+                <div>
+                    <p class="tab-ind tab-p">计划标题：</p>
+                    <P class="tab-p clo-hide" th:text="${item.title}">计划标题</P>
+
+                </div>
+                <div>
+                    <p class="tab-ind tab-p">开始时间：</p>
+                    <P class="tab-p clo-hide" th:text="${item.starTime}">开始时间</P>
+                </div>
+                <div>
+                    <p class="tab-ind tab-p">结束时间：</p>
+                    <P class="tab-p clo-hide" th:text="${item.endTime}">结束时间</P>
+                </div>
+                <div>
+                    <p class="tab-ind tab-p">添加人：</p>
+                    <P class="tab-p clo-hide" th:text="${item.createUser}">添加人</P>
+                </div>
+                <div>
+                    <p class="tab-ind tab-p">添加日期：</p>
+                    <P class="tab-p clo-hide" th:text="${#dates.format(item.createDateTime,'yyyy-MM-dd hh:mm')}">添加日期</P>
+                </div>
+            </div>
+            <h2>测评计划所包含的量表</h2>
+            <hr style="height: 1px;background: #555555">
+<!--            <i class="layui-icon layui-icon-refresh refresh-btn"></i>-->
+
+            <div class="btn-group-right" style="float: right;margin-bottom: 10px">
+                <button class="layui-btn refresh-btn" style="background: #337AB7">
+                    <i class="layui-icon layui-icon-refresh"></i> 刷新列表
+<!--                    shiro:hasPermission="system:assessmentPlan:add"-->
+                </button>
+                <button class="layui-btn open-popup" data-title="添加量表" th:attr="data-url=@{/system/assessmentPlan/detail/addScale(assId=${assId})}"
+                         data-size="1000,600">
+                    <i class="fa fa-plus"></i> 添加量表
+<!--                    shiro:hasPermission="system:assessmentPlan:add"-->
+                </button>
+                <button class="layui-btn " style="background: #F0AD4E" id="remove">
+                    <i class="fa fa-trash"></i> 删除量表
+<!--                    shiro:hasPermission="system:assessmentPlan:add"-->
+                </button>
+            </div>
+            <table class="layui-table timo-table" style="width: 100%">
+                <thead >
+                <tr>
+                    <th class="timo-table-checkbox">
+                        <label class="timo-checkbox"><input type="checkbox">
+                            <i class="layui-icon layui-icon-ok"></i></label>
+                    </th>
+                    <th style="text-align: center;" class="sortable" data-field="id">量表名称</th>
+<!--                    <th style="text-align: center;width: 100px" class="sortable" data-field="starTime">题目数</th>-->
+                    <th style="text-align: center;width:100px" class="sortable" data-field="state">量表状态</th>
+                    <th style="text-align: center;width: 100px">操作</th>
+                </tr>
+                </thead>
+                <tbody style="text-align: center">
+                    <tr th:each="it:${scales}">
+                        <td><label class="timo-checkbox"><input name="check"   type="checkbox" th:value="${it.id}">
+                            <i class="layui-icon layui-icon-ok"></i></label></td>
+                        <td th:text="${it.title}" style="text-align: left">显示名称</td>
+<!--                        <td>11</td>-->
+                        <td th:text="${it.state==1?'已发布':''}">量表状态</td>
+                        <td>
+                            <a class="open-popup" data-title="编辑量表" th:attr="data-url=@{'/system/scale/edit/'+${it.id}}"
+                               data-size="600,570" href="#">编辑</a>
+<!--                            shiro:hasPermission="system:scale:edit"-->
+                            <a class="ajax-get" data-msg="您是否确认删除" th:href="@{/system/assessmentPlan/deleteScale(assId=${assId},scaleId=${it.id})}"
+                               >删除</a>
+<!--                            shiro:hasPermission="system:assessmentPlan:delete"-->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <h2 style="margin-top: 40px">测评计划对用户的筛选条件</h2>
+            <hr style="height: 1px;background: #555555">
+            <div class="btn-group-right" style="float: right;margin-bottom: 10px">
+                <button class="layui-btn refresh-btn" style="background: #337AB7">
+                    <i class="layui-icon layui-icon-refresh"></i> 刷新列表
+<!--                    shiro:hasPermission="system:assessmentPlan:add"-->
+                </button>
+                <button class="layui-btn open-popup" data-title="添加条件" th:attr="data-url=@{/system/assessmentPlan/detail/addPerList(assId=${assId})}"
+                        data-size="1000,600">
+                    <i class="fa fa-plus"></i> 添加条件
+<!--                    shiro:hasPermission="system:assessmentPlan:add"-->
+                </button>
+            </div>
+            <table class="layui-table timo-table" >
+                <thead >
+                <tr>
+<!--                    <th style="text-align: center;width: 100px" class="sortable">编号</th>-->
+                    <th style="text-align: center" class="sortable" data-field="id">拥有权限部门</th>
+                    <th style="text-align: center" class="sortable" data-field="starTime">拥有权限用户</th>
+                    <th style="text-align: center;width: 100px">操作</th>
+                </tr>
+                </thead>
+
+                <tbody style="text-align: center">
+                    <tr th:each="ele:${permission}">
+<!--                        <td th:text="${eleStat.count}"></td>-->
+                        <td th:text="${ele.get('map').get('deptName')==''?'':ele.get('map').get('deptName')}"></td>
+                        <td th:text="${ele.get('map').get('nickname')}"></td>
+                        <td>
+                            <a class="ajax-get" data-msg="您是否确认删除"
+                               th:href="@{/system/assessmentPlan/deletePerList(assId=${assId},type=${ele.get('map').get('type')},deptName=${ele.get('map').get('deptName')},nickname=${ele.get('map').get('nickname')})}"
+                               >删除</a>
+<!--                            shiro:hasPermission="system:assessmentPlan:delete"-->
+                        </td>
+                    </tr>
+<!--                    <tr th:each="it,itStat:${scales}">-->
+<!--                        <td th:text="${itStat.count}"></td>-->
+<!--                        <td th:text="${it.title}">显示名称</td>-->
+<!--                        <td th:text="${it.state==1?'已发布':''}">量表状态</td>-->
+<!--                        <td>-->
+<!--                            <a class="open-popup" data-title="编辑量表" th:attr="data-url=@{'/system/scale/edit/'+${it.id}}"-->
+<!--                               shiro:hasPermission="system:scale:edit"-->
+<!--                               data-size="600,570" href="#">编辑</a>-->
+<!--                            <a class="ajax-get" data-msg="您是否确认删除" th:href="@{/system/assessmentPlan/deleteScale(assId=${assId},scaleId=${it.id})}"-->
+<!--                               shiro:hasPermission="system:assessmentPlan:delete">删除</a>-->
+<!--                        </td>-->
+<!--                    </tr>-->
+                </tbody>
+            </table>
+        </div>
+        <span style="display: none"  id="assId" th:text="${assId}"></span>
+    </div>
+</div>
+<script th:replace="/common/template :: script"></script>
+<script type="text/javascript" th:src="@{/js/plugins/jquery-2.2.4.min.js}"></script>
+<script type="text/javascript" th:src="@{/lib/zTree_v3/js/jquery.ztree.core.min.js}"></script>
+<!--<script type="text/javascript" th:src="@{/js/timoTree.js}"></script>-->
+<script type="text/javascript">
+    $(function () {
+        // alert("页面加载完成")
+        // alert($("#assId").text())
+        // if ($("#assId").Text()==""){
+        //     alert($("#assId").text())
+        //     // window.location.reload();
+        // }
+    })
+    window.onload = function (ev) {
+    }
+    var topic = $(".addscale");
+    for(var i=0;i<topic.size();i++){
+        topic.eq(i).attr("href",topic.eq(i).data('url'));
+    }
+    $(".rest").click(function () {
+        window.location.href="/system/assessmentPlan/index"
+    })
+    var str="";
+    var assId=$("#assId").text();
+    var local = window.localStorage;
+    $("#remove").click(function () {
+        var items = document.getElementsByName("check")
+        var arr = items.length;
+        for(var i=0;i<arr;i++){
+            if (items[i].checked==true){
+                // console.log(items[i].value)
+                str+=items[i].value+',';
+            }
+        }
+        if (str==""){
+            alert("请至少选择一项移除！")
+            return false;
+        }
+        $.ajax({
+            url:"/system/assessmentPlan/deleteScale?assId="+assId+"&scaleId="+str,
+            type:"get",
+            dataType:"json",
+            success:function (json) {
+                if (json.code==200){
+                    // alert("删除成功！")
+                    window.location.reload();
+                }
+
+            }
+        })
+    })
+</script>
+</body>
+</html>

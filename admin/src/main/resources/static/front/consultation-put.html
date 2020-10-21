@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>在线咨询-德宝心理咨询中心</title>
+
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    [endif]-->
+    <style type="text/css">
+      body{
+        font-size: 0;
+      }
+      .ass-title{
+        width: 700px;
+        height: 60px;
+        margin: 30px auto;
+      }
+      .ass-title img{
+        width: 50px;
+        margin-right: 20px;
+        vertical-align: middle;
+      }
+      .ass-title span{
+        font-size: 30px;
+        font-weight: bolder;
+        vertical-align: middle;
+      }
+      .tab-wrapper{
+        width: 700px;
+        height: 400px;
+        margin: 20px auto;
+      }
+      .cop-tab{
+        width: 100%;
+        height: 100%;
+        border: 1px solid grey;
+        font-size: 16px;
+      }
+      .td-w-1{
+        width: 180px;
+      }
+      .tr-h{
+        height: 60px;
+      }
+      td{
+        text-indent: 1em;
+        border: 1px solid #DEDEDE;
+      }
+      input[type=text]{
+        width: 95%;
+        margin: 5px auto;
+        height: 50px;
+        border-radius: 5px;
+        border: 1px solid #DEDEDE;
+        text-indent: 1em;
+      }
+      select{
+        width: 95%;
+        margin: 10px auto;
+        height: 40px;
+        border-radius: 5px;
+        border: 1px solid #DEDEDE;
+        text-indent: 1em;
+      }
+      textarea{
+        width: 95%;
+        height: 200px;
+        margin: 10px auto;
+        border-radius: 5px;
+        border: 1px solid #DEDEDE;
+        text-indent: 0.5em;
+      }
+      .btn-sub{
+        width: 700px;
+        height: 50px;
+        margin: 10px auto;
+        color: white;
+        font-size: 24px;
+        font-weight: bolder;
+        text-align: center;
+        cursor: pointer;
+        background-color: #1BB23F;
+        border-radius: 5px;
+        line-height: 50px;
+      }
+    </style>
+
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="/js/jquery-3.4.1.js"></script>
+    <script>
+      $(function () {
+        $("#head").load("header.html")
+      })
+
+    </script>
+  </head>
+  <body>
+    <div id="top_menu_for_large">
+      <header id="head"></header>
+      <div class="ass-title">
+        <img src="../images/img/zaixianzixun.png">
+        <span>提交咨询</span>
+        <div style="clear: both;"></div>
+      </div>
+      <div class="tab-wrapper">
+        <table class="cop-tab" >
+          <tr class="tr-h">
+            <td class="td-w-1">咨询师</td>
+            <td>朴老师</td>
+          </tr>
+          <tr class="tr-h">
+            <td class="td-w-1">咨询主题</td>
+            <td>
+              <input type="text">
+            </td>
+          </tr>
+          <tr class="tr-h">
+            <td class="td-w-1">咨询类型</td>
+            <td>
+              <select>
+                <option>请选择</option>
+                <option>情感问题</option>
+                <option>学业问题</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td class="td-w-1">咨询类容</td>
+            <td>
+              <textarea>
+
+              </textarea>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="btn-sub" id="submit">
+        提交咨询
+      </div>
+    </div>
+
+
+  <script>
+    $("#submit").click(function () {
+      window.location.href="online-consult.html"
+    })
+  </script>
+
+  </body>
+</html>

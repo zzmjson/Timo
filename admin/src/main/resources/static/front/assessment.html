@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>参与测评-德宝心理咨询中心</title>
+
+    <!-- Bootstrap -->
+    <link href="../css/bootstrap.css" rel="stylesheet">
+
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    [endif]-->
+    <style type="text/css">
+      @media only screen and (max-width: 1144px) {
+            /* 隐藏大屏菜单 */
+            /* #top_menu_for_large {
+                display: none;
+            } */
+            /* 主要页面内容 */
+            /* .main.content {
+                margin-top: 5em;
+            } */
+      }
+     /* 大屏显示 */
+     @media only screen and (min-width: 1145px) {
+            /* 隐藏小屏菜单 */
+            /* #top_menu_for_small {
+                display: none;
+            } */
+      }   
+      
+      body{
+        font-size: 0;
+      }
+      .ass-title{
+        width: 1000px;
+        height: 60px;
+        margin: 30px auto;
+      }
+      .ass-title img{
+        width: 50px;
+        margin-right: 20px;
+        vertical-align: middle;
+      }
+      .ass-title span{
+        font-size: 30px;
+        font-weight: bolder;
+        vertical-align: middle;
+      }
+      table{
+        width: 1000px;
+        font-size: 15px;
+        border-radius: 5px;
+        border-top: 1px solid #DEDEDE;
+        border-left: 1px solid #DEDEDE;
+        border-right: 1px solid #DEDEDE;
+        border-bottom: 1px solid #DEDEDE;
+      }
+      .ass-table{
+        width: 1000px;
+        margin: 10px auto;
+        
+      }
+      table thead{
+        font-size: 15px;
+        font-weight: bolder;
+        background-color: #F9FAFB;
+      }
+      table tfoot{
+        background-color: #F9FAFB;
+        color: #808080;
+      }
+      th{
+        height: 30px;
+        text-align: center;
+      }
+      td{
+        height: 40px;
+        text-align: center;
+        border-top: 1px solid #DEDEDE;
+      }
+      tfoot td{
+        height: 30px;
+        
+      }
+      thead td{
+        height: 30px;
+      }
+    </style>
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="/js/jquery-3.4.1.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="/js/bootstrap.js"></script>
+    <script>
+      $(function () {
+        $("#head").load("header.html")
+      })
+    </script>
+  </head>
+  <body>
+    <div id="top_menu_for_large">
+      <header id="head">
+
+      </header>
+    <div class="ass-title">
+      <img src="../images/img/penpal.png">
+      <span style="color: #009688">参与测评</span>
+    </div>
+    <div class="ass-table">
+      <table border="1">
+        <thead >
+          <tr style="background-color: #00B7A6;color: white" >
+            <th style="text-align: center">测评计划名称</th>
+<!--            <th style="text-align: center">完成进度</th>-->
+            <th style="text-align: center">创建人</th>
+            <th style="text-align: center">截止日期</th>
+            <th style="text-align: center">操作</th>
+          </tr>
+        </thead>
+        <tbody id="ass-wrapper">
+<!--          <tr>-->
+<!--            <td>焦虑 抑郁</td>-->
+<!--            <td>2/2</td>-->
+<!--            <td>管理员</td>-->
+<!--            <td>2022-04-07</td>-->
+<!--            <td><button type="button" class="btn btn-primary join">进入计划</button></td>-->
+<!--          </tr>-->
+<!--          <tr>-->
+<!--            <td>高校心理健康筛查量表</td>-->
+<!--            <td>0/99</td>-->
+<!--            <td>管理员</td>-->
+<!--            <td>2020-05-31</td>-->
+<!--            <td><button type="button" class="btn btn-primary join">进入计划</button></td>-->
+<!--          </tr>-->
+<!--          <tr>-->
+<!--            <td>张槎中学试用(勿动)</td>-->
+<!--            <td>3/5</td>-->
+<!--            <td>管理员</td>-->
+<!--            <td>2020-08-20</td>-->
+<!--            <td><button type="button" class="btn btn-primary join">进入计划</button></td>-->
+<!--          </tr>-->
+
+        </tbody>
+        <tfoot>
+          <tr>
+            <td id="notnull" colspan="5">已经是最后一条了~</td>
+            <td id="null" colspan="5" style="display: none">暂无可用测评计划~</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+
+
+
+      <!-- 按钮触发模态框 -->
+<!--      <button class="btn btn-primary btn-lg" id="btn-mod" data-toggle="modal" data-target="#myModal">开始演示模态框</button>-->
+      <!-- 模态框（Modal） -->
+      <div class="modal fade" id="myModal" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+              <h4 class="modal-title" id="myModalLabel" style="font-size: 24px;font-weight: bolder"></h4>
+            </div>
+            <div class="modal-body" id="myModalContent" style="font-size: 16px;"></div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" id="btn-join">同意</button>
+              <button type="button" class="btn btn-default" id="btn-fal" data-dismiss="modal">不同意</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+      </div>
+
+
+      <script>
+        var assId = "";
+      $(function () {
+        // $("#myModal").modal('show')
+        $("#head").load("header.html")
+        loadDate()
+        loadTemplate()
+      })
+      function loadTemplate() {
+        $.ajax({
+          url:"/front/getAsseTemplate",
+          type:"get",
+          datatype:"json",
+          success:function (json) {
+            // console.log(json.data)
+            $("#myModalLabel").text(json.data['protocol_title'])
+            $("#myModalContent").text(json.data['protocol_content'])
+          }
+        })
+      }
+      function loadDate(){
+        $.ajax({
+          url:"/front/findAssessment",
+          type:"get",
+          datatype:"json",
+          success:function (json) {
+            // console.log(json.data)
+            if (json.data.length<1){
+              $("#notnull").hide()
+              $("#null").show()
+            }
+            for(var item of json.data){
+            // <td>"+"0"+"/"+item.scaleNumber+"</td>
+              var line ="<tr><td>"+item.title+"</td><td>"+item.createUser+"</td><td>"+item.endTime+"</td><td><button type='button' value='"+item.id+"'  class='btn btn-primary join' data-toggle='modal' data-target='#myModal'>进入计划</button></td></tr>"
+              $("#ass-wrapper").append(line)
+            }
+          }
+        })
+      }
+
+      $("#btn-sel").click(function(){
+        if($(".nav-select").css("display")=="none"){
+          $(".nav-select").show()
+        }
+        else{
+          $(".nav-select").hide()
+        }
+        
+      })
+      //不同意-回到首页
+      $("#btn-fal").click(function () {
+        window.location="index.html"
+
+      })
+      //同意-进入计划
+        $("#btn-join").click(function () {
+          window.location="ass-list.html?asseId="+assId
+        })
+      $("#ass-wrapper").delegate(".join","click",function () {
+        // $("#myModal").modal('show')
+        assId = $(this).val();
+
+        // window.location="ass-list.html?asseId="+$(this).val()
+      })
+      // $(".join").click(function(){
+      //   window.location="ass-list.html"
+      // })
+    </script>
+  </body>
+</html>

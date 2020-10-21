@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:mo="https://gitee.com/aun/Timo"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head th:replace="/common/template :: header(~{::title},~{::link},~{::style})">
+    <link rel="stylesheet" th:href="@{/lib/zTree_v3/css/zTreeStyle/zTreeStyle.css}" type="text/css">
+</head>
+<body class="timo-layout-page">
+<div class="layui-card">
+    <div class="layui-card-header timo-card-header">
+        <span><i class="fa fa-bars"></i>量表因子详情</span>
+        <i class="layui-icon layui-icon-refresh refresh-btn"></i>
+    </div>
+    <div class="layui-card-body">
+        <div class="layui-row timo-card-screen put-row">
+            <div class="pull-right screen-btn-group">
+                <div class="btn-group-right">
+                    <button class="layui-btn open-popup" data-title="添加用户" th:attr="data-url=@{'/system/group/add/'+${list.get(0).scaleId}}">
+                        <i class="fa fa-plus"></i> 添加分组
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="timo-table-wrap">
+            <table class="layui-table timo-table">
+                <thead>
+                <tr>
+                    <th class="sortable" data-field="nickname">序号</th>
+                    <th class="sortable" data-field="nickname">小组标题</th>
+                    <th class="sortable" data-field="nickname">是否参加统计</th>
+                    <th class="sortable" data-field="nickname">统计方式</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="item:${list}">
+                    <td th:text="${item.serial}"></td>
+                    <td th:text="${item.info}"></td>
+                    <td th:text="${item.isStat==1?'统计':'不统计'}"></td>
+                    <td th:text="${item.statType}"></td>
+
+                    <td>
+<!--                        <a class="open-popup" data-title="删除" th:attr="data-url=@{'/system/group/detail/'+${item['id']}}"-->
+<!--                           data-size="600,570" href="#">删除</a>-->
+                        <a class="open-popup" data-title="编辑" th:attr="data-url=@{'/system/group/edit/'+${item.id}}"
+                           data-size="600,570" href="#">编辑</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script th:replace="/common/template :: script"></script>
+<script type="text/javascript" th:src="@{/js/plugins/jquery-2.2.4.min.js}"></script>
+<script type="text/javascript" th:src="@{/lib/zTree_v3/js/jquery.ztree.core.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/timoTree.js}"></script>
+<script type="text/javascript">
+    var local = window.localStorage;
+    // 树形菜单
+    $.fn.selectTree({
+        rootTree: '全部',
+        onSelected: function (treeNode) {
+            local.setItem('deptTitle', treeNode.name);
+        }
+    });
+</script>
+</body>
+</html>

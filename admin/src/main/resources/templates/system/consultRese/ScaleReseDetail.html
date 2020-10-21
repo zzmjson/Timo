@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:mo="https://gitee.com/aun/Timo">
+<head th:replace="/common/template :: header(~{::title},~{::link},~{::style})">
+    <link rel="stylesheet" th:href="@{/lib/zTree_v3/css/zTreeStyle/zTreeStyle.css}" type="text/css">
+</head>
+<body>
+<div class="layui-form timo-compile">
+    <form th:action="@{/system/consultRese/saveScaleAsseRese}" method="post">
+        <!--        <input type="hidden" name="id" th:if="${user}" th:value="${user.id}"/>-->
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 120px">添加时间</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" name="visitor"  type="text"  th:value="${#dates.format(item.createDateTime,'yyyy-MM-dd hh:mm:ss')}"  readonly>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 120px">添加人</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" name="visitor"  type="text"  th:value="${item.createUser}"  readonly>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label" style="width: 120px">预约人(部门)</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" name="visitor" id="visitor" type="text"  th:value="${item.visitor}"  readonly>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label " style="width: 120px">预约日期</label>
+            <div class="layui-input-inline">
+                <input type="text" autocomplete="off" th:value="${item.resDate}" id="resDate" name="resDate" class="layui-input" readonly>
+            </div>
+        </div>
+        <div class="layui-form-item" >
+            <label class="layui-form-label " style="width: 120px">咨询师</label>
+            <div class="layui-input-inline">
+                <input type="text" autocomplete="off" th:value="${item.counselorName}"  name="resDate" class="layui-input" readonly >
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label " style="width: 120px">预约时间</label>
+            <div class="layui-input-inline">
+                <input type="text" autocomplete="off" th:value="${item.resTime}"  class="layui-input" readonly >
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label " style="width: 120px">咨询地点</label>
+            <div class="layui-input-inline">
+                <input type="text" autocomplete="off" th:value="${item.site}" class="layui-input" readonly>
+            </div>
+        </div>
+        <div class="layui-form-item timo-finally">
+<!--            <button class="layui-btn ajax-submit" id="btn-sub"><i class="fa fa-check-circle"></i> 添加</button>-->
+            <button class="layui-btn btn-secondary close-popup"><i class="fa fa-times-circle"></i> 关闭</button>
+        </div>
+    </form>
+</div>
+<script th:replace="/common/template :: script"></script>
+<script type="text/javascript" th:src="@{/js/plugins/jquery-2.2.4.min.js}"></script>
+<script type="text/javascript" th:src="@{/lib/zTree_v3/js/jquery.ztree.core.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/timoTree.js}"></script>
+<script type="text/javascript">
+    // 树形菜单
+    $.fn.selectTree();
+</script>
+</body>
+</html>

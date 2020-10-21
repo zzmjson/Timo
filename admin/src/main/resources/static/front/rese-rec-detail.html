@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>预约咨询-德宝心理咨询中心</title>
+
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.js"></script>
+    [endif]-->
+    <style type="text/css">
+
+      body{
+        font-size: 0;
+      }
+      .h-na img{
+        width: 40px;
+        height: auto;
+        padding-right: 5px;
+      }
+
+      .ass-title{
+        width: 800px;
+        height: 60px;
+        margin: 30px auto;
+      }
+      .ass-title img{
+        width: 50px;
+        margin-right: 20px;
+        vertical-align: middle;
+      }
+      .ass-title span{
+        font-size: 30px;
+        font-weight: bolder;
+        vertical-align: middle;
+      }
+      .rc-wrappser{
+        width: 800px;
+        height: 600px;
+        /*border: solid 1px sandybrown;*/
+        margin: 0 auto;
+        font-size: 18px;
+      }
+      .rc-wrappser table{
+        width: 100%;
+      }
+      .tab-w-1{
+        width: 150px;
+      }
+      .tab-w-2{
+        width: 250px;
+      }
+      .tr-h{
+        height: 55px;
+        text-align: left;
+        text-indent: 1em;
+      }
+      .tr-h-2{
+        height: 150px;
+        text-align: left;
+        padding: 0;
+        width: 800px;
+        /*text-indent: 1em;*/
+      }
+      .btn-sub{
+        width: 100%;
+        height: 45px;
+        border-radius: 5px;
+        text-align: center;
+        line-height: 45px;
+        background: #21BA45;
+        cursor: pointer;
+        font-size: 24px;
+        color: white;
+        margin-top: 20px;
+        margin-bottom: 100px;
+      }
+    </style>
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="/js/jquery-3.4.1.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="/js/bootstrap.js"></script>
+    <script>
+      $(function () {
+        $("#head").load("header.html")
+      })
+
+    </script>
+  </head>
+  <body>
+    <div id="top_menu_for_large">
+      <header id="head"></header>
+      <div class="ass-title">
+        <img src="../images/img/flag.png">
+        <span>预约记录详情</span>
+      </div>
+    </div>
+    <div class="rc-wrappser">
+      <table border="1">
+        <tr class="tr-h">
+          <td class="tab-w-1">预约日期</td>
+          <td class="tab-w-2" id="resDate">2020-05-10(14:00)</td>
+          <td class="tab-w-1" >申请日期</td>
+          <td class="tab-w-2" id="createDate">2020-05-02</td>
+        </tr>
+        <tr class="tr-h">
+          <td class="tab-w-1" >咨询师</td>
+          <td class="tab-w-2" id="counselor">李老师</td>
+          <td class="tab-w-1">咨询类型</td>
+          <td class="tab-w-2" id="type">学业问题</td>
+        </tr>
+        <tr class="tr-h">
+          <td class="tab-w-1">咨询地点</td>
+          <td class="tab-w-2" id="site">心理中心208</td>
+          <td class="tab-w-1">咨询方式</td>
+          <td class="tab-w-2" id="manner">面谈</td>
+        </tr>
+        <tr class="tr-h">
+          <td class="tab-w-1">最后更新</td>
+          <td class="tab-w-2" id="last">2020-05-15</td>
+          <td class="tab-w-1">当前状态</td>
+          <td class="tab-w-2" id="state">已完成（反馈评价）</td>
+        </tr>
+        <tr class="tr-h">
+          <td class="tab-w-1">反馈评级</td>
+          <td class="tab-w-2">暂无评级</td>
+          <td class="tab-w-1">反馈评价</td>
+          <td class="tab-w-2">暂无评价</td>
+        </tr>
+        <tr class="tr-h-2">
+          <td style="text-indent: 1em;">现状</td>
+          <td colspan="3" style="height: 150px;padding: 1em" id="actuality">
+           现状
+          </td>
+        </tr>
+        <tr class="tr-h-2">
+          <td style="text-indent: 1em;">个人近况总结</td>
+          <td colspan="3" style="height: 150px;padding: 1em" id="persionalState">
+            个人近况信息
+          </td>
+        </tr>
+        <tr class="tr-h-2">
+          <td style="text-indent: 1em;">家庭情况</td>
+          <td colspan="3" style="height: 150px;padding: 1em" id="familyState">
+           家庭情况信息
+          </td>
+        </tr>
+        <tr class="tr-h-2">
+          <td style="text-indent: 1em;">咨询问题</td>
+          <td colspan="3" style="height: 150px;padding: 1em" id="problem">
+           咨询问题详情
+          </td>
+        </tr>
+        <tr style="height: 80px">
+          <td style="text-indent: 1em;">说明</td>
+          <td colspan="3" style="height: 80px;padding: 1em">
+            您可以在此查看您的预约记录详情！
+          </td>
+        </tr>
+      </table>
+      <div class="btn-back btn-sub">
+        返回上一页
+      </div>
+    </div>
+
+
+      <script>
+        //获取路径参数传参
+        function queryString(name) {
+          var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+          var r = window.location.search.substr(1).match(reg);
+          if(r!=null)return  unescape(r[2]); return null;
+        }
+        var reseId = queryString("reseId")
+        function loadData() {
+            $.ajax({
+              url:"/front/getReseDetail",
+              type:"get",
+              dataType:"json",
+              data:{"reseId":reseId},
+              success:function (json) {
+                console.log(json.data)
+                $("#resDate").text(json.data.resDate+"("+json.data.resTime+")")
+                $("#createDate").text(dateFormat(json.data.createDateTime))
+                $("#counselor").text(json.data.counselorName)
+                $("#type").text(json.data.resType)
+                $("#site").text(json.data.site)
+                $("#manner").text(json.data.manner)
+                $("#last").text(dateFormat(json.data.modifyDateTime))
+                $("#state").text(formatState(json.data.state))
+                $("#actuality").text(json.data.actuality)
+                $("#problem").text(json.data.problem)
+                $("#familyState").text(json.data.familyState)
+                $("#persionalState").text(json.data.persionalState)
+                // dateFormat(json.data.createDateTime)
+              }
+            })
+        }
+        $(function () {
+          loadData()
+          // alert(reseId)
+          //得到当前时间
+          var nowDate = new Date();
+          //得到当前年份
+          var year = nowDate.getFullYear();
+          //得到当前月份
+          var month = nowDate.getMonth()+1 < 10 ? "0"+(nowDate.getMonth()+1) : (nowDate.getMonth()+1);
+          //得到当前日子
+          var date = nowDate.getDate() < 10 ? "0"+nowDate.getDate() : nowDate.getDate();
+          //赋值给表单元素
+          $("#rese-date").attr("min",year+"-"+month+"-"+date);
+        })
+        // $("#rese-date").change(function () {
+        //   alert("加载咨询师信息！")
+        // })
+      $(".btn-back").click(function () {
+        window.history.go(-1)
+      })
+        function dateFormat(str) {
+          var date = new Date(str)
+          var year = date.getFullYear()
+          var mon = date.getMonth()+1;
+          var day = date.getDate()
+          var time = year+"-"+mon+"-"+day
+          return time;
+        }
+        function formatState(item) {
+          if (item=="1"){
+            return "已预约"
+          }
+          if (item=="2"){
+            return "已确认"
+          }
+          if (item=="3"){
+            return "已完成"
+          }
+          if (item=="4"){
+            return "已过期"
+          }
+        }
+      </script>
+  </body>
+</html>

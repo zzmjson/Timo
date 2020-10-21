@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:mo="https://gitee.com/aun/Timo">
+<head th:replace="/common/template :: header(~{::title},~{::link},~{::style})">
+    <link rel="stylesheet" th:href="@{/lib/zTree_v3/css/zTreeStyle/zTreeStyle.css}" type="text/css">
+</head>
+<body>
+<div class="layui-form timo-compile">
+    <form th:action="@{/system/consultRese/saveTimeSolt}" method="post">
+<!--        <input type="hidden" name="id" th:if="${user}" th:value="${user.id}"/>-->
+        <div class="layui-form-item">
+            <label class="layui-form-label " style="width: 120px">生效期限</label>
+            <div class="layui-input-inline">
+<!--                <input class="layui-input" type="text" name="serialNo" placeholder="请输入自定义编号" th:value="${user?.serialNo}">-->
+                <input type="text" autocomplete="off" name="starDate" class="layui-input" id="test1">
+                &nbsp;至&nbsp;
+                <input type="text" autocomplete="off" name="endDate" class="layui-input" id="test2">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required" style="width: 120px">开始时间</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" type="text" name="starTime" value="08:00:00">
+            </div>
+        </div>
+        <div class="layui-form-item" >
+            <label class="layui-form-label required" style="width: 120px">持续时长</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" type="text" name="timeSlot" value="30" >
+            </div>
+        </div>
+        <div class="layui-form-item" >
+            <label class="layui-form-label required" style="width: 120px">开始允许提交</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" type="text" name="action" value="0" >
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required" style="width: 120px">提前截止提交</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" type="text" name="before" value="30">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required" style="width: 120px">可预约数</label>
+            <div class="layui-input-inline">
+                <input class="layui-input"  type="text" name="reseCount">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label required" style="width: 120px">咨询地点</label>
+            <div class="layui-input-inline">
+<!--                <input class="layui-input" type="text" name="realName" >
+-->
+                <select name="site">
+                    <option th:each="i:${sites}" th:text="${i}" th:value="${i}"></option>
+<!--                    <option>默认地点</option>-->
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label " style="width: 120px">咨询方式</label>
+            <div class="layui-input-inline">
+<!--                <input class="layui-input" type="text" name="education" placeholder="请输入学历" th:value="${user?.education}">-->
+                <select name="consultWay">
+                   <option th:each="j:${consultWay}" th:text="${j}" th:value="${j}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label " style="width: 120px">立即启用</label>
+            <div class="layui-input-inline">
+                <input class="layui-input" type="radio" name="state" value="1" >是
+                <input class="layui-input" type="radio" name="state" value="2" >否
+            </div>
+        </div>
+        <div class="layui-form-item timo-finally">
+            <button class="layui-btn ajax-submit"><i class="fa fa-check-circle"></i> 添加</button>
+            <button class="layui-btn btn-secondary close-popup"><i class="fa fa-times-circle"></i> 取消</button>
+        </div>
+    </form>
+</div>
+<script th:replace="/common/template :: script"></script>
+<script type="text/javascript" th:src="@{/js/plugins/jquery-2.2.4.min.js}"></script>
+<script type="text/javascript" th:src="@{/lib/zTree_v3/js/jquery.ztree.core.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/timoTree.js}"></script>
+<script type="text/javascript">
+    // 树形菜单
+    $.fn.selectTree();
+    var star;
+    var end;
+    // 时间选择
+    layui.use('laydate',function () {
+        var lauyiDate = layui.laydate;
+        star = lauyiDate.render({
+            elem:"#test1",
+            min:-0
+
+        })
+        end = lauyiDate.render({
+            elem:"#test2",
+            min:-0
+        })
+    })
+    // $("#test1").blur(function () {
+    //     alert($("#test1").val())
+    //     end.config.min=$("#test1").val()
+    // })
+
+</script>
+</body>
+</html>
